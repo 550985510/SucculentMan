@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SucculentMan:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SucculentMan.war">
+      <element id="artifact" artifact-name="SucculentMan:war exploded" />
+    </root>
+  </artifact>
+</component>
