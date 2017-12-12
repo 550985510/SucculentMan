@@ -1,0 +1,21 @@
+server:
+  context-path: /manager
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://112.74.102.9:3306/succulent
+    username: root
+    password: root
+    driver-class-name:  com.mysql.jdbc.Driver
+
+
+#pagehelper
+pagehelper:
+  helperDialect:  mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
