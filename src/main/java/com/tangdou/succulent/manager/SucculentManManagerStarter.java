@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableScheduling
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.tangdou.succulent.manager.mapper")
-@EnableAutoConfiguration
+@MapperScan("com.tangdou.succulent.manager.mapper")
 public class SucculentManManagerStarter extends SpringBootServletInitializer {
 
     /**

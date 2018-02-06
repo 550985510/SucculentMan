@@ -6,10 +6,9 @@ package com.tangdou.succulent.manager.config;
  */
 public class CustomException extends RuntimeException {
 
-    private static final long serialVersionUID = -4488377121094064672L;
+    //private static final long serialVersionUID = -4488377121094064672L;
 
-    public CustomException() {
-    }
+    public CustomException() {}
 
     public CustomException(String message) {
         super(message);

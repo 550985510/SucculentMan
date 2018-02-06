@@ -8,7 +8,24 @@ spring:
     username: root
     password: root
     driver-class-name:  com.mysql.jdbc.Driver
-
+  application:
+    name: succulentMan
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+    time-zone: GMT+8
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+  mvc:
+    favicon:
+      enabled: false
+  aop:
+    proxy-target-class: true
+  freemarker:
+    template-loader-path: ["classpath:/templates/", "classpath:/castemplates/"]
 
 #pagehelper
 pagehelper:
