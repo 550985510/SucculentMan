@@ -9,6 +9,10 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * 后台管理系统入口
+ * @author 木叶丸
+ */
 @SpringBootApplication
 @EnableScheduling
 @EnableTransactionManagement
@@ -16,7 +20,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 public class SucculentManManagerStarter extends SpringBootServletInitializer {
 
-    //war包发布到tomcat需要增加SpringBootServletInitializer子类，并覆盖configure方法或直接继承后覆写
+    /**
+     * war包发布到tomcat需要增加SpringBootServletInitializer子类，并覆盖configure方法或直接继承后覆写
+     * @param application application
+     * @return application
+     */
     @Override
     protected SpringApplicationBuilder configure(
             SpringApplicationBuilder application) {
