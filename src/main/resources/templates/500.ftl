@@ -10,7 +10,7 @@
 <body class="error-page sb-l-o sb-r-c onload-check">
 <div id="main">
     <section id="content_wrapper">
-        <section id="content" class="pn">
+        <section id="content" class="pn" style="margin: 0px">
             <div class="center-block mt50 mw800">
                 <h1 class="error-title"> 500! </h1>
                 <h2 class="error-subtitle">服务器处理错误.</h2>

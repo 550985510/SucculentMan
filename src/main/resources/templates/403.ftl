@@ -9,8 +9,8 @@
 
 <body class="error-page sb-l-o sb-r-c onload-check">
 <div id="main">
-    <section id="content_wrapper" style="margin-left: 0px">
-        <section id="content" class="pn">
+    <section id="content_wrapper">
+        <section id="content" class="pn" style="margin: 0px">
             <div class="center-block mt70 mw800">
                 <h1 class="error-title"> 403! </h1>
                 <h2 class="error-subtitle">没有相关权限</h2>

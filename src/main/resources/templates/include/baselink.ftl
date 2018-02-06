@@ -9,10 +9,6 @@
 
 
 <style>
-    .custom-dz-preview-box {
-        display: inline-block;
-        text-align: center;
-    }
 
     .custom-dz-preview-box img {
         display: block;
@@ -20,13 +16,6 @@
         margin-right: 5px;
     }
 
-    .custom-dz-preview-box {
-
-    }
-
-    .admin-form .field-label {
-        font-weight: bold;
-    }
     b{
         font-weight: normal;
     }
@@ -36,10 +25,5 @@
     span b{
         font-weight: bold;
     }
-    .is-danger {
-        color:red;
-        display: block;
-        font-size: 14px;
-        margin-top: 5px;
-    }
+
 </style>

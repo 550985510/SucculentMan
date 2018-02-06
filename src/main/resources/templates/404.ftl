@@ -10,7 +10,7 @@
 
 <body class="error-page sb-l-o sb-r-c onload-check">
 <div id="main">
-    <section id="content_wrapper">
+    <section id="content_wrapper" style="margin: 0px">
         <section id="content" class="pn">
             <div class="center-block mt50 mw800">
                 <h1 class="error-title"> 404! </h1>
