@@ -1,10 +1,8 @@
 package com.tangdou.succulent.manager.config;
 
-
-import com.heptagram.core.common.exception.CustomException;
-import com.heptagram.core.common.rest.ResponseResult;
-import com.heptagram.core.common.rest.RestResultEnum;
-import com.heptagram.core.common.util.JSONUtil;
+import com.tangdou.succulent.manager.bean.ResponseResult;
+import com.tangdou.succulent.manager.bean.RestResultEnum;
+import com.tangdou.succulent.manager.util.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
