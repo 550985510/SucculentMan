@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.StaffUserMapper">
+  <sql id="Base_Column_List">
+    id, user_name, pass_word, real_name, gender, mobile, role_id, role_name, dept_id, dept_name,
+    status, created_by, created_time, modified_by, modified_time
+  </sql>
+  <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM staff_user
+    WHERE
+    user_name = #{userName}
+    AND
+    pass_word = #{passWord}
+  </select>
+</mapper>

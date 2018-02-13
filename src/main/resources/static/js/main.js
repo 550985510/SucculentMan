@@ -674,7 +674,7 @@ var Core = function (options) {
             var settingsObj = {"headerSkin":"","sidebarSkin":"","headerState":"navbar-fixed-top","sidebarState":"affix","breadcrumbState":"relative","breadcrumbHidden":"visible"};
 
             // Local Storage Theme Key
-            var themeKey = 'admin-settings2';
+            var themeKey = 'staff-settings2';
 
             // Local Storage Theme Get
             var themeGet = localStorage.getItem(themeKey);

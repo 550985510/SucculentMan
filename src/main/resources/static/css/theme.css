@@ -26877,7 +26877,7 @@ perspective effects (not including the modals and the overlay).
 .ui-drag-active #content {
   overflow: auto;
 }
-/* add to ".admin-panels" wrapper to have the content fadein
+/* add to ".staff-panels" wrapper to have the content fadein
  * after its contents are finished loading/rearranging */
 .admin-panels.fade-onload {
   opacity: 0;

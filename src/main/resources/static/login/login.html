@@ -17,16 +17,16 @@
         <div class="login_form">
 				<li class="login-item">
 					<span>用户名：</span>
-					<input type="text" id="username" name="adminname" class="login_input" >
+					<input type="text" id="username" name="username" class="login_input" >
 				</li>
 				<li class="login-item">
 					<span>密　码：</span>
-					<input type="password" id="password" name="adminpass" class="login_input" >
+					<input type="password" id="password" name="password" class="login_input" >
 				</li>
 				
 				<li class="login-item verify">
 					<span>验证码：</span>
-					<input type="text" name="CheckCode" id="CheckCode" class="login_input verify_input">
+					<input type="text" name="checkCode" id="checkCode" class="login_input verify_input">
 				</li>
 				<input type="button" id="code" onclick="createCode()" />
 				<div class="clearfix"></div>
@@ -74,7 +74,7 @@
         $(function(){
         	document.getElementById("username").value="";
         	document.getElementById("password").value="";
-        	document.getElementById("CheckCode").value="";
+        	document.getElementById("checkCode").value="";
         	$('#username').blur(checkName);
         	$('#password').blur(checkPassword);
         });
@@ -113,32 +113,33 @@
 		        
         
         function login(){
-        	var adminname = $('#username').val();
-        	var adminpass = $('#password').val();
-        	var CheckCode = $('#CheckCode').val().toUpperCase(); 
-        	if(adminname == ""){
+        	var username = $('#username').val();
+        	var password = $('#password').val();
+        	var checkCode = $('#checkCode').val().toUpperCase(); 
+        	if(username == ""){
         		layer.msg("还没有输入用户名噢",{time:0,btn:['朕知道了', '退下']});
         	}
-        	else if(adminpass == ""){
+        	else if(password == ""){
         		layer.msg("您忘了输入密码了皇上",{time:0,btn:['朕知道了', '退下']});
         	}
-        	else if(CheckCode == ""){
+        	else if(checkCode == ""){
         		layer.msg("怎么能忘了验证码呢",{time:0,btn:['朕知道了', '退下']});
         	}
-        	else if(CheckCode != code) { //若输入的验证码与产生的验证码不一致时  
+        	else if(checkCode != code) { //若输入的验证码与产生的验证码不一致时  
             	layer.msg("验证码输入错误",{time:0,btn:['朕知道了', '退下']});//则弹出验证码输入错误  
                 createCode(); //刷新验证码  
-                document.getElementById("CheckCode").value = ""; //清空文本框  
+                document.getElementById("checkCode").value = ""; //清空文本框  
             }
         	else{
             	$.ajax({
-            		url:"../AdminLogin",
-            		data:"adminname="+adminname+"&adminpass="+adminpass,
+            		url:"/manager/api/staff/login",
+            		data:"username="+username+"&password="+password,
             		type:"POST",
             		success:function(result){
-            			if(result.code == 100){
+            		    console.log(result)
+            			if(result.retcode == 2000000){
             				var index = layer.load(0, {shade: false});
-            				window.location.href='../index.jsp'; 
+            				window.location.href='/manager/index';
             			}
             			else{
             				layer.msg("用户不存在或用户名密码输入错误",{time:0,btn:['朕知道了', '退下']});
@@ -154,7 +155,7 @@
         	createCode();
         	$('#username').val("");
         	$('#password').val("");
-        	$('#CheckCode').val("");
+        	$('#checkCode').val("");
         }
 	</script>
 	<script type="text/javascript" src="js/canvas-particle.js"></script>

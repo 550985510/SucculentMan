@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://112.74.102.9:3306/succulent
+    url: jdbc:mysql://112.74.102.9:3306/succulent_man
     username: root
     password: root
     driver-class-name:  com.mysql.jdbc.Driver

@@ -15,7 +15,6 @@
     <script type="text/javascript" src="H-ui/lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="H-ui/static/h-ui/js/H-ui.min.js"></script>
     <script type="text/javascript" src="H-ui/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
-    <script type="text/javascript" src="H-ui/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 </head>
 <body>
 <header class="navbar-wrapper">
@@ -38,7 +37,7 @@
                 <ul class="cl">
                     <li>超级管理员</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">adminname<i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <a href="#" class="dropDown_A">${Session.user.userName}<i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                             <li><a href="#">切换账户</a></li>

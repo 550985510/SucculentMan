@@ -11,8 +11,8 @@ var Demo = function() {
   var runDemoForms = function() {
 
     // Prevents directory response when submitting a demo form
-    $('.admin-form').on('submit', function(e) {
-      if ($('body.timeline-page').length || $('body.admin-validation-page').length) {
+    $('.staff-form').on('submit', function(e) {
+      if ($('body.timeline-page').length || $('body.staff-validation-page').length) {
         return;
       }
       e.preventDefault;
@@ -208,7 +208,7 @@ var Demo = function() {
       };
 
       // Local Storage Theme Key
-      var themeKey = 'admin-settings2';
+      var themeKey = 'staff-settings2';
 
       // Local Storage Theme Get
       var themeGet = localStorage.getItem(themeKey);

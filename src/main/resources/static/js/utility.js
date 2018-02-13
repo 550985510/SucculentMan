@@ -458,7 +458,7 @@
 
       // Default plugin options.
       var defaults = {
-         grid: '.admin-grid',
+         grid: '.staff-grid',
          draggable: false,
          mobile: false,
          preserveGrid: false,
@@ -548,7 +548,7 @@
                });
             }
 
-            // Prep admin panel/container prior to menu creation
+            // Prep staff panel/container prior to menu creation
             methods.createControls(options);
 
             // Loop through settings key and apply options to panels
