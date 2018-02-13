@@ -35,4 +35,14 @@ pagehelper:
   params: count=countSql
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    cache-enabled: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    auto-mapping-behavior: full
+    default-statement-timeout: 2000
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    classpath:mapper/*.xml

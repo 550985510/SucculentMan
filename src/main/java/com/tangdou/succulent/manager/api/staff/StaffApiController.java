@@ -5,6 +5,8 @@ import com.tangdou.succulent.manager.bean.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/api/staff")
 public class StaffApiController {
+
+    final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
     private StaffUserService staffUserService;
