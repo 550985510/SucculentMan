@@ -1,5 +1,6 @@
 package com.tangdou.succulent.manager.api.staff;
 
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.ResponseResult;
 import com.tangdou.succulent.manager.bean.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
@@ -7,10 +8,7 @@ import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -40,5 +38,11 @@ public class StaffApiController {
             return new ResponseResult(RestResultEnum.SUCCESS);
         }
         return new ResponseResult(RestResultEnum.ERROR);
+    }
+
+    @PostMapping("/userList")
+    public ResponseResult<PageInfo<StaffUser>> userList(@RequestBody StaffUser staffUser) {
+        PageInfo<StaffUser> pageInfo = staffUserService.findList(staffUser);
+        return new ResponseResult<>(pageInfo);
     }
 }

@@ -13782,13 +13782,13 @@ body.onload-check #topbar {
   }
 }
 /*===================================================
-   PRINT STYLES - Designed soley for Invoice Page
+   PRINT STYLES - Designed soley for Invoice PageVo
    Problems will arise if you attempt to use
    these styles globally
 =====================================================*/
 @media print {
   .invoice-page {
-    /* Reset + Hide Primary Page Components */
+    /* Reset + Hide Primary PageVo Components */
     /* Modify Primary Container */
     /* Shorten and center page */
     /* Remove all Panel Borders */
@@ -15692,7 +15692,7 @@ body.timeline-page .panel-clone {
   padding: 10px 13px;
 }
 /*===============================================
-  AdminDock Example Page
+  AdminDock Example PageVo
 ================================================= */
 /* Demo styles */
 #dock-content > div {
@@ -18776,7 +18776,7 @@ body.sb-r-o #toggle_sidemenu_r span.glyphicons {
   }
 }
 /* ==============================================
-   Page Footer
+   PageVo Footer
 ================================================= */
 #content-footer {
   color: #AAA;
@@ -18846,8 +18846,8 @@ body.sb-l-m #content-footer.affix {
 }
 /* ================================================
    PAGES - In Order
-      A. UI Animations Page
-	  B. FAQ Page
+      A. UI Animations PageVo
+	  B. FAQ PageVo
 	  C. Gallery.html
 	  D. Calendar.html
 	  E. Message Pages
@@ -18859,7 +18859,7 @@ body.sb-l-m #content-footer.affix {
 	  K. Profile.html
 	  L. Error Pages
 	  M. Ecommerce Pages // Added update v1.3
-	  N. Search Result Page // Added update v1.4
+	  N. Search Result PageVo // Added update v1.4
 
  * This file is reserved for changes done on
  * a per-page basis. To create independent
@@ -18870,7 +18870,7 @@ body.sb-l-m #content-footer.affix {
  * Note: Pages not listed here were made using
  * 100% reusable styles placed in theme.css
 =================================================
-  A. UI Animations Page
+  A. UI Animations PageVo
 ================================================= */
 body.ui-animations-page #mac_wire {
   margin-top: 2.5%;
@@ -18918,7 +18918,7 @@ body.ui-animations-page.animation-running .btn.btn-alt.item-checked {
   transition: opacity 0.2s ease;
 }
 /*===============================================
-  C. Gallery Page
+  C. Gallery PageVo
 ================================================= */
 body.gallery-page #mix-container {
   padding: 15px;
@@ -18969,7 +18969,7 @@ body.gallery-page .fail .fail-message {
   }
 }
 /*===============================================
-  D. Calendar Page
+  D. Calendar PageVo
 ================================================= */
 body.calendar-page .fc-title-clone {
   font-size: 20px;
@@ -19042,7 +19042,7 @@ body.calendar-page .tray-center .fc-toolbar .fc-center h2 {
   }
 }
 /*===============================================
-  E. Messages Page
+  E. Messages PageVo
 ================================================= */
 body.messages-page .message-menu {
   padding: 10px 15px;
@@ -19156,7 +19156,7 @@ body.messages-page .dockmodal-body .quick-compose-form .note-editor .note-status
   }
 }
 /*===============================================
-  F. Editors Page
+  F. Editors PageVo
 ================================================= */
 body.editors-page .panel .panel-heading {
   border-bottom-color: #CCC;
@@ -19631,7 +19631,7 @@ body.error-page .error-text {
   width: 100%;
 }
 /*===============================================
-  M. Ecommerce Page - Added update v1.3
+  M. Ecommerce PageVo - Added update v1.3
 ================================================= */
 .ecommerce-page {
   /* fileupload field styling */
@@ -19676,7 +19676,7 @@ body.error-page .error-text {
   background-color: #FAFAFA;
 }
 /*===============================================
-  N. Search Results Page - Added update v1.4
+  N. Search Results PageVo - Added update v1.4
 ================================================= */
 .search-results-page .search-result + .search-result {
   margin-top: 31px;
@@ -19714,7 +19714,7 @@ body.error-page .error-text {
   color: #999;
 }
 /*===============================================
-  O. Bootstrap Timeout Page - Added update v1.4
+  O. Bootstrap Timeout PageVo - Added update v1.4
 ================================================= */
 #session-timeout-dialog .modal-dialog {
   width: 102%;
@@ -23820,7 +23820,7 @@ previous button's border...
   color: #444;
   font-weight: 600;
 }
-/* Minimal Style. Requires '.minimal-mp' parent class - Used on Calendar Page
+/* Minimal Style. Requires '.minimal-mp' parent class - Used on Calendar PageVo
 --------------------------------------------------------------------------------------------------*/
 .minimal-mp .ui-datepicker {
   background: none;

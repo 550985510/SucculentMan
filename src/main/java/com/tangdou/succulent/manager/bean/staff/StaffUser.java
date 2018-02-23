@@ -1,5 +1,6 @@
 package com.tangdou.succulent.manager.bean.staff;
 
+import com.tangdou.succulent.manager.bean.PageVo;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
  */
 
 @Data
-public class StaffUser {
+public class StaffUser extends PageVo {
 
     private Integer id;
 

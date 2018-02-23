@@ -114,7 +114,7 @@
             <dt><i class="Hui-iconfont">&#xe62d;</i> 员工管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="admin.jsp" data-title="员工列表" href="javascript:void(0)">员工列表</a></li>
+                    <li><a data-href="/manager/staff/user" data-title="员工列表" href="javascript:void(0)">员工列表</a></li>
                     <li><a data-href="jurisdiction.jsp" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
                     <li><a data-href="editors.jsp" data-title="小编管理" href="javascript:void(0)">小编管理</a></li>
                 </ul>

@@ -1,5 +1,6 @@
 package com.tangdou.succulent.manager.service.staff;
 
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 
 /**
@@ -15,4 +16,11 @@ public interface StaffUserService {
      * @return 员工对象
      */
     StaffUser findForLogin(StaffUser staffUser);
+
+    /**
+     * 分页查询员工信息
+     * @param staffUser 员工查询条件
+     * @return 员工分页信息
+     */
+    PageInfo<StaffUser> findList(StaffUser staffUser);
 }

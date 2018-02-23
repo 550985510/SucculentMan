@@ -14,4 +14,21 @@
     AND
     pass_word = #{passWord}
   </select>
+
+  <select id="selectList" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
+    SELECT 
+    <include refid="Base_Column_List"/>
+    FROM staff_user
+    <where>
+      <if test="realName != null">
+        real_name = #{realName}
+      </if>
+      <if test="mobile != null">
+        AND mobile = #{mobile}
+      </if>
+      <if test="roleId != null">
+        AND role_id = #{roleId}
+      </if>
+    </where>
+  </select>
 </mapper>
