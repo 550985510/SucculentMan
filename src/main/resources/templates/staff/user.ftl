@@ -17,14 +17,14 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 触点列表</span>
+                    <span class="panel-title"> 员工列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="well">
                         <form class="form-inline">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <label class="input-group-addon btn-default" for="realName_input">触点姓名</label>
+                                    <label class="input-group-addon btn-default" for="realName_input">员工姓名</label>
                                     <input id="realName_input" type="text" v-model="searchInfo.realName" class="form-control">
                                 </div>
                             </div>
@@ -52,6 +52,7 @@
                                     <th>性别</th>
                                     <th>手机号</th>
                                     <th>所属部门</th>
+                                    <th>在职状态</th>
                                     <th>拥有角色</th>
                                     <th>操作</th>
                                 </tr>
@@ -65,8 +66,14 @@
                                         <span v-if="user.gender === 1">女</span>
                                     </td>
                                     <td>{{user.mobile}}</td>
-                                    <td>{{user.deptId}}</td>
-                                    <td>{{user.roleId}}</td>
+                                    <td>{{user.deptName}}</td>
+                                    <td>
+                                        <span class="label label-success" v-if="user.status === 0">在职</span>
+                                        <span class="label label-warning" v-if="user.status === 1">请假</span>
+                                        <span class="label label-info" v-if="user.status === 2">休假</span>
+                                        <span class="label label-danger" v-if="user.status === 3">离职</span>
+                                    </td>
+                                    <td>{{user.roleName}}</td>
                                     <td>
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" v-on:click="search">设置角色</button>
