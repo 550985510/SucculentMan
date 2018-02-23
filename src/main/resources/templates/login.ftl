@@ -9,7 +9,7 @@
 </head>
 <body>
     <script>
-        window.location.href='/manager/login/login.html';
+        top.location.href='/manager/login/login.html';
     </script>
 </body>
 </html>
