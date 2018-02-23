@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.bean;
 
 /**
+ * @author 木叶丸
  * 返回Json数据的通用返回类
  */
 public class ResponseResult<T> {

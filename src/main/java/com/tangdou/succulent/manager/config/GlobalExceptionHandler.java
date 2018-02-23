@@ -23,8 +23,8 @@ import java.io.IOException;
 @ControllerAdvice
 @RestController
 public class GlobalExceptionHandler {
-    final Logger logger = LoggerFactory.getLogger(getClass());
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${server.context-path}")
     private String requestPath;

@@ -32,6 +32,7 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
         return new SecurityInterceptor();
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
@@ -50,8 +51,9 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
             HttpSession session = request.getSession();
-            if (session.getAttribute(SESSION_KEY) != null)
+            if (session.getAttribute(SESSION_KEY) != null) {
                 return true;
+            }
 
             // 跳转登录
             String url = requestPath + "/login";
