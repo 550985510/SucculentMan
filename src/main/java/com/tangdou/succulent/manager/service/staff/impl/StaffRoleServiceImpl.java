@@ -38,4 +38,15 @@ public class StaffRoleServiceImpl implements StaffRoleService {
     public void updateById(StaffRole staffRole) {
         staffRoleMapper.updateById(staffRole);
     }
+
+    /**
+     * 逻辑删除角色
+     *
+     * @param staffRole id及逻辑删除状态
+     */
+    @Override
+    public void deleteById(StaffRole staffRole) {
+        staffRole.setDeleted(1);
+        staffRoleMapper.updateById(staffRole);
+    }
 }

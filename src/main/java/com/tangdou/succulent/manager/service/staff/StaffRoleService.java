@@ -22,4 +22,10 @@ public interface StaffRoleService {
      * @param staffRole id及修改内容
      */
     void updateById(StaffRole staffRole);
+
+    /**
+     * 逻辑删除角色
+     * @param staffRole id及逻辑删除状态
+     */
+    void deleteById(StaffRole staffRole);
 }

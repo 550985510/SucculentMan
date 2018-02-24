@@ -314,6 +314,7 @@
                     var url = contentPath + "/api/staff/addUser";
                     this.$http.post(url, this.staff).then(function (response) {
                         $("#addStaff").modal('hide');
+                        swal("操作成功！", "", "success");
                         this.query();
                     }, function (error) {
                         swal(error.body.msg);
@@ -329,6 +330,7 @@
                 var url = contentPath + "/api/staff/setRole";
                 this.$http.post(url, this.user).then(function (response) {
                     $("#setRole").modal('hide');
+                    swal("操作成功！", "", "success");
                     this.query();
                 }, function (error) {
                     swal(error.body.msg);

@@ -96,4 +96,12 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
+    @PostMapping("/deleteRole")
+    public ResponseResult deleteRole(@RequestBody StaffRole staffRole, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffRole.setModifiedBy(currentUser.getRealName());
+        staffRoleService.deleteById(staffRole);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
 }

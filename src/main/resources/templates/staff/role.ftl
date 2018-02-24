@@ -35,10 +35,10 @@
                                 <td>{{role.name}}</td>
                                 <td>{{role.brief}}</td>
                                 <td>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" data-toggle='modal' data-target="#editRole"
-                                                    v-on:click="editRoleBtn(role)">编辑角色</button>
-                                        </span>
+                                    <button class="btn btn-primary" data-toggle='modal' data-target="#editRole"
+                                            v-on:click="editRoleBtn(role)">编辑角色
+                                    </button>
+                                    <button class="btn btn-primary" v-on:click="deleteRole(role)">删除角色</button>
                                 </td>
                             </tr>
                             <tr>
@@ -109,9 +109,35 @@
                 var url = contentPath + "/api/staff/editRole";
                 this.$http.post(url, this.role).then(function (response) {
                     $("#editRole").modal('hide');
+                    swal("操作成功！", "", "success");
                     this.query();
                 }, function (error) {
                     swal(error.body.msg);
+                });
+            },
+            deleteRole: function (role) {
+                var that = this;
+                swal({
+                    title: "确定删除该角色？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定删除！",
+                    cancelButtonText: "取消删除！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        var url = contentPath + "/api/staff/deleteRole";
+                        that.$http.post(url, role).then(function (response) {
+                            swal("删除！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
                 });
             }
         }
