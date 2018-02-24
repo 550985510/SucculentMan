@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StaffController {
 
     @GetMapping("/user")
-    public String settings() {
+    public String userList() {
         return "/staff/user";
+    }
+
+    @GetMapping("/role")
+    public String roleList() {
+        return "/staff/role";
     }
 }

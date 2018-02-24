@@ -25,13 +25,24 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon btn-default" for="realName_input">员工姓名</label>
-                                    <input id="realName_input" type="text" v-model="searchInfo.realName" class="form-control">
+                                    <input id="realName_input" type="text" v-model="searchInfo.realName"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon btn-default" for="mobile_input">手机号</label>
-                                    <input id="mobile_input" type="text" v-model="searchInfo.mobile" class="form-control">
+                                    <input id="mobile_input" type="text" v-model="searchInfo.mobile"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="role_select">角色</label>
+                                    <select id="role_select" type="text" v-model="searchInfo.roleId" class="form-control">
+                                        <option value="0">无</option>
+                                        <option :value="role.id" v-for="role in roles">{{role.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group input-group">
@@ -76,7 +87,8 @@
                                     <td>{{user.roleName}}</td>
                                     <td>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" v-on:click="search">设置角色</button>
+                                            <button class="btn btn-default" data-toggle='modal' data-target="#setRole"
+                                                    v-on:click="setRoleBtn(user)">设置角色</button>
                                         </span>
                                     </td>
                                 </tr>
@@ -102,6 +114,28 @@
             </div>
         </div>
     </section>
+    <!-- 角色设置 -->
+    <div id="setRole" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">角色设置</h4>
+                </div>
+                <div class="modal-body input-group">
+                    <label for="modal_role_select" class="input-group-addon">选择角色</label>
+                    <select id="modal_role_select" class="form-control" v-model="user.roleId">
+                        <option value="0">无</option>
+                        <option :value="role.id" v-for="role in roles">{{role.name}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" v-on:click="setRole">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
@@ -111,17 +145,21 @@
         el: '#main',
         data: {
             users: [],
+            roles: [],
             searchInfo: {
                 realName: null,
                 mobile: null,
+                roleId: null,
                 page: 1,
                 pageSize: 30
-            }
+            },
+            user: {}
         },
         created: function () {
             this.searchInfo.page = 1;
             $('#pageMenu').page('destroy');
             this.query();
+            this.findRole();
         },
         watch: {
             "searchInfo.page": function () {
@@ -133,6 +171,14 @@
                 this.searchInfo.page = 1;
                 $('#pageMenu').page('destroy');//销毁分页
                 this.query();
+            },
+            findRole: function () {
+                var url = contentPath + "/api/staff/roleList";
+                this.$http.post(url, this.searchInfo).then(function (response) {
+                    this.roles = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
             },
             query: function () {
                 var url = contentPath + "/api/staff/userList";
@@ -156,6 +202,19 @@
                             }).on('jumpClicked', function (event, pageIndex) {
                         temp.searchInfo.page = pageIndex + 1;
                     });
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            setRoleBtn: function (user) {
+                this.user = user;
+            },
+            setRole: function () {
+                this.user.roleName = $("#modal_role_select").find("option:selected").text();
+                var url = contentPath + "/api/staff/setRole";
+                this.$http.post(url, this.user).then(function (response) {
+                    $("#setRole").modal('hide');
+                    this.query();
                 }, function (error) {
                     swal(error.body.msg);
                 });

@@ -115,7 +115,7 @@
             <dd>
                 <ul>
                     <li><a data-href="/manager/staff/user" data-title="员工列表" href="javascript:void(0)">员工列表</a></li>
-                    <li><a data-href="jurisdiction.jsp" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+                    <li><a data-href="/manager/staff/role" data-title="角色列表" href="javascript:void(0)">角色列表</a></li>
                     <li><a data-href="editors.jsp" data-title="小编管理" href="javascript:void(0)">小编管理</a></li>
                 </ul>
             </dd>

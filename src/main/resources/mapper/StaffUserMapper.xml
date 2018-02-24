@@ -7,17 +7,17 @@
   </sql>
   <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT
-    <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List"/>
     FROM staff_user
     WHERE
-    user_name = #{userName}
+      user_name = #{userName}
     AND
-    pass_word = #{passWord}
+      pass_word = #{passWord}
   </select>
 
   <select id="selectList" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT 
-    <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List"/>
     FROM staff_user
     <where>
       <if test="realName != null">
@@ -31,4 +31,14 @@
       </if>
     </where>
   </select>
+
+  <update id="updateRoleById">
+    UPDATE staff_user
+    SET
+      role_id = #{roleId},
+      role_name = #{roleName},
+      modified_by = #{modifiedBy}
+    WHERE
+      id = #{id}
+  </update>
 </mapper>

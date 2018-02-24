@@ -45,4 +45,14 @@ public class StaffUserServiceImpl implements StaffUserService {
         List<StaffUser> list = staffUserMapper.selectList(staffUser);
         return new PageInfo<>(list);
     }
+
+    /**
+     * 通过id修改员工角色
+     *
+     * @param staffUser id及员工角色信息
+     */
+    @Override
+    public void updateRoleById(StaffUser staffUser) {
+        staffUserMapper.updateRoleById(staffUser);
+    }
 }

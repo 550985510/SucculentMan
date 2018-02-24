@@ -3,8 +3,10 @@ package com.tangdou.succulent.manager.api.staff;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.ResponseResult;
 import com.tangdou.succulent.manager.bean.RestResultEnum;
+import com.tangdou.succulent.manager.bean.staff.StaffRole;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
+import com.tangdou.succulent.manager.service.staff.StaffRoleService;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author cuihang
@@ -23,8 +26,13 @@ public class StaffApiController {
 
     final Logger logger = LoggerFactory.getLogger(getClass());
 
+    private StaffUser currentUser = new StaffUser();
+
     @Resource
     private StaffUserService staffUserService;
+
+    @Resource
+    private StaffRoleService staffRoleService;
 
     @PostMapping("/login")
     public ResponseResult login(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession session) {
@@ -41,8 +49,31 @@ public class StaffApiController {
     }
 
     @PostMapping("/userList")
-    public ResponseResult<PageInfo<StaffUser>> userList(@RequestBody StaffUser staffUser) {
+    public ResponseResult<PageInfo<StaffUser>> findUserList(@RequestBody StaffUser staffUser) {
         PageInfo<StaffUser> pageInfo = staffUserService.findList(staffUser);
         return new ResponseResult<>(pageInfo);
     }
+
+    @PostMapping("/roleList")
+    public ResponseResult<List<StaffRole>> findAllRole() {
+        List<StaffRole> list = staffRoleService.findAll();
+        return new ResponseResult<>(list);
+    }
+
+    @PostMapping("/setRole")
+    public ResponseResult setRole(@RequestBody StaffUser staffUser, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffUser.setModifiedBy(currentUser.getModifiedBy());
+        staffUserService.updateRoleById(staffUser);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    @PostMapping("/editRole")
+    public ResponseResult editRole(@RequestBody StaffRole staffRole, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffRole.setModifiedBy(currentUser.getModifiedBy());
+        staffRoleService.updateById(staffRole);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
 }

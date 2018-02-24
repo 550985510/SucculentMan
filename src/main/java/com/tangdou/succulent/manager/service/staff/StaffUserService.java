@@ -23,4 +23,10 @@ public interface StaffUserService {
      * @return 员工分页信息
      */
     PageInfo<StaffUser> findList(StaffUser staffUser);
+
+    /**
+     * 通过id修改员工角色
+     * @param staffUser id及员工角色信息
+     */
+    void updateRoleById(StaffUser staffUser);
 }
