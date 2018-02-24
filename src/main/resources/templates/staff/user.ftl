@@ -107,8 +107,9 @@
                                 <td>{{user.roleName}}</td>
                                 <td>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" data-toggle='modal' data-target="#setRole"
-                                                v-on:click="setRoleBtn(user)">设置角色</button>
+                                        <button class="btn btn-default btn-primary" data-toggle='modal'
+                                                data-target="#setRole" v-on:click="setRoleBtn(user)">设置角色
+                                        </button>
                                     </span>
                                 </td>
                             </tr>
@@ -303,11 +304,11 @@
             addStaff: function () {
                 this.staff.deptName = $("#add_modal_dept_select").find("option:selected").text();
                 this.staff.roleName = $("#add_modal_role_select").find("option:selected").text();
-                if (this.staff.realName == null) {
+                if (this.staff.realName === null) {
                     sweetAlert("请输入员工姓名");
-                } else if (this.staff.mobile == null) {
+                } else if (this.staff.mobile === null) {
                     sweetAlert("请输入员工手机号码")
-                } else if (this.staff.deptId == null) {
+                } else if (this.staff.deptId === null) {
                     sweetAlert("请选择员工所属部门")
                 } else {
                     var url = contentPath + "/api/staff/addUser";
