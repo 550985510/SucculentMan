@@ -5,6 +5,16 @@
     id, user_name, pass_word, real_name, gender, mobile, role_id, role_name, dept_id, dept_name,
     status, created_by, created_time, modified_by, modified_time
   </sql>
+
+  <insert id="insert">
+    INSERT INTO staff_user
+    (user_name, pass_word, real_name, gender, mobile, role_id, role_name,
+     dept_id, dept_name, created_by, created_time, modified_by)
+    VALUES
+    (#{userName}, #{passWord}, #{realName}, #{gender}, #{mobile}, #{roleId},
+     #{roleName}, #{deptId}, #{deptName}, #{createdBy}, now(), #{modifiedBy})
+  </insert>
+
   <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT
       <include refid="Base_Column_List"/>
@@ -28,6 +38,9 @@
       </if>
       <if test="roleId != null">
         AND role_id = #{roleId}
+      </if>
+      <if test="deptId != null">
+        AND dept_id = #{deptId}
       </if>
     </where>
   </select>

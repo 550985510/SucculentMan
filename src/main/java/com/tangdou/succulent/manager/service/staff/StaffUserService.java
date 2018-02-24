@@ -29,4 +29,10 @@ public interface StaffUserService {
      * @param staffUser id及员工角色信息
      */
     void updateRoleById(StaffUser staffUser);
+
+    /**
+     * 添加员工
+     * @param staffUser 员工信息
+     */
+    void add(StaffUser staffUser);
 }

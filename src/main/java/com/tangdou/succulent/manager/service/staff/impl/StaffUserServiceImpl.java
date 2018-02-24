@@ -55,4 +55,16 @@ public class StaffUserServiceImpl implements StaffUserService {
     public void updateRoleById(StaffUser staffUser) {
         staffUserMapper.updateRoleById(staffUser);
     }
+
+    /**
+     * 添加员工
+     *
+     * @param staffUser 员工信息
+     */
+    @Override
+    public void add(StaffUser staffUser) {
+        staffUser.setUserName(staffUser.getMobile());
+        staffUser.setPassWord("admin");
+        staffUserMapper.insert(staffUser);
+    }
 }

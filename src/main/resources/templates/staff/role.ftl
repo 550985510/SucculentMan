@@ -88,7 +88,7 @@
         el: '#main',
         data: {
             role: {},
-            roles: [],
+            roles: []
         },
         created: function () {
             this.query();

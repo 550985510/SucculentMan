@@ -3,9 +3,11 @@ package com.tangdou.succulent.manager.api.staff;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.ResponseResult;
 import com.tangdou.succulent.manager.bean.RestResultEnum;
+import com.tangdou.succulent.manager.bean.staff.Department;
 import com.tangdou.succulent.manager.bean.staff.StaffRole;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
+import com.tangdou.succulent.manager.service.staff.DepartmentService;
 import com.tangdou.succulent.manager.service.staff.StaffRoleService;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
 import org.slf4j.Logger;
@@ -34,13 +36,16 @@ public class StaffApiController {
     @Resource
     private StaffRoleService staffRoleService;
 
+    @Resource
+    private DepartmentService departmentService;
+
     @PostMapping("/login")
     public ResponseResult login(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession session) {
         StaffUser staffUser = new StaffUser();
         staffUser.setUserName(username);
         staffUser.setPassWord(password);
         StaffUser info = staffUserService.findForLogin(staffUser);
-        if (info != null) {
+        if (info != null && info.getStatus() != 3 && info.getRoleId() != 0) {
             info.setPassWord(null);
             session.setAttribute(AdminSecurityConfig.SESSION_KEY,info);
             return new ResponseResult(RestResultEnum.SUCCESS);
@@ -60,10 +65,25 @@ public class StaffApiController {
         return new ResponseResult<>(list);
     }
 
+    @PostMapping("/deptList")
+    public ResponseResult<List<Department>> findAllDept() {
+        List<Department> list = departmentService.findAll();
+        return new ResponseResult<>(list);
+    }
+
+    @PostMapping("/addUser")
+    public ResponseResult addUser(@RequestBody StaffUser staffUser, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffUser.setModifiedBy(currentUser.getRealName());
+        staffUser.setCreatedBy(currentUser.getRealName());
+        staffUserService.add(staffUser);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
     @PostMapping("/setRole")
     public ResponseResult setRole(@RequestBody StaffUser staffUser, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
-        staffUser.setModifiedBy(currentUser.getModifiedBy());
+        staffUser.setModifiedBy(currentUser.getRealName());
         staffUserService.updateRoleById(staffUser);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
@@ -71,7 +91,7 @@ public class StaffApiController {
     @PostMapping("/editRole")
     public ResponseResult editRole(@RequestBody StaffRole staffRole, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
-        staffRole.setModifiedBy(currentUser.getModifiedBy());
+        staffRole.setModifiedBy(currentUser.getRealName());
         staffRoleService.updateById(staffRole);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
