@@ -173,7 +173,7 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="jurisdiction.jsp" data-title="权限列表" href="javascript:void(0)">权限列表</a></li>
+                        <li><a data-href="/manager/staff/role" data-title="角色列表" href="javascript:void(0)">角色列表</a></li>
                         <!--
                         <li><a data-href="system-category.html" data-title="栏目管理" href="javascript:void(0)">栏目管理</a></li>
                         <li><a data-href="system-data.html" data-title="数据字典" href="javascript:void(0)">数据字典</a></li>
