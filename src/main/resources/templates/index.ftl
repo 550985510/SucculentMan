@@ -11,21 +11,25 @@
     <link rel="stylesheet" type="text/css" href="H-ui/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="H-ui/static/h-ui.admin/skin/default/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="H-ui/static/h-ui.admin/css/style.css"/>
-    <script type="text/javascript" src="H-ui/lib/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="H-ui/lib/layer/2.4/layer.js"></script>
-    <script type="text/javascript" src="H-ui/static/h-ui/js/H-ui.min.js"></script>
-    <script type="text/javascript" src="H-ui/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+    <link rel="stylesheet" type="text/css" href="plugins/sweetAlert/sweetalert.css"/>
+
     <!-- jQuery -->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="plugins/sweetAlert/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="plugins/sweetAlert/sweetalert.min.js"></script>
 
     <!-- Theme Javascript -->
     <script type="text/javascript" src="js/utility.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/vue-resource.min.js"></script>
     <script type="text/javascript" src="js/constant.js"></script>
+
+
+    <script type="text/javascript" src="H-ui/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="H-ui/lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="H-ui/static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="H-ui/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 </head>
 <body>
 <div id="main">
@@ -45,7 +49,6 @@
                                         class="Hui-iconfont">&#xe613;</i> 图片</a></li>
                                 <li><a href="javascript:;" onclick="product_add('添加资讯','member-add.html','','510')"><i
                                         class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-                            <#--<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>-->
                                 <li><a data-toggle='modal' data-target="#addStaff"><i class="Hui-iconfont">&#xe60d;</i>
                                     用户</a></li>
                             </ul>
@@ -208,7 +211,7 @@
 
     <!-- 添加员工 -->
     <div id="addStaff" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog radius" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -216,39 +219,45 @@
                     <h4 class="modal-title">添加员工</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="add_modal_name_input" class="control-label col-lg-3">员工姓名</label>
-                            <div class="bs-component col-lg-8">
-                                <input id="add_modal_name_input" class="form-control" v-model="staff.realName">
+                    <form class="form form-horizontal" role="form">
+                        <div class="row cl">
+                            <label for="add_modal_name_input" class="form-label col-xs-4 col-sm-3">员工姓名</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <input id="add_modal_name_input" class="input-text radius" v-model="staff.realName">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-3">员工性别</label>
-                            <div class="radio col-lg-8">
-                                <label><input type="radio" name="gender" value="0" v-model="staff.gender">男</label>
-                                <label><input type="radio" name="gender" value="1" v-model="staff.gender">女</label>
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3">员工性别</label>
+                            <div class="formControls skin-minimal col-xs-8 col-sm-9">
+                                <div class="radio-box">
+                                    <input type="radio" id="gender-0" name="gender" value="0" v-model="staff.gender" checked>
+                                    <label for="gender-0">男</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="gender-1" name="gender" value="1" v-model="staff.gender">
+                                    <label for="gender-1">女</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="add_modal_mobile_input" class="control-label col-lg-3">手机号码</label>
-                            <div class="bs-component col-lg-8">
-                                <input id="add_modal_mobile_input" class="form-control" v-model="staff.mobile">
+                        <div class="row cl">
+                            <label for="add_modal_mobile_input" class="form-label col-xs-4 col-sm-3">手机号码</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <input id="add_modal_mobile_input" class="input-text radius" v-model="staff.mobile">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="add_modal_role_select" class="control-label col-lg-3">选择角色</label>
-                            <div class="bs-component col-lg-8">
-                                <select id="add_modal_role_select" class="form-control" v-model="staff.roleId">
+                        <div class="row cl">
+                            <label for="add_modal_role_select" class="form-label col-xs-4 col-sm-3">选择角色</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <select id="add_modal_role_select" class="input-text radius" v-model="staff.roleId">
                                     <option value="0">无角色</option>
                                     <option :value="role.id" v-for="role in roles">{{role.name}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="add_modal_dept_select" class="control-label col-lg-3">所属部门</label>
-                            <div class="bs-component col-lg-8">
-                                <select id="add_modal_dept_select" class="form-control" v-model="staff.deptId">
+                        <div class="row cl">
+                            <label for="add_modal_dept_select" class="form-label col-xs-4 col-sm-3">所属部门</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <select id="add_modal_dept_select" class="input-text radius" v-model="staff.deptId">
                                     <option :value="dept.id" v-for="dept in depts"
                                             :disabled="dept.id == 1 ? true : false">{{dept.name}}
                                     </option>
@@ -265,7 +274,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
-<script type="text/javascript">
+<script>
 
     var app = new Vue({
         el: '#main',
@@ -301,11 +310,11 @@
             addStaff: function () {
                 this.staff.deptName = $("#add_modal_dept_select").find("option:selected").text();
                 this.staff.roleName = $("#add_modal_role_select").find("option:selected").text();
-                if (this.staff.realName === null) {
+                if (this.staff.realName == null) {
                     sweetAlert("请输入员工姓名");
-                } else if (this.staff.mobile === null) {
+                } else if (this.staff.mobile == null) {
                     sweetAlert("请输入员工手机号码")
-                } else if (this.staff.deptId === null) {
+                } else if (this.staff.deptId == null) {
                     sweetAlert("请选择员工所属部门")
                 } else {
                     var url = contentPath + "/api/staff/addUser";
