@@ -19,6 +19,8 @@ public class StaffUser extends PageVo {
 
     private String passWord;
 
+    private String salt;
+
     private String realName;
 
     private Integer gender;

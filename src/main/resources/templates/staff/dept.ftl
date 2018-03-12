@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-group">
-                        <label for="deptName" class="input-group-addon">角色名称</label>
+                        <label for="deptName" class="input-group-addon">部门名称</label>
                         <input id="deptName" class="form-control" v-model="dept.name">
                     </div>
                 </div>

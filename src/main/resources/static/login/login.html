@@ -103,7 +103,7 @@
         		layer.msg("密码不能为空");
         		return false;
         	}
-        	var reg = /^\w{6,16}$/;
+        	var reg = /^\w{5,16}$/;
         	if(!reg.test(password)){
         		layer.msg("输入6-16个字母或数字或下划线");
         		return false;

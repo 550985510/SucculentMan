@@ -35,4 +35,11 @@ public interface StaffUserService {
      * @param staffUser 员工信息
      */
     void add(StaffUser staffUser);
+
+    /**
+     * 通过账号查找用户（拿到混合加密盐值判断登陆）
+     * @param staffUser 账号
+     * @return 用户信息
+     */
+    StaffUser findByUserName(StaffUser staffUser);
 }

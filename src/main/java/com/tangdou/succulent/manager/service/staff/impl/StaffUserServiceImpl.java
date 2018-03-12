@@ -63,8 +63,18 @@ public class StaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public void add(StaffUser staffUser) {
-        staffUser.setUserName(staffUser.getMobile());
-        staffUser.setPassWord("admin");
         staffUserMapper.insert(staffUser);
+    }
+
+    /**
+     * 通过账号查找用户（拿到混合加密盐值判断登陆）
+     *
+     * @param staffUser 账号
+     * @return 用户信息
+     */
+    @Override
+    public StaffUser findByUserName(StaffUser staffUser) {
+        StaffUser info = staffUserMapper.selectByUserName(staffUser);
+        return info;
     }
 }
