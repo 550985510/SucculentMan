@@ -29,4 +29,15 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<Department> list = departmentMapper.selectAll();
         return list;
     }
+
+    /**
+     * 逻辑删除部门
+     *
+     * @param department 部门id
+     */
+    @Override
+    public void deleteById(Department department) {
+        department.setDeleted(1);
+        departmentMapper.updateById(department);
+    }
 }

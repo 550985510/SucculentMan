@@ -16,4 +16,10 @@ public interface DepartmentMapper {
      * @return 部门列表信息
      */
     List<Department> selectAll();
+
+    /**
+     * 通过部门id修改部门信息
+     * @param department 部门id及修改条件
+     */
+    void updateById(Department department);
 }

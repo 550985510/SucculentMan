@@ -71,6 +71,14 @@ public class StaffApiController {
         return new ResponseResult<>(list);
     }
 
+    @PostMapping("/deleteDept")
+    public ResponseResult deleteDept(@RequestBody Department department, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        department.setModifiedBy(currentUser.getRealName());
+        departmentService.deleteById(department);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
     @PostMapping("/addUser")
     public ResponseResult addUser(@RequestBody StaffUser staffUser, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);

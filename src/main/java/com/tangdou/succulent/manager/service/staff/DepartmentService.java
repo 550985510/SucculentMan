@@ -16,4 +16,10 @@ public interface DepartmentService {
      * @return 部门列表信息
      */
     List<Department> findAll();
+
+    /**
+     * 逻辑删除部门
+     * @param department 部门id
+     */
+    void deleteById(Department department);
 }

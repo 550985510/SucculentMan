@@ -16,7 +16,7 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 角色列表</span>
+                    <span class="panel-title"> 部门列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="panel-body">
@@ -24,25 +24,23 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>角色名称</th>
-                                <th>描述信息</th>
+                                <th>部门名称</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="role in roles">
-                                <td>{{role.id}}</td>
-                                <td>{{role.name}}</td>
-                                <td>{{role.brief}}</td>
+                            <tr v-for="dept in depts">
+                                <td>{{dept.id}}</td>
+                                <td>{{dept.name}}</td>
                                 <td>
                                     <button class="btn btn-primary" data-toggle='modal' data-target="#editRole"
-                                            v-on:click="editRoleBtn(role)">编辑角色
+                                            v-on:click="editDeptBtn(dept)">编辑部门
                                     </button>
-                                    <button class="btn btn-primary" v-on:click="deleteRole(role)">删除角色</button>
+                                    <button class="btn btn-primary" v-on:click="deleteDept(dept)">删除部门</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="20" v-if="roles.length == 0">没有数据 ！</td>
+                                <td class="text-center" colspan="20" v-if="depts.length == 0">没有数据 ！</td>
                             </tr>
                             </tbody>
                         </table>
@@ -65,17 +63,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-group">
-                        <label for="roleName" class="input-group-addon">角色名称</label>
-                        <input id="roleName" class="form-control" v-model="role.name">
-                    </div>
-                    <div class="form-group input-group">
-                        <label for="brief" class="input-group-addon">角色描述</label>
-                        <input id="brief" class="form-control" v-model="role.brief">
+                        <label for="deptName" class="input-group-addon">角色名称</label>
+                        <input id="deptName" class="form-control" v-model="dept.name">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" v-on:click="editRole">确认</button>
+                    <button type="button" class="btn btn-primary" v-on:click="editDept">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -87,27 +81,27 @@
     var app = new Vue({
         el: '#main',
         data: {
-            role: {},
-            roles: []
+            dept: {},
+            depts: []
         },
         created: function () {
             this.query();
         },
         methods: {
             query: function () {
-                var url = contentPath + "/api/staff/roleList";
+                var url = contentPath + "/api/staff/deptList";
                 this.$http.post(url, this.searchInfo).then(function (response) {
-                    this.roles = response.data.data;
+                    this.depts = response.data.data;
                 }, function (error) {
                     swal(error.body.msg);
                 });
             },
-            editRoleBtn: function (role) {
-                this.role = role;
+            editDeptBtn: function (dept) {
+                this.dept = dept;
             },
-            editRole: function () {
+            editDept: function () {
                 var url = contentPath + "/api/staff/editRole";
-                this.$http.post(url, this.role).then(function (response) {
+                this.$http.post(url, this.dept).then(function (response) {
                     $("#editRole").modal('hide');
                     swal("操作成功！", "", "success");
                     this.query();
@@ -115,10 +109,10 @@
                     swal(error.body.msg);
                 });
             },
-            deleteRole: function (role) {
+            deleteDept: function (dept) {
                 var that = this;
                 swal({
-                    title: "确定删除该角色？",
+                    title: "确定删除该部门？",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -128,8 +122,8 @@
                     closeOnCancel: false
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        var url = contentPath + "/api/staff/deleteRole";
-                        that.$http.post(url, role).then(function (response) {
+                        var url = contentPath + "/api/staff/deleteDept";
+                        that.$http.post(url, dept).then(function (response) {
                             swal("删除！", "", "success");
                             that.query();
                         }, function (error) {
