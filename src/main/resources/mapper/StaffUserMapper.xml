@@ -9,10 +9,10 @@
   <insert id="insert">
     INSERT INTO tb_staff_user
     (user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name,
-     dept_id, dept_name, created_by, created_time, modified_by)
+     dept_id, dept_name, created_by, created_time, modified_time, modified_by, created_by)
     VALUES
     (#{userName}, #{passWord}, #{salt}, #{realName}, #{gender}, #{mobile}, #{roleId},
-     #{roleName}, #{deptId}, #{deptName}, #{createdBy}, now(), #{modifiedBy})
+     #{roleName}, #{deptId}, #{deptName}, #{createdBy}, now(), now(), #{modifiedBy}, #{createdBy})
   </insert>
 
   <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">

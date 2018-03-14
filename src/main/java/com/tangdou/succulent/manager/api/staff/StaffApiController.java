@@ -1,16 +1,16 @@
 package com.tangdou.succulent.manager.api.staff;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.ResponseResult;
-import com.tangdou.succulent.manager.bean.RestResultEnum;
+import com.tangdou.succulent.manager.bean.common.ResponseResult;
+import com.tangdou.succulent.manager.bean.common.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.Department;
 import com.tangdou.succulent.manager.bean.staff.StaffRole;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
+import com.tangdou.succulent.manager.bean.staff.enums.OnTheJobStatus;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.staff.DepartmentService;
 import com.tangdou.succulent.manager.service.staff.StaffRoleService;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
-import com.tangdou.succulent.manager.util.SecurityPasswordLevel;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class StaffApiController {
         staffUser.setPassWord(passphrase);
         //判断登陆
         StaffUser info = staffUserService.findForLogin(staffUser);
-        if (info != null && info.getStatus() != 3 && info.getRoleId() != 0) {
+        if (info != null && !info.getStatus().equals(OnTheJobStatus.QUIT_JOB_STATUS.getKey()) && info.getRoleId() != 0) {
             session.setAttribute(AdminSecurityConfig.SESSION_KEY,info);
             return new ResponseResult(RestResultEnum.SUCCESS);
         }
@@ -99,7 +99,6 @@ public class StaffApiController {
         //密码随机设置
         String salt = SecurityPasswordUtils.getSalt();
         String password = "admin";
-//        String password = SecurityPasswordUtils.randomPassword(SecurityPasswordLevel.MEDIUM);
         String passphrase = SecurityPasswordUtils.getPassphrase(salt, password);
         staffUser.setSalt(salt);
         staffUser.setPassWord(passphrase);

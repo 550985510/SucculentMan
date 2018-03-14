@@ -29,8 +29,7 @@ public class StaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public StaffUser findForLogin(StaffUser staffUser) {
-        StaffUser info = staffUserMapper.selectForLogin(staffUser);
-        return info;
+        return staffUserMapper.selectForLogin(staffUser);
     }
 
     /**
@@ -74,7 +73,6 @@ public class StaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public StaffUser findByUserName(StaffUser staffUser) {
-        StaffUser info = staffUserMapper.selectByUserName(staffUser);
-        return info;
+        return staffUserMapper.selectByUserName(staffUser);
     }
 }

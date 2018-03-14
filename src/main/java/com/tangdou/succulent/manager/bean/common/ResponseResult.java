@@ -1,4 +1,4 @@
-package com.tangdou.succulent.manager.bean;
+package com.tangdou.succulent.manager.bean.common;
 
 /**
  * @author 木叶丸
