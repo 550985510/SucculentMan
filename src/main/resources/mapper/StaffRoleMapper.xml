@@ -7,13 +7,13 @@
   <select id="selectAll" resultType="com.tangdou.succulent.manager.bean.staff.StaffRole">
     SELECT 
       <include refid="Base_Column_List"/>
-    FROM staff_role
+    FROM tb_staff_role
     WHERE
       deleted = 0
   </select>
 
   <update id="updateById">
-    UPDATE staff_role
+    UPDATE tb_staff_role
     <set>
       <if test="name != null">
         name = #{name},

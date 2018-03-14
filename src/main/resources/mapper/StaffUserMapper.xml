@@ -7,7 +7,7 @@
   </sql>
 
   <insert id="insert">
-    INSERT INTO staff_user
+    INSERT INTO tb_staff_user
     (user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name,
      dept_id, dept_name, created_by, created_time, modified_by)
     VALUES
@@ -18,7 +18,7 @@
   <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT
       <include refid="Base_Column_List"/>
-    FROM staff_user
+    FROM tb_staff_user
     WHERE
       user_name = #{userName}
     AND
@@ -28,7 +28,7 @@
   <select id="selectList" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT 
       <include refid="Base_Column_List"/>
-    FROM staff_user
+    FROM tb_staff_user
     <where>
       <if test="realName != null">
         real_name = #{realName}
@@ -47,12 +47,12 @@
   <select id="selectByUserName" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM staff_user
+    FROM tb_staff_user
     WHERE user_name = #{userName}
   </select>
 
   <update id="updateRoleById">
-    UPDATE staff_user
+    UPDATE tb_staff_user
     SET
       role_id = #{roleId},
       role_name = #{roleName},

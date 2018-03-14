@@ -8,6 +8,7 @@ public enum  RestResultEnum {
 
     SUCCESS(2000000, "操作成功"),
     ERROR(50000000, "操作错误"),
+    LOGIN_ERROR(1000001, "用户名或密码错误"),
     UNKNOWN_ERROR(-1, "未知异常错误"),
     NOT_FOUND_ERROR(-2, "请求地址不存在"),
     FORBIDDEN_ERROR(-3, "没有相关操作权限"),

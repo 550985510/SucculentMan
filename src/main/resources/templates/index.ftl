@@ -50,14 +50,14 @@
                                 <li><a href="javascript:;" onclick="product_add('添加资讯','member-add.html','','510')"><i
                                         class="Hui-iconfont">&#xe620;</i> 产品</a></li>
                                 <li><a data-toggle='modal' data-target="#addStaff"><i class="Hui-iconfont">&#xe60d;</i>
-                                    用户</a></li>
+                                    员工</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
                 <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                     <ul class="cl">
-                        <li>超级管理员</li>
+                        <li>${Session.user.roleName}</li>
                         <li class="dropDown dropDown_hover">
                             <a href="#" class="dropDown_A">${Session.user.realName}<i class="Hui-iconfont">&#xe6d5;</i></a>
                             <ul class="dropDown-menu menu radius box-shadow">
