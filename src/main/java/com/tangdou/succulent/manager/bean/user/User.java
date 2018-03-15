@@ -25,7 +25,7 @@ public class User {
     /**
      * 性别
      */
-    private String gender;
+    private Integer gender;
 
     /**
      * 昵称
@@ -96,4 +96,14 @@ public class User {
      * 修改时间
      */
     private Date modifiedTime;
+
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
 }
