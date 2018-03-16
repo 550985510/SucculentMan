@@ -26,5 +26,11 @@
             <artifactId>SucculentMan-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- hessian -->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.38</version>
+        </dependency>
     </dependencies>
 </project>
