@@ -12,8 +12,6 @@ import com.tangdou.succulent.manager.service.staff.StaffUserService;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
 import com.tangdou.succulent.manager.bean.common.ResponseResult;
 import com.tangdou.succulent.manager.service.staff.DepartmentService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,8 +26,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/staff")
 public class StaffApiController {
-
-    final Logger logger = LoggerFactory.getLogger(getClass());
 
     private StaffUser currentUser = new StaffUser();
 
