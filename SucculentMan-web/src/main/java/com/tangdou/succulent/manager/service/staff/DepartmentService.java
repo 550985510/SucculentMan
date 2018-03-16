@@ -22,4 +22,10 @@ public interface DepartmentService {
      * @param department 部门id
      */
     void deleteById(Department department);
+
+    /**
+     * 修改部门信息
+     * @param department 部门信息
+     */
+    void updateById(Department department);
 }

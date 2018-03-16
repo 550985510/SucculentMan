@@ -16,7 +16,7 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 部门列表</span>
+                    <span class="panel-title"> 模块列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="panel-body">
@@ -24,23 +24,26 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>部门名称</th>
+                                <th>模块名称</th>
+                                <th>模块类型</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="dept in depts">
-                                <td>{{dept.id}}</td>
-                                <td>{{dept.name}}</td>
+                            <tr v-for="module in modules">
+                                <td>{{module.id}}</td>
+                                <td>{{module.name}}</td>
+                                <td v-if="module.type === 0">文章</td>
+                                <td v-if="module.type === 1">帖子</td>
                                 <td>
-                                    <button class="btn btn-primary" data-toggle='modal' data-target="#editDept"
-                                            v-on:click="editDeptBtn(dept)">编辑部门
+                                    <button class="btn btn-primary" data-toggle='modal' data-target="#editModule"
+                                            v-on:click="editBtn(module)">编辑模块
                                     </button>
-                                    <button class="btn btn-primary" v-on:click="deleteDept(dept)">删除部门</button>
+                                    <button class="btn btn-primary" v-on:click="deleteModule(module)">删除模块</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="20" v-if="depts.length == 0">没有数据 ！</td>
+                                <td class="text-center" colspan="20" v-if="modules.length == 0">没有数据 ！</td>
                             </tr>
                             </tbody>
                         </table>
@@ -52,24 +55,24 @@
             </div>
         </div>
     </section>
-    <!-- 部门设置 -->
-    <div id="editDept" class="modal fade" tabindex="-1" role="dialog">
+    <!-- 角色设置 -->
+    <div id="editModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">修改部门信息</h4>
+                    <h4 class="modal-title">修改角色信息</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-group">
-                        <label for="deptName" class="input-group-addon">部门名称</label>
-                        <input id="deptName" class="form-control" v-model="dept.name">
+                        <label for="moduleName" class="input-group-addon">部门名称</label>
+                        <input id="moduleName" class="form-control" v-model="module.name">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" v-on:click="editDept">确认</button>
+                    <button type="button" class="btn btn-primary" v-on:click="edit">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -81,38 +84,38 @@
     var app = new Vue({
         el: '#main',
         data: {
-            dept: {},
-            depts: []
+            module: {},
+            modules: []
         },
         created: function () {
             this.query();
         },
         methods: {
             query: function () {
-                var url = contentPath + "/api/staff/deptList";
+                var url = contentPath + "/api/module/list";
                 this.$http.post(url).then(function (response) {
-                    this.depts = response.data.data;
+                    this.modules = response.data.data;
                 }, function (error) {
                     swal(error.body.msg);
                 });
             },
-            editDeptBtn: function (dept) {
-                this.dept = dept;
+            editBtn: function (module) {
+                this.module = module;
             },
-            editDept: function () {
-                var url = contentPath + "/api/staff/editDept";
-                this.$http.post(url, this.dept).then(function (response) {
-                    $("#editDept").modal('hide');
+            edit: function () {
+                var url = contentPath + "/api/module/edit";
+                this.$http.post(url, this.module).then(function (response) {
+                    $("#editModule").modal('hide');
                     swal("操作成功！", "", "success");
                     this.query();
                 }, function (error) {
                     swal(error.body.msg);
                 });
             },
-            deleteDept: function (dept) {
+            deleteModule: function (module) {
                 var that = this;
                 swal({
-                    title: "确定删除该部门？",
+                    title: "确定删除该模块？",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -122,8 +125,8 @@
                     closeOnCancel: false
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        var url = contentPath + "/api/staff/deleteDept";
-                        that.$http.post(url, dept).then(function (response) {
+                        var url = contentPath + "/api/module/delete";
+                        that.$http.post(url, module).then(function (response) {
                             swal("删除！", "", "success");
                             that.query();
                         }, function (error) {

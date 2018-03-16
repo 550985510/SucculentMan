@@ -40,4 +40,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         department.setDeleted(1);
         departmentMapper.updateById(department);
     }
+
+    /**
+     * 修改部门信息
+     *
+     * @param department 部门信息
+     */
+    @Override
+    public void updateById(Department department) {
+        departmentMapper.updateById(department);
+    }
 }

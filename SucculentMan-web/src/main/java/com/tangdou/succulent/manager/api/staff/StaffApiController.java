@@ -38,6 +38,13 @@ public class StaffApiController {
     @Resource
     private DepartmentService departmentService;
 
+    /**
+     * 登陆判断
+     * @param username 用户名
+     * @param password 密码
+     * @param session  登陆信息保存
+     * @return 登陆操作状态
+     */
     @PostMapping("/login")
     public ResponseResult login(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession session) {
         StaffUser staffUser = new StaffUser();
@@ -61,24 +68,43 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.LOGIN_ERROR);
     }
 
+    /**
+     * 员工列表
+     * @param staffUser 员工信息
+     * @return 员工列表信息
+     */
     @PostMapping("/userList")
     public ResponseResult<PageInfo<StaffUser>> findUserList(@RequestBody StaffUser staffUser) {
         PageInfo<StaffUser> pageInfo = staffUserService.findList(staffUser);
         return new ResponseResult<>(pageInfo);
     }
 
+    /**
+     * 角色权限列表
+     * @return 角色权限列表信息
+     */
     @PostMapping("/roleList")
     public ResponseResult<List<StaffRole>> findAllRole() {
         List<StaffRole> list = staffRoleService.findAll();
         return new ResponseResult<>(list);
     }
 
+    /**
+     * 部门列表
+     * @return 部门列表信息
+     */
     @PostMapping("/deptList")
     public ResponseResult<List<Department>> findAllDept() {
         List<Department> list = departmentService.findAll();
         return new ResponseResult<>(list);
     }
 
+    /**
+     * 逻辑删除部门
+     * @param department 部门信息
+     * @param session 登陆状态
+     * @return 操作状态
+     */
     @PostMapping("/deleteDept")
     public ResponseResult deleteDept(@RequestBody Department department, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
@@ -87,6 +113,26 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
+    /**
+     * 修改部门
+     * @param department 修改信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
+    @PostMapping("/editDept")
+    public ResponseResult editDept(@RequestBody  Department department, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        department.setModifiedBy(currentUser.getRealName());
+        departmentService.updateById(department);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    /**
+     * 添加员工
+     * @param staffUser 员工信息
+     * @param session 登陆状态
+     * @return 操作状态
+     */
     @PostMapping("/addUser")
     public ResponseResult addUser(@RequestBody StaffUser staffUser, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
@@ -103,6 +149,12 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
+    /**
+     * 设置员工权限角色
+     * @param staffUser 员工信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
     @PostMapping("/setRole")
     public ResponseResult setRole(@RequestBody StaffUser staffUser, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
@@ -111,6 +163,12 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
+    /**
+     * 修改权限角色
+     * @param staffRole 修改信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
     @PostMapping("/editRole")
     public ResponseResult editRole(@RequestBody StaffRole staffRole, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
@@ -119,6 +177,12 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
+    /**
+     * 逻辑删除权限角色
+     * @param staffRole 权限角色信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
     @PostMapping("/deleteRole")
     public ResponseResult deleteRole(@RequestBody StaffRole staffRole, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);

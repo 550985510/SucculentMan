@@ -21,7 +21,7 @@
       <if test="deleted != null">
         deleted = #{deleted},
       </if>
-      modified_by = #{modifiedBy}，
+      modified_by = #{modifiedBy},
       modified_time = now()
     </set>
     WHERE

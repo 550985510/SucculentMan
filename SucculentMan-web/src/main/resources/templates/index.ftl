@@ -155,7 +155,7 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="module.jsp" data-title="模块列表" href="javascript:void(0)">模块列表</a></li>
+                        <li><a data-href="/manager/module/list" data-title="模块列表" href="javascript:void(0)">模块列表</a></li>
                         <!--
                         <li><a data-href="charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>
                         <li><a data-href="charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a></li>

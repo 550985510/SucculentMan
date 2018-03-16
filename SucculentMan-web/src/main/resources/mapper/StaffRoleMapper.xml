@@ -6,10 +6,10 @@
   </sql>
   <select id="selectAll" resultType="com.tangdou.succulent.manager.bean.staff.StaffRole">
     SELECT 
-      <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List"/>
     FROM tb_staff_role
     WHERE
-      deleted = 0
+    deleted = 0
   </select>
 
   <update id="updateById">
