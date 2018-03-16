@@ -56,7 +56,8 @@
     SET
       role_id = #{roleId},
       role_name = #{roleName},
-      modified_by = #{modifiedBy}
+      modified_by = #{modifiedBy},
+      modified_time = now()
     WHERE
       id = #{id}
   </update>

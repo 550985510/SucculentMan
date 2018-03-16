@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tangdou.succulent.manager.mapper.StaffRoleMapper">
   <sql id="Base_Column_List">
-    id, name, brief, deleted, created_by, created_time, modified_by, modified_time
+    id, name, type, deleted, created_by, created_time, modified_by, modified_time
   </sql>
-  <select id="selectAll" resultType="com.tangdou.succulent.manager.bean.staff.StaffRole">
+  <select id="selectAll" resultType="com.tangdou.succulent.manager.bean.module.Module">
     SELECT 
       <include refid="Base_Column_List"/>
-    FROM tb_staff_role
+    FROM tb_module
     WHERE
       deleted = 0
   </select>
 
   <update id="updateById">
-    UPDATE tb_staff_role
+    UPDATE tb_module
     <set>
       <if test="name != null">
         name = #{name},
       </if>
-      <if test="brief != null">
-        brief = #{brief},
+      <if test="type != null">
+        type = #{type},
       </if>
       <if test="deleted != null">
         deleted = #{deleted},
