@@ -101,7 +101,7 @@
       now(),
     </trim>
   </insert>
-  <select id="selectList" resultType="com.tangdou.succulent.manager.bean.user.User">
+  <select id="selectList" resultType="com.tangdou.succulent.manager.api.user.model.User">
     SELECT
     <include refid="Base_Column_List"/>
     FROM

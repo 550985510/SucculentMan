@@ -1,7 +1,7 @@
 package com.tangdou.succulent.manager.service.user;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.user.User;
+import com.tangdou.succulent.manager.api.user.model.User;
 
 /**
  * 用户相关

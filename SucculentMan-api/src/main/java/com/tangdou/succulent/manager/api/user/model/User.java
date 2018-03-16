@@ -1,7 +1,8 @@
-package com.tangdou.succulent.manager.bean.user;
+package com.tangdou.succulent.manager.api.user.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @date 2018/3/14
  */
 @Data
-public class User {
+public class User implements Serializable{
 
     /**
      * 用户id

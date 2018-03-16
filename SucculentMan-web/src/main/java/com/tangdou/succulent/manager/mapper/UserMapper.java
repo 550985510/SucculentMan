@@ -1,7 +1,6 @@
 package com.tangdou.succulent.manager.mapper;
 
-import com.tangdou.succulent.manager.bean.user.User;
-
+import com.tangdou.succulent.manager.api.user.model.User;
 import java.util.List;
 
 /**

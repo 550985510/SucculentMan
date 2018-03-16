@@ -2,7 +2,7 @@ package com.tangdou.succulent.manager.service.user.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.user.User;
+import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.mapper.UserMapper;
 import com.tangdou.succulent.manager.service.user.UserService;
 import org.springframework.stereotype.Service;
