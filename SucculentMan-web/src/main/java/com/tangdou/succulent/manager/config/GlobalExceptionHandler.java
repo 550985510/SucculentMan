@@ -1,7 +1,7 @@
 package com.tangdou.succulent.manager.config;
 
-import com.tangdou.succulent.manager.bean.common.ResponseResult;
 import com.tangdou.succulent.manager.bean.common.RestResultEnum;
+import com.tangdou.succulent.manager.bean.common.ResponseResult;
 import com.tangdou.succulent.manager.util.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

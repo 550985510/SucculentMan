@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SucculentMan" />
+        <module name="SucculentMan-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="SucculentMan" target="1.8" />
+      <module name="SucculentMan-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

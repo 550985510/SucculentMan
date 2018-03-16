@@ -1,17 +1,17 @@
 package com.tangdou.succulent.manager.api.staff;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.common.ResponseResult;
 import com.tangdou.succulent.manager.bean.common.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.Department;
 import com.tangdou.succulent.manager.bean.staff.StaffRole;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.bean.staff.enums.OnTheJobStatus;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
-import com.tangdou.succulent.manager.service.staff.DepartmentService;
 import com.tangdou.succulent.manager.service.staff.StaffRoleService;
 import com.tangdou.succulent.manager.service.staff.StaffUserService;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
+import com.tangdou.succulent.manager.bean.common.ResponseResult;
+import com.tangdou.succulent.manager.service.staff.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;

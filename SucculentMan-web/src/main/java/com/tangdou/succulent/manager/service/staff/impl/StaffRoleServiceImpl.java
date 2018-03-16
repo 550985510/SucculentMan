@@ -1,8 +1,8 @@
 package com.tangdou.succulent.manager.service.staff.impl;
 
 import com.tangdou.succulent.manager.bean.staff.StaffRole;
-import com.tangdou.succulent.manager.mapper.StaffRoleMapper;
 import com.tangdou.succulent.manager.service.staff.StaffRoleService;
+import com.tangdou.succulent.manager.mapper.StaffRoleMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
