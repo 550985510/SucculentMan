@@ -34,6 +34,11 @@ public class Article implements Serializable {
     private Integer moduleId;
 
     /**
+     * 所属模块名称
+     */
+    private Integer moduleName;
+
+    /**
      * 发布状态 0:待审核 1:未通过 2:已发布 3:已下架
      */
     private Integer status;
