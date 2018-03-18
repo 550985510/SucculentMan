@@ -22,4 +22,10 @@ public interface StaffRoleMapper {
      * @param staffRole id及修改内容
      */
     void updateById(StaffRole staffRole);
+
+    /**
+     * 插入一条权限角色信息
+     * @param staffRole 权限角色信息
+     */
+    void insert(StaffRole staffRole);
 }

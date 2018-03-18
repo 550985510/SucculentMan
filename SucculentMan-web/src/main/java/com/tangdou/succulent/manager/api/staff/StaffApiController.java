@@ -128,6 +128,21 @@ public class StaffApiController {
     }
 
     /**
+     * 添加部门
+     * @param department 部门信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
+    @PostMapping("/addDept")
+    public ResponseResult addDept(@RequestBody Department department, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        department.setModifiedBy(currentUser.getRealName());
+        department.setCreatedBy(currentUser.getRealName());
+        departmentService.add(department);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    /**
      * 添加员工
      * @param staffUser 员工信息
      * @param session 登陆状态
@@ -188,6 +203,21 @@ public class StaffApiController {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
         staffRole.setModifiedBy(currentUser.getRealName());
         staffRoleService.deleteById(staffRole);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    /**
+     * 添加权限角色
+     * @param staffRole 权限角色信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
+    @PostMapping("/addRole")
+    public ResponseResult addRole(@RequestBody StaffRole staffRole, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffRole.setCreatedBy(currentUser.getRealName());
+        staffRole.setModifiedBy(currentUser.getRealName());
+        staffRoleService.add(staffRole);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 

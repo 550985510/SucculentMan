@@ -22,4 +22,10 @@ public interface ModuleMapper {
      * @param module 修改内容
      */
     void updateById(Module module);
+
+    /**
+     * 插入一条模块信息
+     * @param module 模块信息
+     */
+    void insert(Module module);
 }

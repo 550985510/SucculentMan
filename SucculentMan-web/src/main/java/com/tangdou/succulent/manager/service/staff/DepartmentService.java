@@ -28,4 +28,10 @@ public interface DepartmentService {
      * @param department 部门信息
      */
     void updateById(Department department);
+
+    /**
+     * 添加部门
+     * @param department 部门信息
+     */
+    void add(Department department);
 }

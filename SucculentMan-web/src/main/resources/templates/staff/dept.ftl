@@ -45,6 +45,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addDept">
+                            <i class="fa fa-plus-circle"></i> 添加部门
+                        </button>
+                    </div>
                 </div>
             <#--<div class="panel-footer">-->
 
@@ -52,7 +57,7 @@
             </div>
         </div>
     </section>
-    <!-- 部门设置 -->
+    <!-- 修改部门 -->
     <div id="editDept" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -74,6 +79,29 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <!-- 添加部门 -->
+    <div id="addDept" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-group">
+                        <label for="deptName" class="input-group-addon">部门名称</label>
+                        <input id="deptName" class="form-control" v-model="addDept.name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" v-on:click="add">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <!-- Charts JS -->
@@ -82,7 +110,8 @@
         el: '#main',
         data: {
             dept: {},
-            depts: []
+            depts: [],
+            addDept: {}
         },
         created: function () {
             this.query();
@@ -132,6 +161,16 @@
                     } else {
                         swal("取消！", "", "error");
                     }
+                });
+            },
+            add: function () {
+                var url = contentPath + "/api/staff/addDept";
+                this.$http.post(url, this.addDept).then(function (response) {
+                    $("#addDept").modal('hide');
+                    swal("操作成功！", "", "success");
+                    this.query();
+                }, function (error) {
+                    swal(error.body.msg);
                 });
             }
         }

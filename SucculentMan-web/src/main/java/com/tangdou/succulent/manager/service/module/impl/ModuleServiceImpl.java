@@ -49,4 +49,14 @@ public class ModuleServiceImpl implements ModuleService {
         module.setDeleted(1);
         moduleMapper.updateById(module);
     }
+
+    /**
+     * 添加模块
+     *
+     * @param module 模块信息
+     */
+    @Override
+    public void add(Module module) {
+        moduleMapper.insert(module);
+    }
 }

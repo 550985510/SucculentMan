@@ -22,4 +22,10 @@ public interface DepartmentMapper {
      * @param department 部门id及修改条件
      */
     void updateById(Department department);
+
+    /**
+     * 插入一条部门信息
+     * @param department 部门信息
+     */
+    void insert(Department department);
 }

@@ -54,4 +54,20 @@ public class ModuleApiController {
         moduleService.deleteById(module);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
+
+    /**
+     * 添加模块
+     * @param module 模块信息
+     * @param session 登陆信息
+     * @return 操作状态
+     */
+    @PostMapping("/add")
+    public ResponseResult add(@RequestBody Module module, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        module.setCreatedBy(currentUser.getRealName());
+        module.setModifiedBy(currentUser.getRealName());
+        moduleService.add(module);
+        ResponseResult result = new ResponseResult(RestResultEnum.SUCCESS);
+        return result;
+    }
 }

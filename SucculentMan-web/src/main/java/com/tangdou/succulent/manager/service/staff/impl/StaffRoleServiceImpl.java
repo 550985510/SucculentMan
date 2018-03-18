@@ -49,4 +49,14 @@ public class StaffRoleServiceImpl implements StaffRoleService {
         staffRole.setDeleted(1);
         staffRoleMapper.updateById(staffRole);
     }
+
+    /**
+     * 新增权限角色
+     *
+     * @param staffRole 权限角色信息
+     */
+    @Override
+    public void add(StaffRole staffRole) {
+        staffRoleMapper.insert(staffRole);
+    }
 }

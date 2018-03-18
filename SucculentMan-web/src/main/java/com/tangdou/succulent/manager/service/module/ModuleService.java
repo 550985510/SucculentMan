@@ -28,4 +28,10 @@ public interface ModuleService {
      * @param module 模块id
      */
     void deleteById(Module module);
+
+    /**
+     * 添加模块
+     * @param module 模块信息
+     */
+    void add(Module module);
 }

@@ -47,6 +47,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addRole">
+                            <i class="fa fa-plus-circle"></i> 添加角色
+                        </button>
+                    </div>
                 </div>
             <#--<div class="panel-footer">-->
 
@@ -80,6 +85,33 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <!-- 添加角色 -->
+    <div id="addRole" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加角色</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-group">
+                        <label for="roleName" class="input-group-addon">角色名称</label>
+                        <input id="roleName" class="form-control" v-model="addRole.name">
+                    </div>
+                    <div class="form-group input-group">
+                        <label for="brief" class="input-group-addon">角色描述</label>
+                        <input id="brief" class="form-control" v-model="addRole.brief">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" v-on:click="add">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <!-- Charts JS -->
@@ -88,7 +120,8 @@
         el: '#main',
         data: {
             role: {},
-            roles: []
+            roles: [],
+            addRole: {}
         },
         created: function () {
             this.query();
@@ -138,6 +171,16 @@
                     } else {
                         swal("取消！", "", "error");
                     }
+                });
+            },
+            add: function () {
+                var url = contentPath + "/api/staff/addRole";
+                this.$http.post(url, this.addRole).then(function (response) {
+                    $("#addRole").modal('hide');
+                    swal("操作成功！", "", "success");
+                    this.query();
+                }, function (error) {
+                    swal(error.body.msg);
                 });
             }
         }

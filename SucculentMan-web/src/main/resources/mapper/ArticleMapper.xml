@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.ArticleMapper">
+  <sql id="Base_Column_List">
+    id, title, img, module_id, status, keyword, comment_num, staff_id, created_by, modified_by, created_time, modified_time
+  </sql>
+
+  <insert id="insert">
+    INSERT INTO tb_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="modifiedBy != null">
+        modified_by,
+      </if>
+      modified_time,
+      created_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title},
+      </if>
+      <if test="img != null">
+        #{img},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId},
+      </if>
+      <if test="keyword != null">
+        #{keyword},
+      </if>
+      <if test="staffId != null">
+        #{staffId},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy},
+      </if>
+      <if test="modifiedBy != null">
+        #{modified_by},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+
+</mapper>

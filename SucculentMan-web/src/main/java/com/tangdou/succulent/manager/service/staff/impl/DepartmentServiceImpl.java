@@ -50,4 +50,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void updateById(Department department) {
         departmentMapper.updateById(department);
     }
+
+    /**
+     * 添加部门
+     *
+     * @param department 部门信息
+     */
+    @Override
+    public void add(Department department) {
+        departmentMapper.insert(department);
+    }
 }

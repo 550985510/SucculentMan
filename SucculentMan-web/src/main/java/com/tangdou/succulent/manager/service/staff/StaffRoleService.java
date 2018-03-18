@@ -28,4 +28,10 @@ public interface StaffRoleService {
      * @param staffRole id及逻辑删除状态
      */
     void deleteById(StaffRole staffRole);
+
+    /**
+     * 新增权限角色
+     * @param staffRole 权限角色信息
+     */
+    void add(StaffRole staffRole);
 }

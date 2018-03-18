@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.ArticleContentMapper">
+  <sql id="Base_Column_List">
+    id, article_id, content, created_time, modified_time
+  </sql>
+
+  <insert id="insert">
+    INSERT INTO tb_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      modified_time,
+      created_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+
+</mapper>

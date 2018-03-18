@@ -48,6 +48,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addModule">
+                            <i class="fa fa-plus-circle"></i> 添加模块
+                        </button>
+                    </div>
                 </div>
             <#--<div class="panel-footer">-->
 
@@ -55,24 +60,57 @@
             </div>
         </div>
     </section>
-    <!-- 角色设置 -->
+    <!-- 修改模块 -->
     <div id="editModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">修改角色信息</h4>
+                    <h4 class="modal-title">修改模块信息</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-group">
-                        <label for="moduleName" class="input-group-addon">部门名称</label>
+                        <label for="moduleName" class="input-group-addon">模块名称</label>
                         <input id="moduleName" class="form-control" v-model="module.name">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" v-on:click="edit">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 添加模块 -->
+    <div id="addModule" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加模块</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        温馨提示：成功添加模块后模块类型不能修改。
+                    </div>
+                    <div class="form-group input-group">
+                        <label for="moduleName" class="input-group-addon">模块名称</label>
+                        <input id="moduleName" class="form-control" v-model="addModule.name">
+                    </div>
+                    <div class="form-group input-group">
+                        <label for="moduleType" class="input-group-addon">模块类型</label>
+                        <select id="moduleType" class="form-control" v-model="addModule.type">
+                            <option value="0">文章</option>
+                            <option value="1">帖子</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" v-on:click="add">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -85,7 +123,8 @@
         el: '#main',
         data: {
             module: {},
-            modules: []
+            modules: [],
+            addModule: {}
         },
         created: function () {
             this.query();
@@ -135,6 +174,16 @@
                     } else {
                         swal("取消！", "", "error");
                     }
+                });
+            },
+            add: function () {
+                var url = contentPath + "/api/module/add";
+                this.$http.post(url, this.addModule).then(function (response) {
+                    $("#addModule").modal('hide');
+                    swal("操作成功！", "", "success");
+                    this.query();
+                }, function (error) {
+                    swal(error.body.msg);
                 });
             }
         }

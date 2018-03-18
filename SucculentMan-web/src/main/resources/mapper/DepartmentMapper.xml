@@ -27,4 +27,11 @@
     WHERE
       id = #{id}
   </update>
+
+  <insert id="insert">
+    INSERT INTO tb_department
+    (name, modified_by, created_by, created_time, modified_time)
+    VALUES
+    (#{name}, #{modifiedBy}, #{createdBy}, now(), now())
+  </insert>
 </mapper>
