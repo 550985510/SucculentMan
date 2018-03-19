@@ -49,8 +49,8 @@
                         </table>
                     </div>
                     <div class="panel-footer">
-                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addArticle">
-                            <i class="fa fa-plus-circle"></i> 添加文章
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addModule">
+                            <i class="fa fa-plus-circle"></i> 添加模块
                         </button>
                     </div>
                 </div>
@@ -83,16 +83,19 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- 添加文章 -->
-    <div id="addArticle" class="modal fade" tabindex="-1" role="dialog">
+    <!-- 添加模块 -->
+    <div id="addModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加文章</h4>
+                    <h4 class="modal-title">添加模块</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        温馨提示：成功添加模块后模块类型不能修改。
+                    </div>
                     <div class="form-group input-group">
                         <label for="moduleName" class="input-group-addon">模块名称</label>
                         <input id="moduleName" class="form-control" v-model="addModule.name">
