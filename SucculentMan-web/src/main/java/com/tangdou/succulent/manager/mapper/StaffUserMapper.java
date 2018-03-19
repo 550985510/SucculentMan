@@ -52,4 +52,11 @@ public interface StaffUserMapper {
      * @param roleName 角色名称
      */
     void updateRoleByRoleId(@Param("roleId") Integer roleId, @Param("roleName") String roleName);
+
+    /**
+     * 通过deptId修改员工deptName
+     * @param deptId 部门id
+     * @param deptName 部门名称
+     */
+    void updateDeptByDeptId(@Param("deptId") Integer deptId, @Param("deptName") String deptName);
 }

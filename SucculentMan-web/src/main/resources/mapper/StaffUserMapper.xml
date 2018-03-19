@@ -71,4 +71,13 @@
     WHERE
       role_id = #{roleId}
   </update>
+
+  <update id="updateDeptByDeptId">
+    UPDATE tb_staff_user
+    SET
+      dept_id = #{deptId},
+      dept_name = #{deptName}
+    WHERE
+      dept_id = #{deptId}
+  </update>
 </mapper>

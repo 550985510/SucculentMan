@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/SucculentMan.iml" filepath="$PROJECT_DIR$/.idea/SucculentMan.iml" />
       <module fileurl="file://$PROJECT_DIR$/SucculentMan.iml" filepath="$PROJECT_DIR$/SucculentMan.iml" />
       <module fileurl="file://$PROJECT_DIR$/SucculentMan-api/SucculentMan-api.iml" filepath="$PROJECT_DIR$/SucculentMan-api/SucculentMan-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SucculentMan-api/SucculentMan-api.iml" filepath="$PROJECT_DIR$/SucculentMan-api/SucculentMan-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SucculentMan-web/SucculentMan-web.iml" filepath="$PROJECT_DIR$/SucculentMan-web/SucculentMan-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/SucculentMan-web/SucculentMan-web.iml" filepath="$PROJECT_DIR$/SucculentMan-web/SucculentMan-web.iml" />
     </modules>
   </component>
