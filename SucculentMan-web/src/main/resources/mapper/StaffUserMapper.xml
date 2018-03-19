@@ -44,6 +44,7 @@
       </if>
     </where>
   </select>
+
   <select id="selectByUserName" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
     SELECT
     <include refid="Base_Column_List"/>
@@ -60,5 +61,14 @@
       modified_time = now()
     WHERE
       id = #{id}
+  </update>
+
+  <update id="updateRoleByRoleId">
+    UPDATE tb_staff_user
+    SET
+      role_id = #{roleId},
+      role_name = #{roleName}
+    WHERE
+      role_id = #{roleId}
   </update>
 </mapper>

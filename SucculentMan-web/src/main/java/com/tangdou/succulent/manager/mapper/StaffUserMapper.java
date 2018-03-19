@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.mapper;
 
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -44,4 +45,11 @@ public interface StaffUserMapper {
      * @return 用户信息
      */
     StaffUser selectByUserName(StaffUser staffUser);
+
+    /**
+     * 通过roleId修改员工roleName
+     * @param roleId 角色id
+     * @param roleName 角色名称
+     */
+    void updateRoleByRoleId(@Param("roleId") Integer roleId, @Param("roleName") String roleName);
 }
