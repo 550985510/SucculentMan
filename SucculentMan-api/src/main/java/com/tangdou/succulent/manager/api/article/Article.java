@@ -34,7 +34,7 @@ public class Article implements Serializable {
     private Integer moduleId;
 
     /**
-     * 所属模块名称
+     * 所属模块名称(通过模块编号查到)
      */
     private Integer moduleName;
 
