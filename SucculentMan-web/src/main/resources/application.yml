@@ -5,6 +5,9 @@ server:
 img:
   location: C:/tmp/
 
+app:
+  host: http://localhost:8080${server.context-path}
+
 spring:
   datasource:
     url: jdbc:mysql://112.74.102.9:3306/succulent_man
