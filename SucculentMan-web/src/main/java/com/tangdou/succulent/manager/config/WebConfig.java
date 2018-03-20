@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.config;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,9 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+    @Value("${img.location}")
+    private String location;
+
     /**
      * 静态资源映射
      */
@@ -27,6 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry
                 .addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
+                .addResourceLocations("file:" + location)
                 .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
         super.addResourceHandlers(registry);
     }
