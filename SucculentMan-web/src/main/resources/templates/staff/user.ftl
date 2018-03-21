@@ -64,14 +64,6 @@
                                     </button>
                                 </span>
                             </div>
-                            <div class="form-group input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" data-toggle='modal'
-                                            data-target="#addStaff">
-                                        <span class="fa fa-user"></span> 添加员工
-                                    </button>
-                                </span>
-                            </div>
                         </form>
                     </div>
                     <div class="panel-body">
@@ -129,6 +121,11 @@
                             </tr>
                             </tfoot>
                         </table>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addStaff">
+                            <i class="fa fa-user"></i> 添加员工
+                        </button>
                     </div>
                 </div>
             <#--<div class="panel-footer">-->

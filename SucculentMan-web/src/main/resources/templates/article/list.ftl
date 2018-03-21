@@ -22,6 +22,64 @@
                     <span class="panel-title"> 模块列表</span>
                 </div>
                 <div class="panel-body">
+                    <div class="well">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="title_input">文章标题</label>
+                                    <input id="title_input" type="text" v-model="searchInfo.title"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="keyword_input">关键词</label>
+                                    <input id="keyword_input" type="text" v-model="searchInfo.keyword"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="author_select">作者</label>
+                                    <select id="author_select" type="text" v-model="searchInfo.staffId"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option :value="author.id" v-for="author in authors">{{author.nickName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="module_select">所属模块</label>
+                                    <select id="module_select" type="text" v-model="searchInfo.moduleId"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option :value="module.id" v-for="module in modules">{{module.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="status_select">发布状态</label>
+                                    <select id="status_select" type="text" v-model="searchInfo.status"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option value="0">待审核</option>
+                                        <option value="1">未通过</option>
+                                        <option value="2">已发布</option>
+                                        <option value="3">已下架</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" v-on:click="search">
+                                        <span class="fa fa-search"></span> 查询
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <thead>
@@ -41,7 +99,8 @@
                                 <td>{{article.title}}</td>
                                 <td>{{article.author}}</td>
                                 <td>
-                                    <label class="label label-success" v-for="keyword in article.keywordList" style="margin-left: 5px">{{keyword}}</label>
+                                    <label class="label label-success" v-for="keyword in article.keywordList"
+                                           style="margin-left: 5px">{{keyword}}</label>
                                 </td>
                                 <td>{{article.moduleName}}</td>
                                 <td>
@@ -51,13 +110,17 @@
                                     <label v-if="article.status === 3" class="label label-default">已下架</label>
                                 </td>
                                 <td>
-                                    <button v-if="article.status === 0" class="btn btn-primary">
+                                    <button class="btn btn-default" v-on:click="detail(article.id)">
+                                        <i class="fa fa-book"></i> 查看
+                                    </button>
+                                    <button v-if="article.status === 0" class="btn btn-primary" data-toggle='modal'
+                                            data-target="#examine" v-on:click="examine(article)">
                                         <i class="fa fa-eye"></i> 审核
                                     </button>
-                                    <button v-if="article.status === 1 || article.status === 3" class="btn btn-info">
+                                    <button v-if="article.status === 1 || article.status === 3" class="btn btn-info" v-on:click="apply(article)">
                                         <i class="fa fa-tags"></i> 申请上线
                                     </button>
-                                    <button v-if="article.status === 2" class="btn btn-danger">
+                                    <button v-if="article.status === 2" class="btn btn-danger" v-on:click="down(article)">
                                         <i class="fa fa-arrow-circle-down"></i> 下架
                                     </button>
                                 </td>
@@ -139,6 +202,30 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <!-- 添加文章 -->
+    <div id="examine" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">文章审核</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <button type="button" class="btn btn-danger btn-lg" v-on:click="noThrough">
+                        <i class="fa fa-times"></i> 审核不通过
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg" v-on:click="passThrough">
+                        <i class="fa fa-check"></i> 审核通过
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
@@ -155,13 +242,18 @@
         data: {
             editor: {},
             searchInfo: {
+                title: '',
+                staffId: '',
+                keyword: '',
+                moduleId: '',
+                status: '',
                 page: 1,
                 pageSize: 20
             },
             modules: [],
             authors: [],
             addArticle: {},
-            article: {},
+            updateArticle: {},
             articles: []
         },
         created: function () {
@@ -295,6 +387,9 @@
                     swal(error.body.msg);
                 });
             },
+            detail: function (id) {
+                window.location.href = contentPath + "/article/detail?id=" + id;
+            },
             add: function () {
                 this.addArticle.content = this.editor.txt.html();
                 var url = contentPath + "/api/article/add";
@@ -304,6 +399,117 @@
                     this.query();
                 }, function (error) {
                     swal(error.body.msg);
+                });
+            },
+            examine: function (article) {
+                this.updateArticle = article;
+            },
+            passThrough: function () {
+                var that = this;
+                swal({
+                    title: "确定通过审核吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        that.updateArticle.status = 2;
+                        var url = contentPath + "/api/article/examine";
+                        that.$http.post(url, that.updateArticle).then(function (response) {
+                            $("#examine").modal('hide');
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
+            },
+            noThrough: function () {
+                var that = this;
+                swal({
+                    title: "确定不通过审核吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        that.updateArticle.status = 1;
+                        var url = contentPath + "/api/article/examine";
+                        that.$http.post(url, that.updateArticle).then(function (response) {
+                            $("#examine").modal('hide');
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
+            },
+            down: function (article) {
+                var that = this;
+                swal({
+                    title: "确定下架该文章吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        article.status = 3;
+                        var url = contentPath + "/api/article/examine";
+                        that.$http.post(url, article).then(function (response) {
+                            $("#examine").modal('hide');
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
+            },
+            apply: function (article) {
+                var that = this;
+                swal({
+                    title: "确定申请发布该文章吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        article.status = 0;
+                        var url = contentPath + "/api/article/examine";
+                        that.$http.post(url, article).then(function (response) {
+                            $("#examine").modal('hide');
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
                 });
             }
         }

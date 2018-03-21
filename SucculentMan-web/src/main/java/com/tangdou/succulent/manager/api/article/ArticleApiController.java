@@ -42,4 +42,12 @@ public class ArticleApiController {
         articleService.add(article);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
+
+    @PostMapping("examine")
+    public ResponseResult examine(@RequestBody Article article, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        article.setModifiedBy(currentUser.getRealName());
+        articleService.examine(article);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
 }

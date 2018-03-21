@@ -59,19 +59,34 @@
     </trim>
   </insert>
 
+  <update id="updateStatusById">
+    UPDATE tb_article
+    SET
+      modified_by = #{modifiedBy},
+      status= #{status},
+      modified_time = now()
+    WHERE id = #{id}
+  </update>
+
   <select id="selectByList" resultType="com.tangdou.succulent.manager.api.article.Article">
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb_article
     <where>
-      <if test="moduleId != null">
+      <if test="moduleId != null and moduleId != ''">
         module_id = #{moduleId}
       </if>
-      <if test="status != null">
+      <if test="status != null and status != ''">
         AND status = #{status}
+      </if>
+      <if test="staffId != null and staffId != ''">
+        AND staff_id = #{staffId}
       </if>
       <if test="title != null and title != ''">
         AND title like CONCAT ('%',#{title},'%')
+      </if>
+      <if test="keyword != null and keyword != ''">
+        AND keyword like CONCAT ('%',#{keyword},'%')
       </if>
     </where>
   </select>

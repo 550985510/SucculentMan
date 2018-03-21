@@ -20,4 +20,10 @@ public interface ArticleService {
      * @param article 文章信息
      */
     void add(Article article);
+
+    /**
+     * 文章审核
+     * @param article 审核信息
+     */
+    void examine(Article article);
 }

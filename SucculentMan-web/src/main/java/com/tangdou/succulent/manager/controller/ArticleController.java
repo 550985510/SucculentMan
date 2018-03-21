@@ -17,4 +17,9 @@ public class ArticleController {
     public String list() {
         return "/article/list";
     }
+
+    @GetMapping("/detail")
+    public String detail() {
+        return "/article/detail";
+    }
 }

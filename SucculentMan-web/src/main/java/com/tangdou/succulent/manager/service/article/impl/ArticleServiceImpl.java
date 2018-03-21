@@ -88,4 +88,14 @@ public class ArticleServiceImpl implements ArticleService {
         content.setContent(article.getContent());
         articleContentMapper.insert(content);
     }
+
+    /**
+     * 文章审核
+     *
+     * @param article 审核信息
+     */
+    @Override
+    public void examine(Article article) {
+        articleMapper.updateStatusById(article);
+    }
 }
