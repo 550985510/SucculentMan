@@ -49,8 +49,8 @@
                         </table>
                     </div>
                     <div class="panel-footer">
-                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addArticle">
-                            <i class="fa fa-plus-circle"></i> 添加文章
+                        <button class="btn btn-success btn-lg" data-toggle='modal' data-target="#addModule">
+                            <i class="fa fa-plus-circle"></i> 添加模块
                         </button>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
     </div><!-- /.modal -->
 
     <!-- 添加文章 -->
-    <div id="addArticle" class="modal fade" tabindex="-1" role="dialog">
+    <div id="addModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

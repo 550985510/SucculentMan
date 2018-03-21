@@ -6,7 +6,7 @@
   </sql>
 
   <insert id="insert">
-    INSERT INTO tb_article
+    INSERT INTO tb_article_content
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="articleId != null">
         article_id,

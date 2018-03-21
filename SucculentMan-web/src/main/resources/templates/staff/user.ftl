@@ -82,6 +82,7 @@
                                 <th>姓名</th>
                                 <th>性别</th>
                                 <th>手机号</th>
+                                <th>昵称</th>
                                 <th>所属部门</th>
                                 <th>在职状态</th>
                                 <th>拥有角色</th>
@@ -97,6 +98,7 @@
                                     <span v-if="user.gender === 1">女</span>
                                 </td>
                                 <td>{{user.mobile}}</td>
+                                <td>{{user.nickName}}</td>
                                 <td>{{user.deptName}}</td>
                                 <td>
                                     <span class="label label-success" v-if="user.status === 0">在职</span>
@@ -189,6 +191,12 @@
                             <label for="add_modal_mobile_input" class="control-label col-lg-3">手机号码</label>
                             <div class="bs-component col-lg-8">
                                 <input id="add_modal_mobile_input" class="form-control" v-model="staff.mobile">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_modal_nickName_input" class="control-label col-lg-3">员工昵称</label>
+                            <div class="bs-component col-lg-8">
+                                <input id="add_modal_nickName_input" class="form-control" v-model="staff.nickName">
                             </div>
                         </div>
                         <div class="form-group">

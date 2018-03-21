@@ -3,6 +3,8 @@ package com.tangdou.succulent.manager.mapper;
 
 import com.tangdou.succulent.manager.api.article.Article;
 
+import java.util.List;
+
 /**
  * 文章相关
  * @author 木叶丸
@@ -10,5 +12,16 @@ import com.tangdou.succulent.manager.api.article.Article;
  */
 public interface ArticleMapper {
 
+    /**
+     * 插入一条文章信息
+     * @param article 文章信息
+     */
     void insert(Article article);
+
+    /**
+     * 条件查询文章列表信息
+     * @param article 查询条件
+     * @return 文章列表信息
+     */
+    List<Article> selectByList(Article article);
 }

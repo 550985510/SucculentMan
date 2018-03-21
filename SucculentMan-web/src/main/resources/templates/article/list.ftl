@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>多肉达人后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<@s.url '/css/jquery.pagination.css'/>">
 <#include '../include/baselink.ftl'>
     <link href="<@s.url '/css/fileinput.css'/>" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/tagmanager/tagmanager.css'/>">
@@ -26,25 +27,54 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>模块名称</th>
-                                <th>模块类型</th>
+                                <th>标题</th>
+                                <th>作者</th>
+                                <th>关键词</th>
+                                <th>所属模块</th>
+                                <th>发布状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="module in modules">
-                                <td>{{module.id}}</td>
-                                <td>{{module.name}}</td>
-                                <td v-if="module.type === 0">文章</td>
-                                <td v-if="module.type === 1">帖子</td>
+                            <tr v-for="article in articles">
+                                <td>{{article.id}}</td>
+                                <td>{{article.title}}</td>
+                                <td>{{article.author}}</td>
                                 <td>
-                                    <button class="btn btn-primary" v-on:click="deleteModule(module)">删除模块</button>
+                                    <label class="label label-success" v-for="keyword in article.keywordList" style="margin-left: 5px">{{keyword}}</label>
+                                </td>
+                                <td>{{article.moduleName}}</td>
+                                <td>
+                                    <label v-if="article.status === 0" class="label label-warning">待审核</label>
+                                    <label v-if="article.status === 1" class="label label-danger">未通过</label>
+                                    <label v-if="article.status === 2" class="label label-success">已发布</label>
+                                    <label v-if="article.status === 3" class="label label-default">已下架</label>
+                                </td>
+                                <td>
+                                    <button v-if="article.status === 0" class="btn btn-primary">
+                                        <i class="fa fa-eye"></i> 审核
+                                    </button>
+                                    <button v-if="article.status === 1 || article.status === 3" class="btn btn-info">
+                                        <i class="fa fa-tags"></i> 申请上线
+                                    </button>
+                                    <button v-if="article.status === 2" class="btn btn-danger">
+                                        <i class="fa fa-arrow-circle-down"></i> 下架
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="20" v-if="modules.length == 0">没有数据 ！</td>
+                                <td class="text-center" colspan="20" v-if="articles.length == 0">没有数据 ！</td>
                             </tr>
                             </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="20">
+                                    <div class="table-responsive">
+                                        <div id="pageMenu"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div class="panel-footer">
@@ -72,16 +102,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="title" class="control-label">文章标题</label>
-                        <input id="title" class="form-control" v-model="article.title"/>
+                        <input id="title" class="form-control" v-model="addArticle.title"/>
                     </div>
                     <div class="form-group">
                         <label for="input-file" class="control-label">上传首页缩略图</label>
                         <input id="input-file" type="file" name="myFileName" class="file-loading"/>
                     </div>
                     <div class="form-group">
-                        <label for="module" class="control-label">所属模块</label>
-                        <select id="module" class="form-control" v-model="article.moduleId">
-                            <option v-for="module in modules" v-bind:value="module.id">{{module.name}}</option>
+                        <label for="author" class="control-label">文章作者</label>
+                        <select id="author" class="form-control" v-model="addArticle.staffId">
+                            <option v-for="author in authors" v-bind:value="author.id">{{author.realName}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -90,6 +120,12 @@
                             <input type="text" id="tagmanager" class="form-control" placeholder="请输入关键词">
                             <div class="tag-container tags"></div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="module" class="control-label">所属模块</label>
+                        <select id="module" class="form-control" v-model="addArticle.moduleId">
+                            <option v-for="module in modules" v-bind:value="module.id">{{module.name}}</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">文章内容</label>
@@ -105,6 +141,7 @@
     </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
+<script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
 <script src="<@s.url '/js/fileinput.js'/>"></script>
 <script src="<@s.url '/js/zh.js'/>"></script>
 <script src="<@s.url '/plugins/holder/holder.min.js'/>"></script>
@@ -116,13 +153,28 @@
     var app = new Vue({
         el: '#main',
         data: {
-            module: {},
+            editor: {},
+            searchInfo: {
+                page: 1,
+                pageSize: 20
+            },
             modules: [],
-            addModule: {},
-            article: {}
+            authors: [],
+            addArticle: {},
+            article: {},
+            articles: []
         },
         created: function () {
+            this.searchInfo.page = 1;
+            $('#pageMenu').page('destroy');
+            this.query();
             this.findModule();
+            this.findAuthor();
+        },
+        watch: {
+            "searchInfo.page": function () {
+                this.query();
+            }
         },
         mounted: function () {
             var _self = this;
@@ -134,28 +186,28 @@
                 showBrowse: false,
                 browseOnZoneClick: true
             }).on("fileuploaded", function (e, result) {
-                _self.article.img = result.response.msg;
+                _self.addArticle.img = result.response.msg;
             });
 
             //jquery tagmanager插件
             var $tagmanager = $("#tagmanager");
             $tagmanager.tagsManager({
                 tagsContainer: '.tags',
-                prefilled: _self.article.keyword,
+                prefilled: _self.addArticle.keywordList,
                 tagClass: 'tm-tag-info'
             });
             //删除事件处理
             $tagmanager.on('tm:pushed', function (e, tag) {
-                _self.article.keyword = $(this).tagsManager('tags');
+                _self.addArticle.keywordList = $(this).tagsManager('tags');
             });
             $tagmanager.on('tm:spliced', function (e, tag) {
-                _self.article.keyword = $(this).tagsManager('tags');
+                _self.addArticle.keywordList = $(this).tagsManager('tags');
             });
 
             //富文本编辑器
             var E = window.wangEditor;
-            var editor = new E('#content_add_editor');
-            editor.customConfig.menus = [
+            this.editor = new wangEditor('#content_add_editor');
+            this.editor.customConfig.menus = [
                 'head',  // 标题
                 'bold',  // 粗体
                 'fontSize',  // 字号
@@ -174,10 +226,10 @@
                 'undo'  // 撤销
             ];
             // 配置服务器端地址
-            editor.customConfig.uploadImgServer = contentPath + '/api/upload/img';
+            this.editor.customConfig.uploadImgServer = contentPath + '/api/upload/img';
             // 定义文件名
-            editor.customConfig.uploadFileName = 'myFileName';
-            editor.customConfig.uploadImgHooks = {
+            this.editor.customConfig.uploadFileName = 'myFileName';
+            this.editor.customConfig.uploadImgHooks = {
                 success: function (xhr, editor, result) {
                     // 图片上传并返回结果，图片插入成功之后触发
                     // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
@@ -193,9 +245,40 @@
                     // result 必须是一个 JSON 格式字符串！！！否则报错
                 }
             };
-            editor.create();
+            this.editor.create();
         },
         methods: {
+            search: function () {
+                this.searchInfo.page = 1;
+                $('#pageMenu').page('destroy');//销毁分页
+                this.query();
+            },
+            query: function () {
+                var url = contentPath + "/api/article/list";
+                this.$http.post(url, this.searchInfo).then(function (response) {
+                    this.articles = response.data.data.list;
+                    var temp = this;
+                    $("#pageMenu").page({//加载分页
+                        total: response.data.data.total,
+                        pageSize: response.data.data.pageSize,
+                        firstBtnText: '首页',
+                        lastBtnText: '尾页',
+                        prevBtnText: '上一页',
+                        nextBtnText: '下一页',
+                        showInfo: true,
+                        showJump: true,
+                        jumpBtnText: '跳转',
+                        infoFormat: '{start} ~ {end}条，共{total}条'
+                    }, response.data.data.page)//传入请求参数
+                            .on("pageClicked", function (event, pageIndex) {
+                                temp.searchInfo.page = pageIndex + 1;
+                            }).on('jumpClicked', function (event, pageIndex) {
+                        temp.searchInfo.page = pageIndex + 1;
+                    });
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
             findModule: function () {
                 var url = contentPath + "/api/module/list";
                 this.$http.post(url).then(function (response) {
@@ -204,35 +287,19 @@
                     swal(error.body.msg);
                 });
             },
-            deleteModule: function (module) {
-                var that = this;
-                swal({
-                    title: "确定删除该模块？",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定删除！",
-                    cancelButtonText: "取消删除！",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        var url = contentPath + "/api/module/delete";
-                        that.$http.post(url, module).then(function (response) {
-                            swal("删除！", "", "success");
-                            that.query();
-                        }, function (error) {
-                            swal(error.body.msg);
-                        });
-                    } else {
-                        swal("取消！", "", "error");
-                    }
+            findAuthor: function () {
+                var url = contentPath + "/api/staff/authorList";
+                this.$http.post(url).then(function (response) {
+                    this.authors = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
                 });
             },
             add: function () {
-                var url = contentPath + "/api/module/add";
-                this.$http.post(url, this.addModule).then(function (response) {
-                    $("#addModule").modal('hide');
+                this.addArticle.content = this.editor.txt.html();
+                var url = contentPath + "/api/article/add";
+                this.$http.post(url, this.addArticle).then(function (response) {
+                    $("#addArticle").modal('hide');
                     swal("操作成功！", "", "success");
                     this.query();
                 }, function (error) {

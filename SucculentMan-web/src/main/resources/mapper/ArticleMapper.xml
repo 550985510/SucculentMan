@@ -5,7 +5,7 @@
     id, title, img, module_id, status, keyword, comment_num, staff_id, created_by, modified_by, created_time, modified_time
   </sql>
 
-  <insert id="insert">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO tb_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="title != null">
@@ -52,11 +52,28 @@
         #{createdBy},
       </if>
       <if test="modifiedBy != null">
-        #{modified_by},
+        #{modifiedBy},
       </if>
       now(),
       now(),
     </trim>
   </insert>
+
+  <select id="selectByList" resultType="com.tangdou.succulent.manager.api.article.Article">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_article
+    <where>
+      <if test="moduleId != null">
+        module_id = #{moduleId}
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+      <if test="title != null and title != ''">
+        AND title like CONCAT ('%',#{title},'%')
+      </if>
+    </where>
+  </select>
 
 </mapper>

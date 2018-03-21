@@ -3,16 +3,16 @@
 <mapper namespace="com.tangdou.succulent.manager.mapper.StaffUserMapper">
   <sql id="Base_Column_List">
     id, user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name, dept_id, dept_name,
-    status, created_by, created_time, modified_by, modified_time
+    nick_name, status, created_by, created_time, modified_by, modified_time
   </sql>
 
   <insert id="insert">
     INSERT INTO tb_staff_user
-    (user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name,
-     dept_id, dept_name, created_by, created_time, modified_time, modified_by, created_by)
+    (user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name, nick_name,
+     dept_id, dept_name, modified_by, created_by, created_time, modified_time)
     VALUES
     (#{userName}, #{passWord}, #{salt}, #{realName}, #{gender}, #{mobile}, #{roleId},
-     #{roleName}, #{deptId}, #{deptName}, #{createdBy}, now(), now(), #{modifiedBy}, #{createdBy})
+     #{roleName}, #{nickName}, #{deptId}, #{deptName}, #{modifiedBy}, #{createdBy}, now(), now())
   </insert>
 
   <select id="selectForLogin" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
@@ -50,6 +50,13 @@
     <include refid="Base_Column_List"/>
     FROM tb_staff_user
     WHERE user_name = #{userName}
+  </select>
+
+  <select id="selectById" resultType="com.tangdou.succulent.manager.bean.staff.StaffUser">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_staff_user
+    WHERE id = #{id}
   </select>
 
   <update id="updateRoleById">

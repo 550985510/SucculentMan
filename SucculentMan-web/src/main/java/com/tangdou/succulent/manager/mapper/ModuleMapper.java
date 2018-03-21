@@ -28,4 +28,11 @@ public interface ModuleMapper {
      * @param module 模块信息
      */
     void insert(Module module);
+
+    /**
+     * 通过id查询模块信息
+     * @param id 模块编号
+     * @return 模块信息
+     */
+    Module selectById(Integer id);
 }

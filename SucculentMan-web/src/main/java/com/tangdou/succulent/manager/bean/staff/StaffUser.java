@@ -40,6 +40,11 @@ public class StaffUser implements Serializable {
     private String realName;
 
     /**
+     * 员工昵称
+     */
+    private String nickName;
+
+    /**
      * 性别
      */
     private Integer gender;

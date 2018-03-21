@@ -12,6 +12,13 @@
       deleted = 0
   </select>
 
+  <select id="selectById" resultType="com.tangdou.succulent.manager.bean.module.Module">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_module
+    WHERE id = #{id}
+  </select>
+
   <update id="updateById">
     UPDATE tb_module
     <set>

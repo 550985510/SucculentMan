@@ -75,4 +75,16 @@ public class StaffUserServiceImpl implements StaffUserService {
     public StaffUser findByUserName(StaffUser staffUser) {
         return staffUserMapper.selectByUserName(staffUser);
     }
+
+    /**
+     * 查询小编列表
+     *
+     * @return 小编列表信息
+     */
+    @Override
+    public List<StaffUser> findAuthorList() {
+        StaffUser staffUser = new StaffUser();
+        staffUser.setRoleId(3);
+        return staffUserMapper.selectList(staffUser);
+    }
 }

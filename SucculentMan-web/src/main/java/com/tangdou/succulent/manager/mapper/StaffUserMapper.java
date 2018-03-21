@@ -59,4 +59,11 @@ public interface StaffUserMapper {
      * @param deptName 部门名称
      */
     void updateDeptByDeptId(@Param("deptId") Integer deptId, @Param("deptName") String deptName);
+
+    /**
+     * 通过id查询员工信息
+     * @param id 员工编号
+     * @return 员工信息
+     */
+    StaffUser selectById(Integer id);
 }

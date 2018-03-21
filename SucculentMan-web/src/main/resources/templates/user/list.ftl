@@ -137,7 +137,6 @@
                 var url = contentPath + "/api/user/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
                     this.users = response.data.data.list;
-                    console.log(this.users);
                     var temp = this;
                     $("#pageMenu").page({//加载分页
                         total: response.data.data.total,

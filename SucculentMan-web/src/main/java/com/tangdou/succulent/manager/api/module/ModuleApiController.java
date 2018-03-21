@@ -67,7 +67,6 @@ public class ModuleApiController {
         module.setCreatedBy(currentUser.getRealName());
         module.setModifiedBy(currentUser.getRealName());
         moduleService.add(module);
-        ResponseResult result = new ResponseResult(RestResultEnum.SUCCESS);
-        return result;
+        return new ResponseResult(RestResultEnum.SUCCESS);
     }
 }

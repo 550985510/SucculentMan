@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 文章
@@ -36,7 +37,7 @@ public class Article implements Serializable {
     /**
      * 所属模块名称(通过模块编号查到)
      */
-    private Integer moduleName;
+    private String moduleName;
 
     /**
      * 发布状态 0:待审核 1:未通过 2:已发布 3:已下架
@@ -49,6 +50,11 @@ public class Article implements Serializable {
     private String keyword;
 
     /**
+     * 关键词
+     */
+    private List<String> keywordList;
+
+    /**
      * 评论数量
      */
     private Integer commentNum;
@@ -59,9 +65,14 @@ public class Article implements Serializable {
     private Integer staffId;
 
     /**
+     * 作者姓名
+     */
+    private String author;
+
+    /**
      * 文章内容
      */
-    private ArticleContent content;
+    private String content;
 
     /**
      * 创建时间
@@ -82,4 +93,14 @@ public class Article implements Serializable {
      * 最后修改人
      */
     private String modifiedBy;
+
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
 }

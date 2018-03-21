@@ -80,6 +80,16 @@ public class StaffApiController {
     }
 
     /**
+     * 小编列表
+     * @return 小编列表信息
+     */
+    @PostMapping("/authorList")
+    public ResponseResult<List<StaffUser>> findUserList() {
+        List<StaffUser> list = staffUserService.findAuthorList();
+        return new ResponseResult<>(list);
+    }
+
+    /**
      * 角色权限列表
      * @return 角色权限列表信息
      */

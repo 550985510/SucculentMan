@@ -1,9 +1,23 @@
 package com.tangdou.succulent.manager.service.article;
 
-/**
+import com.github.pagehelper.PageInfo;
+import com.tangdou.succulent.manager.api.article.Article; /**
  * 文章相关
  * @author 木叶丸
  * @date 2018/3/18
  */
 public interface ArticleService {
+
+    /**
+     * 分页查询文章信息
+     * @param article 查询条件
+     * @return 文章分页列表信息
+     */
+    PageInfo<Article> findByList(Article article);
+
+    /**
+     * 新增文章
+     * @param article 文章信息
+     */
+    void add(Article article);
 }

@@ -3,6 +3,8 @@ package com.tangdou.succulent.manager.service.staff;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 
+import java.util.List;
+
 /**
  * 员工相关操作
  * @author 木叶丸
@@ -42,4 +44,10 @@ public interface StaffUserService {
      * @return 用户信息
      */
     StaffUser findByUserName(StaffUser staffUser);
+
+    /**
+     * 查询小编列表
+     * @return 小编列表信息
+     */
+    List<StaffUser> findAuthorList();
 }
