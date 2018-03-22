@@ -244,6 +244,12 @@
                             </div>
                         </div>
                         <div class="row cl">
+                            <label for="add_modal_nickName_input" class="form-label col-xs-4 col-sm-3">员工昵称</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <input id="add_modal_nickName_input" class="input-text radius" v-model="staff.nickName">
+                            </div>
+                        </div>
+                        <div class="row cl">
                             <label for="add_modal_role_select" class="form-label col-xs-4 col-sm-3">选择角色</label>
                             <div class="formControls col-xs-8 col-sm-9">
                                 <select id="add_modal_role_select" class="input-text radius" v-model="staff.roleId">
