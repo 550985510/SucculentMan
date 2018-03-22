@@ -37,4 +37,10 @@ public interface ArticleMapper {
      * @return 文章信息
      */
     Article selectById(Integer id);
+
+    /**
+     * 修改文章信息
+     * @param article 文章信息
+     */
+    void update(Article article);
 }

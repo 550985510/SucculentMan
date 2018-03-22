@@ -100,7 +100,7 @@
                                 <td>{{article.author}}</td>
                                 <td>
                                     <label class="label label-success" v-for="keyword in article.keywordList"
-                                           style="margin-left: 5px">{{keyword}}</label>
+                                           style="margin-right: 5px">{{keyword}}</label>
                                 </td>
                                 <td>{{article.moduleName}}</td>
                                 <td>
@@ -203,7 +203,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- 添加文章 -->
+    <!-- 文章审核 -->
     <div id="examine" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -312,7 +312,6 @@
                 'link',  // 插入链接
                 'list',  // 列表
                 'justify',  // 对齐方式
-                'quote',  // 引用
                 'image',  // 插入图片
                 'table',  // 表格
                 'undo'  // 撤销

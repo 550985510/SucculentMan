@@ -68,6 +68,30 @@
     WHERE id = #{id}
   </update>
 
+  <update id="update">
+    UPDATE tb_article
+    <set>
+      <if test="title != null">
+        title = #{title},
+      </if>
+      <if test="img != null">
+        img = #{img},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword},
+      </if>
+      <if test="staffId != null">
+        staff_id = #{staffId},
+      </if>
+        modified_by = #{modifiedBy},
+        modified_time = now()
+    </set>
+    WHERE id= #{id}
+  </update>
+
   <select id="selectByList" resultType="com.tangdou.succulent.manager.api.article.Article">
     SELECT
     <include refid="Base_Column_List"/>

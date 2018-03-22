@@ -33,4 +33,10 @@ public interface ArticleService {
      * @return 文章详情信息
      */
     Article detail(Integer id);
+
+    /**
+     * 编辑文章
+     * @param article 文章信息
+     */
+    void edit(Article article);
 }

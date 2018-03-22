@@ -53,4 +53,12 @@ public class ArticleApiController {
         Article article = articleService.detail(id);
         return new ResponseResult<>(article);
     }
+
+    @PostMapping("/edit")
+    public ResponseResult edit(@RequestBody Article article, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        article.setModifiedBy(currentUser.getRealName());
+        articleService.edit(article);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
 }

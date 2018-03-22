@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.Article;
 import com.tangdou.succulent.manager.api.article.ArticleContent;
-import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.mapper.ArticleContentMapper;
 import com.tangdou.succulent.manager.mapper.ArticleMapper;
 import com.tangdou.succulent.manager.mapper.ModuleMapper;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     /**
      * 树路径分隔符
      */
-    public static final String KEYWORD_SEPARATOR = ",";
+    private static final String KEYWORD_SEPARATOR = ",";
 
     @Resource
     private ArticleMapper articleMapper;
@@ -54,12 +54,10 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(article.getPage(), article.getPageSize());
         List<Article> list = articleMapper.selectByList(article);
         for (Article item : list) {
-            List<String> keywordList = new ArrayList<String>();
+            List<String> keywordList = new ArrayList<>();
             String[] keywords = StringUtils.split(item.getKeyword(), KEYWORD_SEPARATOR);
             if (keywords != null) {
-                for (String keyword : keywords) {
-                    keywordList.add(keyword);
-                }
+                Collections.addAll(keywordList, keywords);
             }
             item.setKeywordList(keywordList);
             item.setAuthor(staffUserMapper.selectById(item.getStaffId()).getNickName());
@@ -76,11 +74,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void add(Article article) {
-        String keyword = "";
+        StringBuilder keyword = new StringBuilder();
         for (String item : article.getKeywordList()) {
-            keyword += item + ",";
+            keyword.append(item).append(",");
         }
-        article.setKeyword(keyword);
+        article.setKeyword(keyword.toString());
         articleMapper.insert(article);
         Integer articleId = article.getId();
         ArticleContent content = new ArticleContent();
@@ -108,6 +106,36 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article detail(Integer id) {
         Article article = articleMapper.selectById(id);
-        return null;
+        ArticleContent content = articleContentMapper.selectByArticleId(id);
+        article.setContent(content.getContent());
+        List<String> keywordList = new ArrayList<>();
+        String[] keywords = StringUtils.split(article.getKeyword(), KEYWORD_SEPARATOR);
+        if (keywords != null) {
+            Collections.addAll(keywordList, keywords);
+        }
+        article.setKeywordList(keywordList);
+        article.setAuthor(staffUserMapper.selectById(article.getStaffId()).getNickName());
+        article.setModuleName(moduleMapper.selectById(article.getModuleId()).getName());
+        return article;
+    }
+
+    /**
+     * 编辑文章
+     *
+     * @param article 文章信息
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void edit(Article article) {
+        StringBuilder keyword = new StringBuilder();
+        for (String item : article.getKeywordList()) {
+            keyword.append(item).append(",");
+        }
+        article.setKeyword(keyword.toString());
+        articleMapper.update(article);
+        ArticleContent content = new ArticleContent();
+        content.setArticleId(article.getId());
+        content.setContent(article.getContent());
+        articleContentMapper.updateByArticleId(content);
     }
 }
