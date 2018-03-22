@@ -30,4 +30,11 @@ public interface ArticleMapper {
      * @param article 状态信息
      */
     void updateStatusById(Article article);
+
+    /**
+     * 通过id查询文章信息
+     * @param id 文章编号
+     * @return 文章信息
+     */
+    Article selectById(Integer id);
 }

@@ -26,4 +26,11 @@ public interface ArticleService {
      * @param article 审核信息
      */
     void examine(Article article);
+
+    /**
+     * 文章详情
+     * @param id 文章编号
+     * @return 文章详情信息
+     */
+    Article detail(Integer id);
 }

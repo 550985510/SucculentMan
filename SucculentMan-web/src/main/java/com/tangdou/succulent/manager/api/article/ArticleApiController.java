@@ -6,10 +6,7 @@ import com.tangdou.succulent.manager.bean.common.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.article.ArticleService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -43,11 +40,17 @@ public class ArticleApiController {
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
 
-    @PostMapping("examine")
+    @PostMapping("/examine")
     public ResponseResult examine(@RequestBody Article article, HttpSession session) {
         currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
         article.setModifiedBy(currentUser.getRealName());
         articleService.examine(article);
         return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    @GetMapping("/detail")
+    public ResponseResult<Article> detail(Integer id) {
+        Article article = articleService.detail(id);
+        return new ResponseResult<>(article);
     }
 }

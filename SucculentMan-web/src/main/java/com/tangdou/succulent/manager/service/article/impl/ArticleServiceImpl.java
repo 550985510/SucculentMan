@@ -98,4 +98,16 @@ public class ArticleServiceImpl implements ArticleService {
     public void examine(Article article) {
         articleMapper.updateStatusById(article);
     }
+
+    /**
+     * 文章详情
+     *
+     * @param id 文章编号
+     * @return 文章详情信息
+     */
+    @Override
+    public Article detail(Integer id) {
+        Article article = articleMapper.selectById(id);
+        return null;
+    }
 }
