@@ -6,7 +6,7 @@ img:
   location: C:/tmp/
 
 app:
-  host: http://localhost:8080${server.context-path}
+  host: http://www.tangdoudou.club${server.context-path}
 
 spring:
   datasource:
