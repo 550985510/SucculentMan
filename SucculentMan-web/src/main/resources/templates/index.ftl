@@ -62,8 +62,7 @@
                             <a href="#" class="dropDown_A">${Session.user.realName}<i class="Hui-iconfont">&#xe6d5;</i></a>
                             <ul class="dropDown-menu menu radius box-shadow">
                                 <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-                                <li><a href="#">切换账户</a></li>
-                                <li><a href="#">退出</a></li>
+                                <li><a href="#" v-on:click="logout">退出</a></li>
                             </ul>
                         </li>
                         <li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;"
@@ -325,12 +324,36 @@
                     this.$http.post(url, this.staff).then(function (response) {
                         $("#addStaff").modal('hide');
                         swal("操作成功！", "", "success");
-                        this.query();
                     }, function (error) {
                         swal(error.body.msg);
                     });
                 }
                 console.log(this.staff);
+            },
+            logout: function () {
+                var that = this;
+                swal({
+                    title: "确定退出当前账户吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        var url = contentPath + "/api/staff/logout";
+                        that.$http.post(url).then(function (response) {
+                            swal("操作成功！", "", "success");
+                            location.reload();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
             }
         }
     });

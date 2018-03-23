@@ -68,6 +68,12 @@ public class StaffApiController {
         return new ResponseResult(RestResultEnum.LOGIN_ERROR);
     }
 
+    @PostMapping("/logout")
+    public ResponseResult logout(HttpSession session) {
+        session.removeAttribute(AdminSecurityConfig.SESSION_KEY);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
     /**
      * 员工列表
      * @param staffUser 员工信息
