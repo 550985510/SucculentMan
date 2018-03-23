@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh_CN">
 <head>
-	<meta charset="utf-8" />
+    <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>管理员登陆</title>
 	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/login.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="../js/layer/layer.js"></script>
-	<link href="../js/layer/skin/default/layer.css" rel="stylesheet">
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+    <script type="text/javascript" src="js/canvas-particle.js"></script>
+	<link rel="stylesheet" href="js/layer/skin/default/layer.css">
 </head>
 <body>
 <div class="page">
@@ -51,10 +52,10 @@
 				dist : 6000,
 				e_dist : 20000,
 				max_conn : 10
-			}
+			};
 			CanvasParticle(config);
 			createCode();
-		}
+		};
 		
 		
 		var code; //在全局定义验证码  
@@ -158,6 +159,5 @@
         	$('#checkCode').val("");
         }
 	</script>
-	<script type="text/javascript" src="js/canvas-particle.js"></script>
 </body>
 </html>
