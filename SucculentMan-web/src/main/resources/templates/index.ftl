@@ -311,24 +311,41 @@
                 });
             },
             addStaff: function () {
+                var that = this;
                 this.staff.deptName = $("#add_modal_dept_select").find("option:selected").text();
                 this.staff.roleName = $("#add_modal_role_select").find("option:selected").text();
                 if (this.staff.realName == null) {
                     sweetAlert("请输入员工姓名");
                 } else if (this.staff.mobile == null) {
                     sweetAlert("请输入员工手机号码")
+                } else if (this.staff.nickName == null) {
+                    sweetAlert("请输入员工昵称")
                 } else if (this.staff.deptId == null) {
                     sweetAlert("请选择员工所属部门")
                 } else {
-                    var url = contentPath + "/api/staff/addUser";
-                    this.$http.post(url, this.staff).then(function (response) {
-                        $("#addStaff").modal('hide');
-                        swal("操作成功！", "", "success");
-                    }, function (error) {
-                        swal(error.body.msg);
+                    swal({
+                        title: "确定添加员工吗？",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定！",
+                        cancelButtonText: "取消！",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            var url = contentPath + "/api/staff/addUser";
+                            that.$http.post(url, that.staff).then(function (response) {
+                                $("#addStaff").modal('hide');
+                                swal("操作成功！", "", "success");
+                            }, function (error) {
+                                swal(error.body.msg);
+                            });
+                        } else {
+                            swal("取消！", "", "error");
+                        }
                     });
                 }
-                console.log(this.staff);
             },
             logout: function () {
                 var that = this;
