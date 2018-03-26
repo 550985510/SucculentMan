@@ -1,5 +1,8 @@
 package com.tangdou.succulent.manager.config;
 
+import com.tangdou.succulent.manager.bean.staff.StaffUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +25,8 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
     @Value("${server.context-path}")
     private String requestPath;
 
+    final Logger logger = LoggerFactory.getLogger(getClass());
+
     /**
      * 登录session key
      */
@@ -37,7 +42,9 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
         // 排除配置
-        addInterceptor.excludePathPatterns("/error");
+        addInterceptor.excludePathPatterns("/error_403");
+        addInterceptor.excludePathPatterns("/error_404");
+        addInterceptor.excludePathPatterns("/error_500");
         addInterceptor.excludePathPatterns("/api/staff/login");
         addInterceptor.excludePathPatterns("/login");
 
@@ -51,13 +58,23 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
             HttpSession session = request.getSession();
-            if (session.getAttribute(SESSION_KEY) != null) {
-                return true;
+            StaffUser staffUser = (StaffUser) session.getAttribute(SESSION_KEY);
+            Integer roleId = staffUser.getRoleId();
+            if (staffUser != null) {
+                String requestUri = request.getRequestURI();
+                String contextPath = request.getContextPath();
+                String url = requestUri.substring(contextPath.length());
+                logger.info("url:"+url);
+                if (roleId != 1) {
+                    response.sendRedirect(requestPath + "/error_403");
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
             // 跳转登录
-            String url = requestPath + "/login";
-            response.sendRedirect(url);
+            response.sendRedirect(requestPath + "/login");
             return false;
         }
     }

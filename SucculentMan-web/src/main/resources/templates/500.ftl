@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>多肉达人后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include 'include/baselink.ftl'>
 </head>
 
 <body class="error-page sb-l-o sb-r-c onload-check">
@@ -18,6 +19,6 @@
         </section>
     </section>
 </div>
+<#include 'include/footer.ftl'/>
 </body>
-
 </html>

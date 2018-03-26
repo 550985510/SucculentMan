@@ -59,7 +59,7 @@
                     <ul class="cl">
                         <li>${Session.user.roleName}</li>
                         <li class="dropDown dropDown_hover">
-                            <a href="#" class="dropDown_A">${Session.user.realName}<i class="Hui-iconfont">&#xe6d5;</i></a>
+                            <a href="#" class="dropDown_A">${Session.user.realName}(${Session.user.nickName})<i class="Hui-iconfont">&#xe6d5;</i></a>
                             <ul class="dropDown-menu menu radius box-shadow">
                                 <li><a href="javascript:;" onClick="myselfinfo()">
                                     <i class="Hui-iconfont">&#xe705;</i> 个人信息</a></li>
