@@ -1,12 +1,12 @@
 package com.tangdou.succulent.manager.controller;
 
+import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.tangdou.succulent.manager.config.AdminSecurityConfig.SESSION_KEY;
 
 /**
  * @author 木叶丸
@@ -23,7 +23,7 @@ public class IndexController {
     @GetMapping("/login")
     public String login(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute(SESSION_KEY) != null) {
+        if (session.getAttribute(AdminSecurityConfig.SESSION_KEY) != null) {
             return "index";
         }
         return "/login/login";

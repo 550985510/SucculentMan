@@ -140,7 +140,7 @@
                     </ul>
                 </dd>
             </dl>
-            <dl id="menu-admin">
+            <dl id="menu-admin" v-if="roleId === 1">
                 <dt><i class="Hui-iconfont">&#xe62d;</i> 员工管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
@@ -167,7 +167,7 @@
                     </ul>
                 </dd>
             </dl>
-            <dl id="menu-system">
+            <dl id="menu-system" v-if="roleId === 1">
                 <dt><i class="Hui-iconfont">&#xe62e;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
@@ -289,7 +289,8 @@
             staff: {
                 gender: 0,
                 roleId: 0
-            }
+            },
+            roleId: ${Session.user.roleId}
         },
         created: function () {
             this.findRole();

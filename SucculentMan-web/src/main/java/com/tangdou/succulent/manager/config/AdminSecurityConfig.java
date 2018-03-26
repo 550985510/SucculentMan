@@ -59,13 +59,13 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
                 throws Exception {
             HttpSession session = request.getSession();
             StaffUser staffUser = (StaffUser) session.getAttribute(SESSION_KEY);
-            Integer roleId = staffUser.getRoleId();
             if (staffUser != null) {
+                Integer roleId = staffUser.getRoleId();
                 String requestUri = request.getRequestURI();
                 String contextPath = request.getContextPath();
                 String url = requestUri.substring(contextPath.length());
-                logger.info("url:"+url);
-                if (roleId != 1) {
+                //logger.info("url:"+url);
+                if (roleId != 1 && ("/staff/user".equals(url) || "/staff/dept".equals(url) || "/staff/role".equals(url))) {
                     response.sendRedirect(requestPath + "/error_403");
                     return false;
                 } else {
