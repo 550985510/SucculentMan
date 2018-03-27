@@ -441,6 +441,7 @@
                             $("#edit").modal('hide');
                             swal("操作成功！", "", "success");
                             that.query();
+                            that.findArticle();
                         }, function (error) {
                             swal(error.body.msg);
                         });

@@ -132,6 +132,7 @@
                 document.getElementById("checkCode").value = ""; //清空文本框  
             }
         	else{
+                var index = layer.load(0, {shade: false});
             	$.ajax({
             		url:"/manager/api/staff/login",
             		data:"username="+username+"&password="+password,
@@ -139,7 +140,6 @@
             		success:function(result){
             		    console.log(result)
             			if(result.retcode == 2000000){
-            				var index = layer.load(0, {shade: false});
             				window.location.href='/manager/index';
             			}
             			else{
