@@ -6,6 +6,7 @@
     <title>多肉达人后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <#include '../include/baselink.ftl'>
+    <link href="<@s.url '/css/fileinput.css'/>" rel="stylesheet" type="text/css">
 </head>
 <body class="dashboard-page">
 <div id="main">

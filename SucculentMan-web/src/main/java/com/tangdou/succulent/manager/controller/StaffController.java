@@ -27,4 +27,9 @@ public class StaffController {
     public String deptList() {
         return "/staff/dept";
     }
+
+    @GetMapping("/personal")
+    public String personal() {
+        return "/staff/personal";
+    }
 }

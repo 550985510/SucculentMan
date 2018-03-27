@@ -55,6 +55,11 @@ public class StaffUser implements Serializable {
     private String mobile;
 
     /**
+     * 用户头像地址
+     */
+    private String avatar;
+
+    /**
      * 角色id
      */
     private Integer roleId;

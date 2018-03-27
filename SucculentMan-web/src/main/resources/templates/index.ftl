@@ -61,8 +61,6 @@
                         <li class="dropDown dropDown_hover">
                             <a href="#" class="dropDown_A">${Session.user.realName}(${Session.user.nickName})<i class="Hui-iconfont">&#xe6d5;</i></a>
                             <ul class="dropDown-menu menu radius box-shadow">
-                                <li><a href="javascript:;" onClick="myselfinfo()">
-                                    <i class="Hui-iconfont">&#xe705;</i> 个人信息</a></li>
                                 <li><a href="#" v-on:click="logout">
                                     <i class="Hui-iconfont">&#xe726;</i> 退出</a></li>
                             </ul>
@@ -87,11 +85,11 @@
     <aside class="Hui-aside">
         <div class="menu_dropdown bk_2">
             <dl id="menu-product">
-                <dt><i class="Hui-iconfont">&#xe616;</i> 部门管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe705;</i> 个人中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="department.jsp" data-title="部门管理" href="javascript:void(0)">部门管理</a></li>
+                        <li><a data-href="/manager/staff/personal" data-title="个人中心" href="javascript:void(0)">个人中心</a></li>
                     </ul>
                 </dd>
             </dl>
@@ -124,7 +122,7 @@
                 </dd>
             </dl>
             <dl id="menu-users">
-                <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe6cc;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>

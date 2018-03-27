@@ -87,4 +87,25 @@ public class StaffUserServiceImpl implements StaffUserService {
         staffUser.setRoleId(3);
         return staffUserMapper.selectList(staffUser);
     }
+
+    /**
+     * 通过id查询员工信息
+     *
+     * @param id 员工编号
+     * @return 员工信息
+     */
+    @Override
+    public StaffUser findById(Integer id) {
+        return staffUserMapper.selectById(id);
+    }
+
+    /**
+     * 修改员工信息
+     *
+     * @param staffUser 修改内容
+     */
+    @Override
+    public void update(StaffUser staffUser) {
+        staffUserMapper.update(staffUser);
+    }
 }

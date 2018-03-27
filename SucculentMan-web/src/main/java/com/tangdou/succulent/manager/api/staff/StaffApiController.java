@@ -85,6 +85,20 @@ public class StaffApiController {
         return new ResponseResult<>(pageInfo);
     }
 
+    @GetMapping("/personal")
+    public ResponseResult<StaffUser> detail(Integer id) {
+        StaffUser user = staffUserService.findById(id);
+        return new ResponseResult<>(user);
+    }
+
+    @PostMapping("/editUser")
+    public ResponseResult editUser(@RequestBody StaffUser staffUser, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        staffUser.setModifiedBy(currentUser.getRealName());
+        staffUserService.update(staffUser);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
     /**
      * 小编列表
      * @return 小编列表信息

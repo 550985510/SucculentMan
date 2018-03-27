@@ -3,7 +3,7 @@
 <mapper namespace="com.tangdou.succulent.manager.mapper.StaffUserMapper">
   <sql id="Base_Column_List">
     id, user_name, pass_word, salt, real_name, gender, mobile, role_id, role_name, dept_id, dept_name,
-    nick_name, status, created_by, created_time, modified_by, modified_time
+    nick_name, status, avatar, created_by, created_time, modified_by, modified_time
   </sql>
 
   <insert id="insert">
@@ -86,5 +86,27 @@
       dept_name = #{deptName}
     WHERE
       dept_id = #{deptId}
+  </update>
+  <update id="update">
+    UPDATE tb_staff_user
+    <set>
+      <if test="realName != null">
+        real_name = #{realName},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar},
+      </if>
+      <if test="gender != null">
+        gender = #{gender},
+      </if>
+      modified_by = #{modifiedBy}
+    </set>
+    WHERE id = #{id}
   </update>
 </mapper>

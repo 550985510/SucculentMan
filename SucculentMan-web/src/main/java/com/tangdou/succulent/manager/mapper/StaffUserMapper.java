@@ -66,4 +66,10 @@ public interface StaffUserMapper {
      * @return 员工信息
      */
     StaffUser selectById(Integer id);
+
+    /**
+     * 修改员工信息
+     * @param staffUser 修改内容
+     */
+    void update(StaffUser staffUser);
 }

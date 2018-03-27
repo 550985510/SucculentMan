@@ -50,4 +50,17 @@ public interface StaffUserService {
      * @return 小编列表信息
      */
     List<StaffUser> findAuthorList();
+
+    /**
+     * 通过id查询员工信息
+     * @param id 员工编号
+     * @return 员工信息
+     */
+    StaffUser findById(Integer id);
+
+    /**
+     * 修改员工信息
+     * @param staffUser 修改内容
+     */
+    void update(StaffUser staffUser);
 }
