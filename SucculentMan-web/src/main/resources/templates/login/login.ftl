@@ -132,6 +132,7 @@
                 document.getElementById("checkCode").value = ""; //清空文本框  
             }
         	else{
+        	    //跳转loading加载动画
                 var index = layer.load(0, {shade: false});
             	$.ajax({
             		url:"/manager/api/staff/login",
