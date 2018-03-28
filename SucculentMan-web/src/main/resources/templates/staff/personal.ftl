@@ -488,7 +488,11 @@
             },
             changePassWord: function () {
                 var that = this;
-                if ($("#newPassWord").val() != $("#newPassWord2").val()) {
+                if (this.changePW.passWord == null) {
+                    sweetAlert("请输入原密码");
+                } else if ($("#newPassWord").val() == '') {
+                    sweetAlert("请输入新密码");
+                } else if ($("#newPassWord").val() != $("#newPassWord2").val()) {
                     sweetAlert("两次密码不相同");
                 } else {
                     swal({
@@ -504,9 +508,13 @@
                         if (isConfirm) {
                             var url = contentPath + "/api/staff/changePassWord";
                             that.$http.post(url, that.changePW).then(function (response) {
-                                $("#changePassWord").modal('hide');
-                                swal("操作成功！", "", "success");
-                                that.query();
+                                if (response.body.retcode != 2000000) {
+                                    swal(response.body.msg, "", "error");
+                                } else {
+                                    $("#changePassWord").modal('hide');
+                                    swal("操作成功！", "", "success");
+                                    that.query();
+                                }
                             }, function (error) {
                                 swal(error.body.msg);
                             });
