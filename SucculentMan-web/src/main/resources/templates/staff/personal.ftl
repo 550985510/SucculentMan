@@ -63,7 +63,7 @@
                                                 <button class="btn btn-info">
                                                     <i class="fa fa-pencil-square-o"></i> 完善个人信息
                                                 </button>
-                                                <button class="btn btn-info">
+                                                <button class="btn btn-info" data-toggle='modal' data-target="#changePassWord">
                                                     <i class="fa fa-wrench"></i> 修改密码
                                                 </button>
                                             </td>
@@ -242,6 +242,36 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <!-- 修改密码 -->
+    <div id="changePassWord" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="oldPassWord" class="control-label">原密码</label>
+                        <input id="oldPassWord" type="password" class="form-control" v-model="changePW.passWord"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassWord" class="control-label">新密码</label>
+                        <input id="newPassWord" type="password" class="form-control" v-model="changePW.newPassWord"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassWord2" class="control-label">确认密码</label>
+                        <input id="newPassWord2" type="password" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" v-on:click="changePassWord">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
@@ -265,7 +295,10 @@
             },
             addArticle: {},
             modules: [],
-            articles: []
+            articles: [],
+            changePW: {
+                id: ${Session.user.id}
+            }
         },
         created: function () {
             this.searchInfo.page = 1;
@@ -452,6 +485,36 @@
                         swal("取消！", "", "error");
                     }
                 });
+            },
+            changePassWord: function () {
+                var that = this;
+                if ($("#newPassWord").val() != $("#newPassWord2").val()) {
+                    sweetAlert("两次密码不相同");
+                } else {
+                    swal({
+                        title: "确定修改密码？",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定！",
+                        cancelButtonText: "取消！",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            var url = contentPath + "/api/staff/changePassWord";
+                            that.$http.post(url, that.changePW).then(function (response) {
+                                $("#changePassWord").modal('hide');
+                                swal("操作成功！", "", "success");
+                                that.query();
+                            }, function (error) {
+                                swal(error.body.msg);
+                            });
+                        } else {
+                            swal("取消！", "", "error");
+                        }
+                    });
+                }
             }
         }
     });

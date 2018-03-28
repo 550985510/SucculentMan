@@ -105,6 +105,9 @@
       <if test="gender != null">
         gender = #{gender},
       </if>
+      <if test="passWord != null">
+        pass_word = #{passWord},
+      </if>
       modified_by = #{modifiedBy}
     </set>
     WHERE id = #{id}

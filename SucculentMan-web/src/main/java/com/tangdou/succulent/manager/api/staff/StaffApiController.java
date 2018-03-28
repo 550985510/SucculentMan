@@ -2,6 +2,7 @@ package com.tangdou.succulent.manager.api.staff;
 
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.bean.common.RestResultEnum;
+import com.tangdou.succulent.manager.bean.staff.ChangePassWord;
 import com.tangdou.succulent.manager.bean.staff.Department;
 import com.tangdou.succulent.manager.bean.staff.StaffRole;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
@@ -97,6 +98,31 @@ public class StaffApiController {
         staffUser.setModifiedBy(currentUser.getRealName());
         staffUserService.update(staffUser);
         return new ResponseResult(RestResultEnum.SUCCESS);
+    }
+
+    @PostMapping("/changePassWord")
+    public ResponseResult changePassWord(@RequestBody ChangePassWord changePassWord, HttpSession session) {
+        StaffUser staffUser = new StaffUser();
+        StaffUser user = staffUserService.findById(changePassWord.getId());
+        String salt = user.getSalt();
+        //根据盐值和用户输入密码加密
+        String passphrase = SecurityPasswordUtils.getPassphrase(salt, changePassWord.getPassWord());
+        staffUser.setSalt(salt);
+        staffUser.setPassWord(passphrase);
+        staffUser.setUserName(user.getUserName());
+        //判断登陆
+        StaffUser info = staffUserService.findForLogin(staffUser);
+        if (info == null) {
+            return new ResponseResult(RestResultEnum.WRONG_PASSWORD);
+        } else {
+            currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+            passphrase = SecurityPasswordUtils.getPassphrase(salt, changePassWord.getNewPassWord());
+            staffUser.setPassWord(passphrase);
+            staffUser.setId(changePassWord.getId());
+            staffUser.setModifiedBy(currentUser.getRealName());
+            staffUserService.update(staffUser);
+            return new ResponseResult(RestResultEnum.SUCCESS);
+        }
     }
 
     /**
