@@ -63,6 +63,9 @@
                                                 <button class="btn btn-info">
                                                     <i class="fa fa-pencil-square-o"></i> 完善个人信息
                                                 </button>
+                                                <button class="btn btn-info">
+                                                    <i class="fa fa-wrench"></i> 修改密码
+                                                </button>
                                             </td>
                                         </tr>
                                         </thead>
