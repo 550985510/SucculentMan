@@ -523,6 +523,33 @@
                         }
                     });
                 }
+            },
+            apply: function (article) {
+                var that = this;
+                swal({
+                    title: "确定申请发布该文章吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        article.status = 0;
+                        var url = contentPath + "/api/article/examine";
+                        that.$http.post(url, article).then(function (response) {
+                            $("#examine").modal('hide');
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
             }
         }
     });
