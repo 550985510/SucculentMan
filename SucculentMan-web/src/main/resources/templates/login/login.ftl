@@ -144,9 +144,11 @@
             				window.location.href='/manager/index';
             			}
             			else{
-            				layer.msg("用户不存在或用户名密码输入错误",{time:0,btn:['朕知道了', '退下']});
-            				createCode(); //刷新验证码  
-            				reset(); //清空文本框  
+                            layer.msg("用户不存在或用户名密码输入错误", {time:0,btn:['朕知道了', '退下']} ,function () {
+                                createCode(); //刷新验证码
+                                reset(); //清空文本框
+                                location.reload();
+                            });
             			}
             		}
             	});	
