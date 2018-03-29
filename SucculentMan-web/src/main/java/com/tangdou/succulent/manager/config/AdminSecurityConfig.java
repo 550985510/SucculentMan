@@ -47,6 +47,7 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
         addInterceptor.excludePathPatterns("/error_500");
         addInterceptor.excludePathPatterns("/api/staff/login");
         addInterceptor.excludePathPatterns("/login");
+        addInterceptor.excludePathPatterns("/hessian/**");
 
         // 拦截配置
         addInterceptor.addPathPatterns("/**");

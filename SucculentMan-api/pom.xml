@@ -10,6 +10,15 @@
     <artifactId>SucculentMan-api</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <!-- hessian -->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.38</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

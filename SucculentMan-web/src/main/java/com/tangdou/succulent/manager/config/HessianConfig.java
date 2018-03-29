@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.config;
 
 
+import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,9 @@ public class HessianConfig {
     @Resource
     private UserServiceApi userServiceApi;
 
+    @Resource
+    private ArticleServiceApi articleServiceApi;
+
     /**
      * 用户管理调用功能
      *
@@ -29,6 +33,19 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(userServiceApi);
         exporter.setServiceInterface(UserServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 文章管理调用功能
+     *
+     * @return
+     */
+    @Bean(name = "/hessian/articleServiceApi")
+    public HessianServiceExporter articleServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(articleServiceApi);
+        exporter.setServiceInterface(ArticleServiceApi.class);
         return exporter;
     }
 
