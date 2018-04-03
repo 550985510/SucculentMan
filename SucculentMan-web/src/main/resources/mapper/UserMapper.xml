@@ -116,4 +116,21 @@
     </where>
   </select>
 
+  <select id="selectByMobile" resultType="com.tangdou.succulent.manager.api.user.model.User">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_user
+    WHERE mobile = #{mobile}
+  </select>
+
+  <select id="selectForLogin" resultType="com.tangdou.succulent.manager.api.user.model.User">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_user
+    WHERE
+    mobile = #{mobile}
+    AND
+    pass_word = #{passWord}
+  </select>
+
 </mapper>

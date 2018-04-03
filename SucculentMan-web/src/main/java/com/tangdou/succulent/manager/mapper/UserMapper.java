@@ -21,4 +21,18 @@ public interface UserMapper {
      * @return 员工列表信息
      */
     List<User> selectList(User user);
+
+    /**
+     * 通过手机号(账号)查询用户
+     * @param mobile 手机号
+     * @return 用户信息
+     */
+    User selectByMobile(String mobile);
+
+    /**
+     * 登陆
+     * @param user 账号密码
+     * @return 员工信息
+     */
+    User selectForLogin(User user);
 }
