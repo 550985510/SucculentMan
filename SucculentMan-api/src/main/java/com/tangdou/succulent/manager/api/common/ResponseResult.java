@@ -1,10 +1,12 @@
-package com.tangdou.succulent.manager.bean.common;
+package com.tangdou.succulent.manager.api.common;
+
+import java.io.Serializable;
 
 /**
  * @author 木叶丸
  * 返回Json数据的通用返回类
  */
-public class ResponseResult<T> {
+public class ResponseResult<T> implements Serializable{
 
     private int retcode;
     private String msg;

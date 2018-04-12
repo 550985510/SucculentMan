@@ -39,4 +39,15 @@ public class UserServiceApiImpl implements UserServiceApi {
             return userMapper.selectForLogin(user);
         }
     }
+
+    /**
+     * 用户注册
+     *
+     * @param mobile   手机号
+     * @param passWord 密码
+     */
+    @Override
+    public void register(String mobile, String passWord) {
+
+    }
 }

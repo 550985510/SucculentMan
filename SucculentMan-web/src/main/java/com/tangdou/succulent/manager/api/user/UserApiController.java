@@ -1,7 +1,7 @@
 package com.tangdou.succulent.manager.api.user;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.common.ResponseResult;
+import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.service.user.UserService;
 import org.slf4j.Logger;

@@ -1,8 +1,8 @@
 package com.tangdou.succulent.manager.api.article;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.bean.common.ResponseResult;
-import com.tangdou.succulent.manager.bean.common.RestResultEnum;
+import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.article.ArticleService;
