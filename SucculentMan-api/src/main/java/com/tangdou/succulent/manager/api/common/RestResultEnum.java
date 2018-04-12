@@ -6,10 +6,11 @@ package com.tangdou.succulent.manager.api.common;
  */
 public enum  RestResultEnum {
 
-    SUCCESS(2000000, "操作成功"),
-    ERROR(50000000, "操作错误"),
-    LOGIN_ERROR(1000001, "用户名或密码错误"),
-    WRONG_PASSWORD(1000002, "密码错误"),
+    SUCCESS(2_000_000, "操作成功"),
+    ERROR(50_000_000, "操作错误"),
+    LOGIN_ERROR(1_000_001, "用户名或密码错误"),
+    WRONG_PASSWORD(1_000_002, "密码错误"),
+    MOBILE_EXIST(1_000_003, "手机号已存在"),
     UNKNOWN_ERROR(-1, "未知异常错误"),
     NOT_FOUND_ERROR(-2, "请求地址不存在"),
     FORBIDDEN_ERROR(-3, "没有相关操作权限"),

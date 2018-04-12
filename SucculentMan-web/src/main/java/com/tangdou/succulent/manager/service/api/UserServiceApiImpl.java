@@ -1,5 +1,7 @@
 package com.tangdou.succulent.manager.service.api;
 
+import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.mapper.UserMapper;
@@ -26,17 +28,17 @@ public class UserServiceApiImpl implements UserServiceApi {
      * @return 用户信息
      */
     @Override
-    public User login(String mobile, String passWord) {
+    public ResponseResult<User> login(String mobile, String passWord) {
         //查询用户是否存在，若存在获取该用户盐值
         User user = userMapper.selectByMobile(mobile);
         if (user == null) {
-            return null;
+            return new ResponseResult<>(RestResultEnum.LOGIN_ERROR);
         } else {
             String salt = user.getSalt();
             //根据盐值和用户输入密码加密
             String passphrase = SecurityPasswordUtils.getPassphrase(salt, passWord);
             user.setPassWord(passphrase);
-            return userMapper.selectForLogin(user);
+            return new ResponseResult<>(userMapper.selectForLogin(user));
         }
     }
 
@@ -45,9 +47,22 @@ public class UserServiceApiImpl implements UserServiceApi {
      *
      * @param mobile   手机号
      * @param passWord 密码
+     * @return 操作状态
      */
     @Override
-    public void register(String mobile, String passWord) {
-
+    public ResponseResult register(String mobile, String passWord) {
+        User user = userMapper.selectByMobile(mobile);
+        if (user != null) {
+            return new ResponseResult<>(RestResultEnum.MOBILE_EXIST);
+        } else {
+            user = new User();
+            String salt = SecurityPasswordUtils.getSalt();
+            String passphrase = SecurityPasswordUtils.getPassphrase(salt, passWord);
+            user.setSalt(salt);
+            user.setMobile(mobile);
+            user.setPassWord(passphrase);
+            userMapper.insert(user);
+            return new ResponseResult<>(RestResultEnum.SUCCESS);
+        }
     }
 }

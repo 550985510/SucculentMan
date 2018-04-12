@@ -1,5 +1,6 @@
 package com.tangdou.succulent.manager.api.user;
 
+import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
 
 /**
@@ -15,12 +16,13 @@ public interface UserServiceApi {
      * @param passWord 密码
      * @return 用户信息
      */
-    User login(String mobile, String passWord);
+    ResponseResult<User> login(String mobile, String passWord);
 
     /**
      * 用户注册
      * @param mobile 手机号
      * @param passWord 密码
+     * @return 操作状态
      */
-    void register(String mobile, String passWord);
+    ResponseResult register(String mobile, String passWord);
 }

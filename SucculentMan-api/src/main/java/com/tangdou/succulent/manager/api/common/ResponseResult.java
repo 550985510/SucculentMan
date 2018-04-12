@@ -1,11 +1,14 @@
 package com.tangdou.succulent.manager.api.common;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
  * @author 木叶丸
  * 返回Json数据的通用返回类
  */
+@ToString
 public class ResponseResult<T> implements Serializable{
 
     private int retcode;
