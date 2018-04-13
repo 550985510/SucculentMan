@@ -51,6 +51,9 @@ public class UserServiceApiImpl implements UserServiceApi {
      */
     @Override
     public ResponseResult register(String mobile, String passWord) {
+        if (passWord.length() < 6 || passWord.length() > 32) {
+            return new ResponseResult<>(RestResultEnum.PASSWORD_LENGTH_ERROR);
+        }
         User user = userMapper.selectByMobile(mobile);
         if (user != null) {
             return new ResponseResult<>(RestResultEnum.MOBILE_EXIST);

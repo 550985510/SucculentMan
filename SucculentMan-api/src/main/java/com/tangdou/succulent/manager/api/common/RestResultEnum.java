@@ -11,6 +11,7 @@ public enum  RestResultEnum {
     LOGIN_ERROR(1_000_001, "用户名或密码错误"),
     WRONG_PASSWORD(1_000_002, "密码错误"),
     MOBILE_EXIST(1_000_003, "手机号已存在"),
+    PASSWORD_LENGTH_ERROR(1_000_004, "请输入6-32位密码"),
     UNKNOWN_ERROR(-1, "未知异常错误"),
     NOT_FOUND_ERROR(-2, "请求地址不存在"),
     FORBIDDEN_ERROR(-3, "没有相关操作权限"),
