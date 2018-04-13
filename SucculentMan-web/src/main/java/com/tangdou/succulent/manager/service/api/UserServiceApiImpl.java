@@ -38,6 +38,10 @@ public class UserServiceApiImpl implements UserServiceApi {
             //根据盐值和用户输入密码加密
             String passphrase = SecurityPasswordUtils.getPassphrase(salt, passWord);
             user.setPassWord(passphrase);
+            User isLogin = userMapper.selectForLogin(user);
+            if (isLogin == null) {
+                return new ResponseResult<>(RestResultEnum.LOGIN_ERROR);
+            }
             return new ResponseResult<>(userMapper.selectForLogin(user));
         }
     }
