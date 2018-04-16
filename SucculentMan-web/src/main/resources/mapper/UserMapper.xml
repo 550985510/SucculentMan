@@ -133,4 +133,18 @@
     pass_word = #{passWord}
   </select>
 
+  <select id="selectById" resultType="com.tangdou.succulent.manager.api.user.model.User">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_user
+    WHERE
+    id = #{id}
+  </select>
+  <select id="countByNickName" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM tb_user
+    WHERE
+    nick_name = #{nickName}
+  </select>
+
 </mapper>

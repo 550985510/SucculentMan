@@ -53,7 +53,7 @@ public class StaffApiController {
         //通过账号拿到混合加密盐值
         StaffUser user = staffUserService.findByUserName(staffUser);
         if (user == null) {
-            return new ResponseResult(RestResultEnum.LOGIN_ERROR);
+            return new ResponseResult(RestResultEnum.ERROR_LOGIN);
         }
         String salt = user.getSalt();
         //根据盐值和用户输入密码加密
@@ -66,7 +66,7 @@ public class StaffApiController {
             session.setAttribute(AdminSecurityConfig.SESSION_KEY,info);
             return new ResponseResult(RestResultEnum.SUCCESS);
         }
-        return new ResponseResult(RestResultEnum.LOGIN_ERROR);
+        return new ResponseResult(RestResultEnum.ERROR_LOGIN);
     }
 
     @PostMapping("/logout")
@@ -113,7 +113,7 @@ public class StaffApiController {
         //判断登陆
         StaffUser info = staffUserService.findForLogin(staffUser);
         if (info == null) {
-            return new ResponseResult(RestResultEnum.WRONG_PASSWORD);
+            return new ResponseResult(RestResultEnum.ERROR_PASSWORD);
         } else {
             currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
             passphrase = SecurityPasswordUtils.getPassphrase(salt, changePassWord.getNewPassWord());

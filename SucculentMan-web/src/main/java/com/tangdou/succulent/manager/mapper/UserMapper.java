@@ -16,9 +16,9 @@ public interface UserMapper {
     void insert(User user);
 
     /**
-     * 查询员工列表
+     * 查询用户列表
      * @param user 查询条件
-     * @return 员工列表信息
+     * @return 用户列表信息
      */
     List<User> selectList(User user);
 
@@ -32,7 +32,21 @@ public interface UserMapper {
     /**
      * 登陆
      * @param user 账号密码
-     * @return 员工信息
+     * @return 用户信息
      */
     User selectForLogin(User user);
+
+    /**
+     * 通过id查询用户信息
+     * @param id 用户id
+     * @return 用户信息
+     */
+    User selectById(Integer id);
+
+    /**
+     * 通过昵称统计用户信息数量
+     * @param nickName 昵称
+     * @return 用户数量
+     */
+    Integer countByNickName(String nickName);
 }

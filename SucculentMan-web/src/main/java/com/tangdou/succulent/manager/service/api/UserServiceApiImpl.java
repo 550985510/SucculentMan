@@ -32,7 +32,7 @@ public class UserServiceApiImpl implements UserServiceApi {
         //查询用户是否存在，若存在获取该用户盐值
         User user = userMapper.selectByMobile(mobile);
         if (user == null) {
-            return new ResponseResult<>(RestResultEnum.LOGIN_ERROR);
+            return new ResponseResult<>(RestResultEnum.ERROR_LOGIN);
         } else {
             String salt = user.getSalt();
             //根据盐值和用户输入密码加密
@@ -40,7 +40,7 @@ public class UserServiceApiImpl implements UserServiceApi {
             user.setPassWord(passphrase);
             User isLogin = userMapper.selectForLogin(user);
             if (isLogin == null) {
-                return new ResponseResult<>(RestResultEnum.LOGIN_ERROR);
+                return new ResponseResult<>(RestResultEnum.ERROR_LOGIN);
             }
             return new ResponseResult<>(userMapper.selectForLogin(user));
         }
@@ -51,25 +51,41 @@ public class UserServiceApiImpl implements UserServiceApi {
      *
      * @param mobile   手机号
      * @param passWord 密码
+     * @param nickName 昵称
      * @return 操作状态
      */
     @Override
-    public ResponseResult register(String mobile, String passWord) {
+    public ResponseResult register(String mobile, String passWord, String nickName) {
         if (passWord.length() < 6 || passWord.length() > 32) {
-            return new ResponseResult<>(RestResultEnum.PASSWORD_LENGTH_ERROR);
+            return new ResponseResult<>(RestResultEnum.ERROR_PASSWORD_LENGTH);
         }
         User user = userMapper.selectByMobile(mobile);
         if (user != null) {
-            return new ResponseResult<>(RestResultEnum.MOBILE_EXIST);
+            return new ResponseResult<>(RestResultEnum.ERROR_MOBILE_EXIST);
+        } else if (userMapper.countByNickName(nickName) != 0){
+            return new ResponseResult<>(RestResultEnum.ERROR_NICKNAME_EXIST);
         } else {
             user = new User();
             String salt = SecurityPasswordUtils.getSalt();
             String passphrase = SecurityPasswordUtils.getPassphrase(salt, passWord);
             user.setSalt(salt);
             user.setMobile(mobile);
+            user.setNickName(nickName);
             user.setPassWord(passphrase);
             userMapper.insert(user);
             return new ResponseResult<>(RestResultEnum.SUCCESS);
         }
+    }
+
+    /**
+     * 通过id查询用户信息
+     *
+     * @param id 用户id
+     * @return 用户信息
+     */
+    @Override
+    public ResponseResult<User> findById(Integer id) {
+        User user = userMapper.selectById(id);
+        return new ResponseResult<>(user);
     }
 }

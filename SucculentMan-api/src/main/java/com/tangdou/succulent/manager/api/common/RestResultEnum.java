@@ -8,10 +8,15 @@ public enum  RestResultEnum {
 
     SUCCESS(2_000_000, "操作成功"),
     ERROR(50_000_000, "操作错误"),
-    LOGIN_ERROR(1_000_001, "用户名或密码错误"),
-    WRONG_PASSWORD(1_000_002, "密码错误"),
-    MOBILE_EXIST(1_000_003, "手机号已存在"),
-    PASSWORD_LENGTH_ERROR(1_000_004, "请输入6-32位密码"),
+
+    //登录错误
+    ERROR_LOGIN(1_000_001, "用户名或密码错误"),
+    ERROR_PASSWORD(1_000_002, "密码错误"),
+    ERROR_MOBILE_EXIST(1_000_003, "手机号已存在"),
+    ERROR_PASSWORD_LENGTH(1_000_004, "请输入6-32位密码"),
+    ERROR_NICKNAME_FORMAT(1_000_005, "请输入2-32位字符作为昵称"),
+    ERROR_NICKNAME_EXIST(1_000_006, "昵称已存在"),
+
     UNKNOWN_ERROR(-1, "未知异常错误"),
     NOT_FOUND_ERROR(-2, "请求地址不存在"),
     FORBIDDEN_ERROR(-3, "没有相关操作权限"),
