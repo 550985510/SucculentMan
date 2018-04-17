@@ -6,7 +6,6 @@ import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.model.UserFollow;
 import com.tangdou.succulent.manager.mapper.UserFollowMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -78,5 +77,27 @@ public class UserFollowServiceApiImpl implements UserFollowServiceApi {
             isFollowed = true;
         }
         return new ResponseResult<>(isFollowed);
+    }
+
+    /**
+     * 查询用户关注人数
+     *
+     * @param userId 用户id
+     * @return 用户关注人数
+     */
+    @Override
+    public ResponseResult<Integer> findUserFollowedNum(Integer userId) {
+        return new ResponseResult<>(userFollowMapper.countByUserId(userId));
+    }
+
+    /**
+     * 查询用户粉丝数量
+     *
+     * @param followedId 被关注用户id
+     * @return 用户粉丝数量
+     */
+    @Override
+    public ResponseResult<Integer> findUserFollowerNum(Integer followedId) {
+        return new ResponseResult<>(userFollowMapper.countByFollowedId(followedId));
     }
 }

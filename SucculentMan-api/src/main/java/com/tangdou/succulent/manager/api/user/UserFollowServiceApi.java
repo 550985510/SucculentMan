@@ -32,4 +32,18 @@ public interface UserFollowServiceApi {
      * @return 响应状态
      */
     ResponseResult<Boolean> isFollowed(Integer userId, Integer followedId);
+
+    /**
+     * 查询用户关注人数
+     * @param userId 用户id
+     * @return 用户关注人数
+     */
+    ResponseResult<Integer> findUserFollowedNum(Integer userId);
+
+    /**
+     * 查询用户粉丝数量
+     * @param followedId 被关注用户id
+     * @return 用户粉丝数量
+     */
+    ResponseResult<Integer> findUserFollowerNum(Integer followedId);
 }
