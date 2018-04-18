@@ -101,6 +101,29 @@
       now(),
     </trim>
   </insert>
+
+  <update id="update">
+    UPDATE tb_user
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="gender != null">
+        gender = #{gender},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar},
+      </if>
+      <if test="email != null">
+        email = #{email},
+      </if>
+      <if test="passWord != null">
+        pass_word = #{passWord},
+      </if>
+    </set>
+    WHERE id = #{id}
+  </update>
+
   <select id="selectList" resultType="com.tangdou.succulent.manager.api.user.model.User">
     SELECT
     <include refid="Base_Column_List"/>

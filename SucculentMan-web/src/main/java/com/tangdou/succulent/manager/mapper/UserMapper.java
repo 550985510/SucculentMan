@@ -49,4 +49,10 @@ public interface UserMapper {
      * @return 用户数量
      */
     Integer countByNickName(String nickName);
+
+    /**
+     * 修改用户信息
+     * @param user 修改内容
+     */
+    void update(User user);
 }

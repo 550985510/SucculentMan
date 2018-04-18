@@ -2,6 +2,7 @@ package com.tangdou.succulent.manager.api.user;
 
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 用户相关接口
@@ -33,4 +34,11 @@ public interface UserServiceApi {
      * @return 用户信息
      */
     ResponseResult<User> findById(Integer id);
+
+    /**
+     * 修改用户基本信息
+     * @param user 修改内容
+     * @return 操作状态
+     */
+    ResponseResult edit(User user);
 }

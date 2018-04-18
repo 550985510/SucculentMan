@@ -88,4 +88,16 @@ public class UserServiceApiImpl implements UserServiceApi {
         User user = userMapper.selectById(id);
         return new ResponseResult<>(user);
     }
+
+    /**
+     * 修改用户基本信息
+     *
+     * @param user 修改内容
+     * @return 操作状态
+     */
+    @Override
+    public ResponseResult edit(User user) {
+        userMapper.update(user);
+        return new ResponseResult(RestResultEnum.SUCCESS);
+    }
 }
