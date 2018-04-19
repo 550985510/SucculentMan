@@ -41,4 +41,13 @@ public interface UserServiceApi {
      * @return 操作状态
      */
     ResponseResult edit(User user);
+
+    /**
+     * 修改用户密码
+     * @param id 用户id
+     * @param passWord 原密码
+     * @param newPassWord 新密码
+     * @return 操作状态
+     */
+    ResponseResult editPassWord(Integer id, String passWord, String newPassWord);
 }

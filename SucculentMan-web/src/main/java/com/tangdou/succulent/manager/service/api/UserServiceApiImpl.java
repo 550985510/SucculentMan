@@ -100,4 +100,32 @@ public class UserServiceApiImpl implements UserServiceApi {
         userMapper.update(user);
         return new ResponseResult(RestResultEnum.SUCCESS);
     }
+
+    /**
+     * 修改用户密码
+     *
+     * @param id          用户id
+     * @param passWord    原密码
+     * @param newPassWord 新密码
+     * @return 操作状态
+     */
+    @Override
+    public ResponseResult editPassWord(Integer id, String passWord, String newPassWord) {
+        User user = userMapper.selectById(id);
+        String passphrase = SecurityPasswordUtils.getPassphrase(user.getSalt(), passWord);
+        if (!passphrase.equals(user.getPassWord())) {
+            return new ResponseResult(RestResultEnum.ERROR_PASSWORD);
+        } else if (newPassWord.length() < 6 || newPassWord.length() > 32) {
+            return new ResponseResult<>(RestResultEnum.ERROR_PASSWORD_LENGTH);
+        } else {
+            User info = new User();
+            String salt = SecurityPasswordUtils.getSalt();
+            String newPassphrase = SecurityPasswordUtils.getPassphrase(salt, newPassWord);
+            info.setId(id);
+            info.setSalt(salt);
+            info.setPassWord(newPassphrase);
+            userMapper.update(info);
+            return new ResponseResult(RestResultEnum.SUCCESS);
+        }
+    }
 }

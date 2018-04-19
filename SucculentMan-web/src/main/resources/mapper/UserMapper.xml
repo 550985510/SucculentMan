@@ -117,6 +117,9 @@
       <if test="email != null">
         email = #{email},
       </if>
+      <if test="salt != null">
+        salt = #{salt},
+      </if>
       <if test="passWord != null">
         pass_word = #{passWord},
       </if>
