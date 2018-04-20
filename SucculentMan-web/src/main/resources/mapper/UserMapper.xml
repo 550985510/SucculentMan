@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tangdou.succulent.manager.mapper.UserMapper">
   <sql id="Base_Column_List">
-    id, name, gender, nick_name, avatar, mobile, email, pass_word, salt, enabled, locked,
+    id, name, gender, nick_name, avatar, mobile, email, background, pass_word, salt, enabled, locked,
      locked_date, login_date, login_failure_count, login_ip, created_time, modified_time
   </sql>
 
@@ -122,6 +122,9 @@
       </if>
       <if test="passWord != null">
         pass_word = #{passWord},
+      </if>
+      <if test="background != null">
+        background = #{background}
       </if>
     </set>
     WHERE id = #{id}

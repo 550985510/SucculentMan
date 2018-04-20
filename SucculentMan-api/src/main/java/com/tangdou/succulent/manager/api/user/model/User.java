@@ -49,6 +49,11 @@ public class User implements Serializable{
     private String email;
 
     /**
+     * 封面背景图
+     */
+    private String background;
+
+    /**
      * 密码
      */
     private String passWord;
