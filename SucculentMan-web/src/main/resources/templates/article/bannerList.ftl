@@ -147,7 +147,7 @@
             bannerShow: function (article) {
                 article.bannerStatus = 1;
                 var url = contentPath + "/api/article/updateBanner";
-                that.$http.post(url, article).then(function (response) {
+                this.$http.post(url, article).then(function (response) {
 
                     }, function (error) {
                     swal(error.body.msg);
@@ -156,7 +156,7 @@
             bannerHide: function (article) {
                 article.bannerStatus = 0;
                 var url = contentPath + "/api/article/updateBanner";
-                that.$http.post(url, article).then(function (response) {
+                this.$http.post(url, article).then(function (response) {
 
                 }, function (error) {
                     swal(error.body.msg);

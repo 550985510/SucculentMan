@@ -45,12 +45,6 @@ public interface ArticleMapper {
     void update(Article article);
 
     /**
-     * 查询已发布文章列表信息
-     * @return 已发布文章列表信息
-     */
-    List<Article> selectPublished();
-
-    /**
      * 修改文章首页轮播图显示状态
      * @param article 修改信息
      */

@@ -72,7 +72,7 @@
     UPDATE tb_article
     SET
       modified_by = #{modifiedBy},
-      bannerStaus = #{bannerStatus},
+      banner_status = #{bannerStatus},
       modified_time = now()
     WHERE id = #{id}
   </update>
@@ -125,13 +125,6 @@
         AND keyword like CONCAT ('%',#{keyword},'%')
       </if>
     </where>
-  </select>
-  
-  <select id="selectPublished" resultType="com.tangdou.succulent.manager.api.article.Article">
-    SELECT 
-    <include refid="Base_Column_List"/>
-    FROM tb_article
-    WHERE status = 2
   </select>
 
   <select id="selectById" resultType="com.tangdou.succulent.manager.api.article.Article">
