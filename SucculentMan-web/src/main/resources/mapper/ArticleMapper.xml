@@ -112,6 +112,9 @@
       <if test="status != null and status != ''">
         AND status = #{status}
       </if>
+      <if test="bannerStatus != null and bannerStatus != ''">
+        AND banner_status = #{bannerStatus}
+      </if>
       <if test="staffId != null and staffId != ''">
         AND staff_id = #{staffId}
       </if>

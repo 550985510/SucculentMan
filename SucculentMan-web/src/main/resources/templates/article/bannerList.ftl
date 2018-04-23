@@ -115,7 +115,7 @@
                 this.query();
             },
             query: function () {
-                var url = contentPath + "/api/article/bannerList";
+                var url = contentPath + "/api/article/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
                     this.articles = response.data.data.list;
                     var temp = this;

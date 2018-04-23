@@ -68,29 +68,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 分页查询首页轮播图文章信息
-     *
-     * @param pageVo 分页信息
-     * @return 文章列表信息
-     */
-    @Override
-    public PageInfo<Article> findByBanner(PageVo pageVo) {
-        PageHelper.startPage(pageVo.getPage(), pageVo.getPageSize());
-        List<Article> list = articleMapper.selectPublished();
-        for (Article item : list) {
-            List<String> keywordList = new ArrayList<>();
-            String[] keywords = StringUtils.split(item.getKeyword(), KEYWORD_SEPARATOR);
-            if (keywords != null) {
-                Collections.addAll(keywordList, keywords);
-            }
-            item.setKeywordList(keywordList);
-            item.setAuthor(staffUserMapper.selectById(item.getStaffId()).getNickName());
-            item.setModuleName(moduleMapper.selectById(item.getModuleId()).getName());
-        }
-        return new PageInfo<>(list);
-    }
-
-    /**
      * 新增文章
      *
      * @param article 文章信息

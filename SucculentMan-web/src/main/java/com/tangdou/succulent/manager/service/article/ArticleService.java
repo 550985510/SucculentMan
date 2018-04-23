@@ -42,13 +42,6 @@ public interface ArticleService {
     void edit(Article article);
 
     /**
-     * 分页查询首页轮播图文章信息
-     * @param pageVo 分页信息
-     * @return 文章列表信息
-     */
-    PageInfo<Article> findByBanner(PageVo pageVo);
-
-    /**
      * 修改文章首页轮播图显示状态
      * @param article 修改信息
      */

@@ -38,17 +38,6 @@ public class ArticleApiController {
     }
 
     /**
-     * 分页查询首页轮播图显示文章
-     * @param pageVo 分页信息
-     * @return 文章列表信息
-     */
-    @PostMapping("/bannerList")
-    public ResponseResult<PageInfo<Article>> findBannerList(@RequestBody PageVo pageVo) {
-        PageInfo<Article> pageInfo = articleService.findByBanner(pageVo);
-        return new ResponseResult<>(pageInfo);
-    }
-
-    /**
      * 新增文章
      * @param article 文章信息
      * @param session 当前用户信息
