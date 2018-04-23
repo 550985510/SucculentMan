@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.api.article;
 
 import com.github.pagehelper.PageInfo;
+import com.tangdou.succulent.manager.api.common.PageVo;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
@@ -33,6 +34,17 @@ public class ArticleApiController {
     @PostMapping("/list")
     public ResponseResult<PageInfo<Article>> findList(@RequestBody Article article) {
         PageInfo<Article> pageInfo = articleService.findByList(article);
+        return new ResponseResult<>(pageInfo);
+    }
+
+    /**
+     * 分页查询首页轮播图显示文章
+     * @param pageVo 分页信息
+     * @return 文章列表信息
+     */
+    @PostMapping("/bannerList")
+    public ResponseResult<PageInfo<Article>> findBannerList(@RequestBody PageVo pageVo) {
+        PageInfo<Article> pageInfo = articleService.findByBanner(pageVo);
         return new ResponseResult<>(pageInfo);
     }
 
@@ -99,5 +111,19 @@ public class ArticleApiController {
     public ResponseResult<PageInfo<Article>> findByAuthor(@RequestBody Article article) {
         PageInfo<Article> pageInfo = articleService.findByList(article);
         return new ResponseResult<>(pageInfo);
+    }
+
+    /**
+     * 修改文章首页轮播图显示状态
+     * @param article 修改信息
+     * @param session 当前用户
+     * @return 操作状态
+     */
+    @PostMapping("/updateBanner")
+    public ResponseResult updateBanner(@RequestBody Article article, HttpSession session) {
+        currentUser = (StaffUser) session.getAttribute(AdminSecurityConfig.SESSION_KEY);
+        article.setModifiedBy(currentUser.getRealName());
+        articleService.updateBannerStatus(article);
+        return new ResponseResult(RestResultEnum.SUCCESS);
     }
 }

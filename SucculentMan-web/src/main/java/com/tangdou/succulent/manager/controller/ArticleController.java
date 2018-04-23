@@ -22,4 +22,9 @@ public class ArticleController {
     public String detail() {
         return "/article/detail";
     }
+
+    @GetMapping("/banner/list")
+    public String bannerList() {
+        return "/article/bannerList";
+    }
 }

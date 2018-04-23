@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.Article;
 import com.tangdou.succulent.manager.api.article.ArticleContent;
+import com.tangdou.succulent.manager.api.common.PageVo;
 import com.tangdou.succulent.manager.mapper.ArticleContentMapper;
 import com.tangdou.succulent.manager.mapper.ArticleMapper;
 import com.tangdou.succulent.manager.mapper.ModuleMapper;
@@ -53,6 +54,29 @@ public class ArticleServiceImpl implements ArticleService {
     public PageInfo<Article> findByList(Article article) {
         PageHelper.startPage(article.getPage(), article.getPageSize());
         List<Article> list = articleMapper.selectByList(article);
+        for (Article item : list) {
+            List<String> keywordList = new ArrayList<>();
+            String[] keywords = StringUtils.split(item.getKeyword(), KEYWORD_SEPARATOR);
+            if (keywords != null) {
+                Collections.addAll(keywordList, keywords);
+            }
+            item.setKeywordList(keywordList);
+            item.setAuthor(staffUserMapper.selectById(item.getStaffId()).getNickName());
+            item.setModuleName(moduleMapper.selectById(item.getModuleId()).getName());
+        }
+        return new PageInfo<>(list);
+    }
+
+    /**
+     * 分页查询首页轮播图文章信息
+     *
+     * @param pageVo 分页信息
+     * @return 文章列表信息
+     */
+    @Override
+    public PageInfo<Article> findByBanner(PageVo pageVo) {
+        PageHelper.startPage(pageVo.getPage(), pageVo.getPageSize());
+        List<Article> list = articleMapper.selectPublished();
         for (Article item : list) {
             List<String> keywordList = new ArrayList<>();
             String[] keywords = StringUtils.split(item.getKeyword(), KEYWORD_SEPARATOR);
@@ -137,5 +161,15 @@ public class ArticleServiceImpl implements ArticleService {
         content.setArticleId(article.getId());
         content.setContent(article.getContent());
         articleContentMapper.updateByArticleId(content);
+    }
+
+    /**
+     * 修改文章首页轮播图显示状态
+     *
+     * @param article 修改信息
+     */
+    @Override
+    public void updateBannerStatus(Article article) {
+        articleMapper.updateBannerStatus(article);
     }
 }

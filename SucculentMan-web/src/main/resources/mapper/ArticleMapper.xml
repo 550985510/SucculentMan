@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tangdou.succulent.manager.mapper.ArticleMapper">
   <sql id="Base_Column_List">
-    id, title, img, module_id, status, keyword, comment_num, staff_id, created_by, modified_by, created_time, modified_time
+    id, title, img, module_id, status, banner_status, keyword, comment_num, staff_id, created_by, modified_by, created_time, modified_time
   </sql>
 
   <insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -63,7 +63,16 @@
     UPDATE tb_article
     SET
       modified_by = #{modifiedBy},
-      status= #{status},
+      status = #{status},
+      modified_time = now()
+    WHERE id = #{id}
+  </update>
+  
+  <update id="updateBannerStatus">
+    UPDATE tb_article
+    SET
+      modified_by = #{modifiedBy},
+      bannerStaus = #{bannerStatus},
       modified_time = now()
     WHERE id = #{id}
   </update>
@@ -113,6 +122,13 @@
         AND keyword like CONCAT ('%',#{keyword},'%')
       </if>
     </where>
+  </select>
+  
+  <select id="selectPublished" resultType="com.tangdou.succulent.manager.api.article.Article">
+    SELECT 
+    <include refid="Base_Column_List"/>
+    FROM tb_article
+    WHERE status = 2
   </select>
 
   <select id="selectById" resultType="com.tangdou.succulent.manager.api.article.Article">

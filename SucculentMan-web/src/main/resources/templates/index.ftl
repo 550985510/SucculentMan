@@ -108,6 +108,7 @@
                 <dd>
                     <ul>
                         <li><a data-href="/manager/article/list" data-title="文章列表" href="javascript:;">文章列表</a></li>
+                        <li><a data-href="/manager/article/banner/list" data-title="轮播管理" href="javascript:;">轮播管理</a></li>
                     </ul>
                 </dd>
             </dl>

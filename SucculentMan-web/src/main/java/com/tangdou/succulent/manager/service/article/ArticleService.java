@@ -1,7 +1,8 @@
 package com.tangdou.succulent.manager.service.article;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.api.article.Article; /**
+import com.tangdou.succulent.manager.api.article.Article;
+import com.tangdou.succulent.manager.api.common.PageVo; /**
  * 文章相关
  * @author 木叶丸
  * @date 2018/3/18
@@ -39,4 +40,17 @@ public interface ArticleService {
      * @param article 文章信息
      */
     void edit(Article article);
+
+    /**
+     * 分页查询首页轮播图文章信息
+     * @param pageVo 分页信息
+     * @return 文章列表信息
+     */
+    PageInfo<Article> findByBanner(PageVo pageVo);
+
+    /**
+     * 修改文章首页轮播图显示状态
+     * @param article 修改信息
+     */
+    void updateBannerStatus(Article article);
 }

@@ -45,6 +45,11 @@ public class Article implements Serializable {
     private Integer status;
 
     /**
+     * 是否首页显示 0:不显示 1:显示
+     */
+    private Integer bannerStatus;
+
+    /**
      * 关键词
      */
     private String keyword;
