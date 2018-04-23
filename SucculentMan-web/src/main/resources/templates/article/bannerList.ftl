@@ -93,6 +93,7 @@
         el: '#main',
         data: {
             searchInfo: {
+                status: 2,
                 page: 1,
                 pageSize: 20
             },
