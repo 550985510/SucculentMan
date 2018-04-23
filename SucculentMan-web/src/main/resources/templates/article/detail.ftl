@@ -107,9 +107,9 @@
             article: {}
         },
         created: function () {
-            this.query();
             this.findModule();
             this.findAuthor();
+            this.query();
         },
         methods: {
             init: function () {
