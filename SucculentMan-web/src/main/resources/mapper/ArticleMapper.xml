@@ -125,6 +125,7 @@
         AND keyword like CONCAT ('%',#{keyword},'%')
       </if>
     </where>
+    ORDER BY created_time DESC
   </select>
 
   <select id="selectById" resultType="com.tangdou.succulent.manager.api.article.Article">
