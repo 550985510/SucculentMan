@@ -38,7 +38,7 @@
       article_id = #{articleId}
   </update>
 
-  <select id="selectByArticleId" resultType="com.tangdou.succulent.manager.api.article.ArticleContent">
+  <select id="selectByArticleId" resultType="com.tangdou.succulent.manager.api.article.model.ArticleContent">
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb_article_content

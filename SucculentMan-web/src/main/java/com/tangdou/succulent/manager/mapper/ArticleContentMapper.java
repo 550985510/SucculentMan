@@ -1,6 +1,6 @@
 package com.tangdou.succulent.manager.mapper;
 
-import com.tangdou.succulent.manager.api.article.ArticleContent;
+import com.tangdou.succulent.manager.api.article.model.ArticleContent;
 
 /**
  * 文章内容相关

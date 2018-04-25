@@ -2,9 +2,8 @@ package com.tangdou.succulent.manager.service.article.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.api.article.Article;
-import com.tangdou.succulent.manager.api.article.ArticleContent;
-import com.tangdou.succulent.manager.api.common.PageVo;
+import com.tangdou.succulent.manager.api.article.model.Article;
+import com.tangdou.succulent.manager.api.article.model.ArticleContent;
 import com.tangdou.succulent.manager.mapper.ArticleContentMapper;
 import com.tangdou.succulent.manager.mapper.ArticleMapper;
 import com.tangdou.succulent.manager.mapper.ModuleMapper;

@@ -1,7 +1,7 @@
 package com.tangdou.succulent.manager.mapper;
 
 
-import com.tangdou.succulent.manager.api.article.Article;
+import com.tangdou.succulent.manager.api.article.model.Article;
 
 import java.util.List;
 

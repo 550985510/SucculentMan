@@ -1,7 +1,7 @@
 package com.tangdou.succulent.manager.service.api;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.api.article.Article;
+import com.tangdou.succulent.manager.api.article.model.Article;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.service.article.ArticleService;

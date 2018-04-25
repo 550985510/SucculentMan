@@ -101,7 +101,7 @@
     WHERE id= #{id}
   </update>
 
-  <select id="selectByList" resultType="com.tangdou.succulent.manager.api.article.Article">
+  <select id="selectByList" resultType="com.tangdou.succulent.manager.api.article.model.Article">
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb_article
@@ -128,7 +128,7 @@
     ORDER BY created_time DESC
   </select>
 
-  <select id="selectById" resultType="com.tangdou.succulent.manager.api.article.Article">
+  <select id="selectById" resultType="com.tangdou.succulent.manager.api.article.model.Article">
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb_article

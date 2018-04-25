@@ -1,8 +1,9 @@
 package com.tangdou.succulent.manager.service.article;
 
 import com.github.pagehelper.PageInfo;
-import com.tangdou.succulent.manager.api.article.Article;
-import com.tangdou.succulent.manager.api.common.PageVo; /**
+import com.tangdou.succulent.manager.api.article.model.Article;
+
+/**
  * 文章相关
  * @author 木叶丸
  * @date 2018/3/18

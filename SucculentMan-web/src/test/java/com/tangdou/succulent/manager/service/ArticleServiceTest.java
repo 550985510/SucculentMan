@@ -1,6 +1,6 @@
 package com.tangdou.succulent.manager.service;
 
-import com.tangdou.succulent.manager.api.article.Article;
+import com.tangdou.succulent.manager.api.article.model.Article;
 import com.tangdou.succulent.manager.service.article.ArticleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.tangdou.succulent.manager.api.article;
+package com.tangdou.succulent.manager.api.article.model;
 
 import lombok.Data;
 
