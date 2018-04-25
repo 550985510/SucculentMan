@@ -3,6 +3,7 @@ package com.tangdou.succulent.manager.service.api;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.Article;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
+import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.service.article.ArticleService;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,17 @@ public class ArticleServiceApiImpl implements ArticleServiceApi {
     public PageInfo<Article> list(Article article) {
         PageInfo<Article> list = articleService.findByList(article);
         return list;
+    }
+
+    /**
+     * 文章详情
+     *
+     * @param articleId 文章id
+     * @return 文章信息
+     */
+    @Override
+    public ResponseResult<Article> detail(Integer articleId) {
+        Article article = articleService.detail(articleId);
+        return new ResponseResult<>(article);
     }
 }

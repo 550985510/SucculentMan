@@ -108,6 +108,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article detail(Integer id) {
         Article article = articleMapper.selectById(id);
+        if (article == null) {
+            return null;
+        }
         ArticleContent content = articleContentMapper.selectByArticleId(id);
         article.setContent(content.getContent());
         List<String> keywordList = new ArrayList<>();
@@ -116,6 +119,7 @@ public class ArticleServiceImpl implements ArticleService {
             Collections.addAll(keywordList, keywords);
         }
         article.setKeywordList(keywordList);
+        article.setAuthorAvatar(staffUserMapper.selectById(article.getStaffId()).getAvatar());
         article.setAuthor(staffUserMapper.selectById(article.getStaffId()).getNickName());
         article.setModuleName(moduleMapper.selectById(article.getModuleId()).getName());
         return article;
