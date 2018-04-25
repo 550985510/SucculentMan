@@ -61,6 +61,7 @@ public class ArticleServiceImpl implements ArticleService {
                 Collections.addAll(keywordList, keywords);
             }
             item.setKeywordList(keywordList);
+            item.setAuthorAvatar(staffUserMapper.selectById(item.getStaffId()).getAvatar());
             item.setAuthor(staffUserMapper.selectById(item.getStaffId()).getNickName());
             item.setModuleName(moduleMapper.selectById(item.getModuleId()).getName());
         }

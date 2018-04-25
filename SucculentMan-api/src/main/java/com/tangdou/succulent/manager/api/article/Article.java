@@ -75,6 +75,11 @@ public class Article implements Serializable {
     private String author;
 
     /**
+     * 作者头像
+     */
+    private String authorAvatar;
+
+    /**
      * 文章内容
      */
     private String content;
