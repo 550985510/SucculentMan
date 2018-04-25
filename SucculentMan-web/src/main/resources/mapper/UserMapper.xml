@@ -176,4 +176,11 @@
     nick_name = #{nickName}
   </select>
 
+  <select id="selectRandom" resultType="com.tangdou.succulent.manager.api.user.model.User">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_user
+    ORDER BY rand() limit 5
+  </select>
+
 </mapper>

@@ -69,7 +69,7 @@ public class AdminSecurityConfig extends WebMvcConfigurerAdapter {
                 if (roleId != 1 && ("/staff/user".equals(url) || "/staff/dept".equals(url) || "/staff/role".equals(url))) {
                     response.sendRedirect(requestPath + "/error_403");
                     return false;
-                } else if(roleId == 3 && ("/module/list".equals(url) || "/user/list".equals(url) || "/article/list".equals(url))) {
+                } else if(roleId == 3 && ("/module/list".equals(url) || "/user/list".equals(url) || "/article/list".equals(url) || "/article/banner/list".equals(url))) {
                     response.sendRedirect(requestPath + "/error_403");
                     return false;
                 } else {

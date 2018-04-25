@@ -4,6 +4,9 @@ import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.OverridesAttribute;
+import java.util.List;
+
 /**
  * 用户相关接口
  * @author 木叶丸
@@ -50,4 +53,10 @@ public interface UserServiceApi {
      * @return 操作状态
      */
     ResponseResult editPassWord(Integer id, String passWord, String newPassWord);
+
+    /**
+     * 随机查出五个用户首页展示
+     * @return 用户列表信息
+     */
+    ResponseResult<List<User>> showUsers();
 }

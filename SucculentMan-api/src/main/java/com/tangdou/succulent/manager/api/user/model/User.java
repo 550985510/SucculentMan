@@ -112,4 +112,14 @@ public class User implements Serializable{
      * 每页数量
      */
     private Integer pageSize;
+
+    /**
+     * 关注人数
+     */
+    private Integer followedNum;
+
+    /**
+     * 粉丝人数
+     */
+    private Integer followerNum;
 }

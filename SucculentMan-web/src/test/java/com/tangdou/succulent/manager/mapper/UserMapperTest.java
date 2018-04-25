@@ -26,4 +26,9 @@ public class UserMapperTest {
     public void nickName() {
         logger.info("{}", userMapper.countByNickName("123"));
     }
+
+    @Test
+    public void random() {
+        logger.info("{}", userMapper.selectRandom());
+    }
 }

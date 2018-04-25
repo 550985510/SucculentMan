@@ -4,11 +4,13 @@ import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
+import com.tangdou.succulent.manager.mapper.UserFollowMapper;
 import com.tangdou.succulent.manager.mapper.UserMapper;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 用户相关
@@ -20,6 +22,9 @@ public class UserServiceApiImpl implements UserServiceApi {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private UserFollowMapper userFollowMapper;
 
     /**
      * 用户登陆
@@ -127,5 +132,28 @@ public class UserServiceApiImpl implements UserServiceApi {
             userMapper.update(info);
             return new ResponseResult(RestResultEnum.SUCCESS);
         }
+    }
+
+    /**
+     * 随机查出五个用户首页展示
+     *
+     * @return 用户列表信息
+     */
+    @Override
+    public ResponseResult<List<User>> showUsers() {
+        List<User> list = userMapper.selectRandom();
+        for (User user : list) {
+            //用户关注人数
+            user.setFollowedNum(userFollowMapper.countByUserId(user.getId()));
+            //用户粉丝数量
+            user.setFollowerNum(userFollowMapper.countByFollowedId(user.getId()));
+            //用户个人信息不显示
+            user.setPassWord(null);
+            user.setSalt(null);
+            user.setMobile(null);
+            user.setEmail(null);
+            user.setEnabled(null);
+        }
+        return new ResponseResult<>(list);
     }
 }

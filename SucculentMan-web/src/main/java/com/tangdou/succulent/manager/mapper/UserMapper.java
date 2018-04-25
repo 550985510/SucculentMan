@@ -55,4 +55,10 @@ public interface UserMapper {
      * @param user 修改内容
      */
     void update(User user);
+
+    /**
+     * 随机查询用户信息
+     * @return 用户列表信息
+     */
+    List<User> selectRandom();
 }
