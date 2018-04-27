@@ -35,11 +35,12 @@ public class ArticleServiceApiImpl implements ArticleServiceApi {
      * 文章详情
      *
      * @param articleId 文章id
+     * @param status 文章发布状态
      * @return 文章信息
      */
     @Override
-    public ResponseResult<Article> detail(Integer articleId) {
-        Article article = articleService.detail(articleId);
+    public ResponseResult<Article> detail(Integer articleId, Integer status) {
+        Article article = articleService.detail(articleId, status);
         return new ResponseResult<>(article);
     }
 }

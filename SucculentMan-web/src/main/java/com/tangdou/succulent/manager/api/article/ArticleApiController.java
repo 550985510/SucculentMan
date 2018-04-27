@@ -73,7 +73,7 @@ public class ArticleApiController {
      */
     @GetMapping("/detail")
     public ResponseResult<Article> detail(Integer id) {
-        Article article = articleService.detail(id);
+        Article article = articleService.detail(id, null);
         return new ResponseResult<>(article);
     }
 

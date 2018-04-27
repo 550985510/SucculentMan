@@ -133,6 +133,9 @@
     <include refid="Base_Column_List"/>
     FROM tb_article
     WHERE id =#{id}
+    <if test="status != null">
+      AND status = #{status}
+    </if>
   </select>
 
 </mapper>

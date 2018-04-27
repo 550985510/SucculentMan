@@ -34,9 +34,10 @@ public interface ArticleMapper {
     /**
      * 通过id查询文章信息
      * @param id 文章编号
+     * @param status 文章发布状态
      * @return 文章信息
      */
-    Article selectById(Integer id);
+    Article selectById(Integer id, Integer status);
 
     /**
      * 修改文章信息

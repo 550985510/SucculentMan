@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.config;
 
 
+import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
@@ -26,6 +27,9 @@ public class HessianConfig {
 
     @Resource
     private UserFollowServiceApi userFollowServiceApi;
+
+    @Resource
+    private ArticleCollectionServiceApi articleCollectionServiceApi;
 
     /**
      * 用户管理调用功能
@@ -63,6 +67,19 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(userFollowServiceApi);
         exporter.setServiceInterface(UserFollowServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 文章收藏调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/articleCollectionServiceApi")
+    public HessianServiceExporter articleCollectionServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(articleCollectionServiceApi);
+        exporter.setServiceInterface(ArticleCollectionServiceApi.class);
         return exporter;
     }
 

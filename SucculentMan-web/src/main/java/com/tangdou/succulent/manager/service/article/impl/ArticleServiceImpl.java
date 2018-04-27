@@ -102,11 +102,12 @@ public class ArticleServiceImpl implements ArticleService {
      * 文章详情
      *
      * @param id 文章编号
+     * @param status 文章发布状态
      * @return 文章详情信息
      */
     @Override
-    public Article detail(Integer id) {
-        Article article = articleMapper.selectById(id);
+    public Article detail(Integer id, Integer status) {
+        Article article = articleMapper.selectById(id, status);
         if (article == null) {
             return null;
         }

@@ -21,7 +21,8 @@ public interface ArticleServiceApi {
     /**
      * 文章详情
      * @param articleId 文章id
+     * @param status 文章发布状态
      * @return 文章信息
      */
-    ResponseResult<Article> detail(Integer articleId);
+    ResponseResult<Article> detail(Integer articleId, Integer status);
 }

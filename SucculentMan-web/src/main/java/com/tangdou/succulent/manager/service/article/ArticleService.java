@@ -32,9 +32,10 @@ public interface ArticleService {
     /**
      * 文章详情
      * @param id 文章编号
+     * @param status 文章发布状态
      * @return 文章详情信息
      */
-    Article detail(Integer id);
+    Article detail(Integer id, Integer status);
 
     /**
      * 编辑文章
