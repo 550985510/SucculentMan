@@ -27,8 +27,7 @@ public class ArticleServiceApiImpl implements ArticleServiceApi {
      */
     @Override
     public PageInfo<Article> list(Article article) {
-        PageInfo<Article> list = articleService.findByList(article);
-        return list;
+        return articleService.findByList(article);
     }
 
     /**
