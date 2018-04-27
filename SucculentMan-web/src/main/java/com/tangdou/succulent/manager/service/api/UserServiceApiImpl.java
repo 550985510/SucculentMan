@@ -1,11 +1,14 @@
 package com.tangdou.succulent.manager.service.api;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.mapper.UserFollowMapper;
 import com.tangdou.succulent.manager.mapper.UserMapper;
+import com.tangdou.succulent.manager.service.user.UserService;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,9 @@ public class UserServiceApiImpl implements UserServiceApi {
 
     @Resource
     private UserFollowMapper userFollowMapper;
+
+    @Resource
+    private UserService userService;
 
     /**
      * 用户登陆
@@ -148,12 +154,46 @@ public class UserServiceApiImpl implements UserServiceApi {
             //用户粉丝数量
             user.setFollowerNum(userFollowMapper.countByFollowedId(user.getId()));
             //用户个人信息不显示
+            user.setName(null);
             user.setPassWord(null);
             user.setSalt(null);
             user.setMobile(null);
             user.setEmail(null);
             user.setEnabled(null);
+            user.setCreatedTime(null);
+            user.setModifiedTime(null);
+            user.setLocked(null);
+            user.setLoginFailureCount(null);
         }
         return new ResponseResult<>(list);
+    }
+
+    /**
+     * 分页查询所有用户
+     *
+     * @return 用户列表信息
+     */
+    @Override
+    public ResponseResult<PageInfo<User>> findAllUsers(User user) {
+        PageHelper.startPage(user.getPage(), user.getPageSize());
+        List<User> list = userMapper.selectList(user);
+        for (User item : list) {
+            //用户关注人数
+            item.setFollowedNum(userFollowMapper.countByUserId(item.getId()));
+            //用户粉丝数量
+            item.setFollowerNum(userFollowMapper.countByFollowedId(item.getId()));
+            //用户个人信息不显示
+            item.setName(null);
+            item.setPassWord(null);
+            item.setSalt(null);
+            item.setMobile(null);
+            item.setEmail(null);
+            item.setEnabled(null);
+            item.setCreatedTime(null);
+            item.setModifiedTime(null);
+            item.setLocked(null);
+            item.setLoginFailureCount(null);
+        }
+        return new ResponseResult<>(new PageInfo<>(list));
     }
 }

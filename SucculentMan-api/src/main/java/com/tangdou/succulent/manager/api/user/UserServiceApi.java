@@ -1,10 +1,9 @@
 package com.tangdou.succulent.manager.api.user;
 
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.OverridesAttribute;
 import java.util.List;
 
 /**
@@ -59,4 +58,11 @@ public interface UserServiceApi {
      * @return 用户列表信息
      */
     ResponseResult<List<User>> showUsers();
+
+    /**
+     * 分页查询所有用户
+     * @param user 查询条件
+     * @return 用户列表信息
+     */
+    ResponseResult<PageInfo<User>> findAllUsers(User user);
 }
