@@ -2,6 +2,7 @@ package com.tangdou.succulent.manager.mapper;
 
 
 import com.tangdou.succulent.manager.api.article.model.Article;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface ArticleMapper {
      * @param status 文章发布状态
      * @return 文章信息
      */
-    Article selectById(Integer id, Integer status);
+    Article selectById(@Param("id") Integer id, @Param("status") Integer status);
 
     /**
      * 修改文章信息

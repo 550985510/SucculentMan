@@ -132,10 +132,12 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb_article
-    WHERE id =#{id}
-    <if test="status != null">
-      AND status = #{status}
-    </if>
+    <where>
+      id =#{id}
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+    </where>
   </select>
 
 </mapper>
