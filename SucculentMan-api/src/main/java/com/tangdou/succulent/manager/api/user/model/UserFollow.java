@@ -37,4 +37,34 @@ public class UserFollow implements Serializable {
      * 创建时间
      */
     private Date createdTime;
+
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
+
+    /**
+     * 关注人数
+     */
+    private Integer followedNum;
+
+    /**
+     * 粉丝人数
+     */
+    private Integer followerNum;
+
+    /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
+     * 头像url
+     */
+    private String avatar;
 }

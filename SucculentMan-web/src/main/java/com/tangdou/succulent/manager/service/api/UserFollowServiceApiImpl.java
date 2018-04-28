@@ -1,13 +1,20 @@
 package com.tangdou.succulent.manager.service.api;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
+import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.api.user.model.UserFollow;
 import com.tangdou.succulent.manager.mapper.UserFollowMapper;
+import com.tangdou.succulent.manager.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户关注相关接口
@@ -19,6 +26,9 @@ public class UserFollowServiceApiImpl implements UserFollowServiceApi {
 
     @Resource
     private UserFollowMapper userFollowMapper;
+
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 用户关注
@@ -99,5 +109,55 @@ public class UserFollowServiceApiImpl implements UserFollowServiceApi {
     @Override
     public ResponseResult<Integer> findUserFollowerNum(Integer followedId) {
         return new ResponseResult<>(userFollowMapper.countByFollowedId(followedId));
+    }
+
+    /**
+     * 分页查询用户关注列表
+     *
+     * @param userFollow 查询条件
+     * @return 用户列表信息
+     */
+    @Override
+    public ResponseResult<PageInfo<UserFollow>> findFollowedList(UserFollow userFollow) {
+        PageHelper.startPage(userFollow.getPage(), userFollow.getPageSize());
+        List<UserFollow> list = userFollowMapper.selectByUserId(userFollow.getUserId());
+        for (UserFollow item : list) {
+            User user = userMapper.selectById(item.getFollowedId());
+            item.setAvatar(user.getAvatar());
+            item.setNickName(user.getNickName());
+            //用户关注人数
+            item.setFollowedNum(userFollowMapper.countByUserId(item.getFollowedId()));
+            //用户粉丝数量
+            item.setFollowerNum(userFollowMapper.countByFollowedId(item.getFollowedId()));
+            //用户个人信息不显示
+            item.setCreatedTime(null);
+            item.setStatus(null);
+        }
+        return new ResponseResult<>(new PageInfo<>(list));
+    }
+
+    /**
+     * 分页查询用户粉丝列表
+     *
+     * @param userFollow 查询条件
+     * @return 用户列表信息
+     */
+    @Override
+    public ResponseResult<PageInfo<UserFollow>> findFollowerList(UserFollow userFollow) {
+        PageHelper.startPage(userFollow.getPage(), userFollow.getPageSize());
+        List<UserFollow> list = userFollowMapper.selectByFollowedId(userFollow.getUserId());
+        for (UserFollow item : list) {
+            User user = userMapper.selectById(item.getUserId());
+            item.setAvatar(user.getAvatar());
+            item.setNickName(user.getNickName());
+            //用户关注人数
+            item.setFollowedNum(userFollowMapper.countByUserId(item.getUserId()));
+            //用户粉丝数量
+            item.setFollowerNum(userFollowMapper.countByFollowedId(item.getUserId()));
+            //用户个人信息不显示
+            item.setCreatedTime(null);
+            item.setStatus(null);
+        }
+        return new ResponseResult<>(new PageInfo<>(list));
     }
 }

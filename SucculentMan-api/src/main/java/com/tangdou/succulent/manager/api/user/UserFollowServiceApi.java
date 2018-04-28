@@ -1,6 +1,8 @@
 package com.tangdou.succulent.manager.api.user;
 
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.user.model.UserFollow;
 
 /**
  * 用户关注相关接口
@@ -46,4 +48,18 @@ public interface UserFollowServiceApi {
      * @return 用户粉丝数量
      */
     ResponseResult<Integer> findUserFollowerNum(Integer followedId);
+
+    /**
+     * 分页查询用户关注列表
+     * @param userFollow 查询条件
+     * @return 用户列表信息
+     */
+    ResponseResult<PageInfo<UserFollow>> findFollowedList(UserFollow userFollow);
+
+    /**
+     * 分页查询用户粉丝列表
+     * @param userFollow 查询条件
+     * @return 用户列表信息
+     */
+    ResponseResult<PageInfo<UserFollow>> findFollowerList(UserFollow userFollow);
 }

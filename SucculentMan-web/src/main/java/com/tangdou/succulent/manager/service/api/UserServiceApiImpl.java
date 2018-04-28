@@ -8,11 +8,11 @@ import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
 import com.tangdou.succulent.manager.mapper.UserFollowMapper;
 import com.tangdou.succulent.manager.mapper.UserMapper;
-import com.tangdou.succulent.manager.service.user.UserService;
 import com.tangdou.succulent.manager.util.SecurityPasswordUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,9 +28,6 @@ public class UserServiceApiImpl implements UserServiceApi {
 
     @Resource
     private UserFollowMapper userFollowMapper;
-
-    @Resource
-    private UserService userService;
 
     /**
      * 用户登陆
