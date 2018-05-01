@@ -36,4 +36,11 @@ public interface ArticleCommentMapper {
      * @return 评论列表信息
      */
     List<ArticleComment> selectList(ArticleComment articleComment);
+
+    /**
+     * 统计文章评论数量
+     * @param articleId 文章id
+     * @return 文章评论数量
+  */
+    Integer countByArticleId(Integer articleId);
 }

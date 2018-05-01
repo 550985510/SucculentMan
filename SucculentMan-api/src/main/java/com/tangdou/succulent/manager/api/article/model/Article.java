@@ -65,6 +65,11 @@ public class Article implements Serializable {
     private Integer commentNum;
 
     /**
+     * 收藏数量
+     */
+    private Integer collectedNum;
+
+    /**
      * 作者（员工编号）
      */
     private Integer staffId;

@@ -3,11 +3,9 @@ package com.tangdou.succulent.manager.service.article.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.model.Article;
+import com.tangdou.succulent.manager.api.article.model.ArticleComment;
 import com.tangdou.succulent.manager.api.article.model.ArticleContent;
-import com.tangdou.succulent.manager.mapper.ArticleContentMapper;
-import com.tangdou.succulent.manager.mapper.ArticleMapper;
-import com.tangdou.succulent.manager.mapper.ModuleMapper;
-import com.tangdou.succulent.manager.mapper.StaffUserMapper;
+import com.tangdou.succulent.manager.mapper.*;
 import com.tangdou.succulent.manager.service.article.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -43,6 +41,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Resource
     private ModuleMapper moduleMapper;
 
+    @Resource
+    private ArticleCommentMapper articleCommentMapper;
+
+    @Resource
+    private ArticleCollectionMapper articleCollectionMapper;
+
     /**
      * 分页查询文章信息
      *
@@ -63,6 +67,8 @@ public class ArticleServiceImpl implements ArticleService {
             item.setAuthorAvatar(staffUserMapper.selectById(item.getStaffId()).getAvatar());
             item.setAuthor(staffUserMapper.selectById(item.getStaffId()).getNickName());
             item.setModuleName(moduleMapper.selectById(item.getModuleId()).getName());
+            item.setCommentNum(articleCommentMapper.countByArticleId(item.getId()));
+            item.setCollectedNum(articleCollectionMapper.countByArticleId(item.getId()));
         }
         return new PageInfo<>(list);
     }
