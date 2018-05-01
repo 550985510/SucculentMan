@@ -2,6 +2,7 @@ package com.tangdou.succulent.manager.config;
 
 
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
+import com.tangdou.succulent.manager.api.article.ArticleCommentServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
@@ -30,6 +31,9 @@ public class HessianConfig {
 
     @Resource
     private ArticleCollectionServiceApi articleCollectionServiceApi;
+
+    @Resource
+    private ArticleCommentServiceApi articleCommentServiceApi;
 
     /**
      * 用户管理调用功能
@@ -80,6 +84,19 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(articleCollectionServiceApi);
         exporter.setServiceInterface(ArticleCollectionServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 文章评论调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/articleCommentServiceApi")
+    public HessianServiceExporter articleCommentServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(articleCommentServiceApi);
+        exporter.setServiceInterface(ArticleCommentServiceApi.class);
         return exporter;
     }
 

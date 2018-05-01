@@ -117,8 +117,8 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="http://h-ui.duoshuo.com/admin/" data-title="评论列表" href="javascript:;">评论列表</a></li>
-                        <li><a data-href="feedback-list.html" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
+                        <li><a data-href="/manager/article/comment/list" data-title="文章评论列表" href="javascript:;">文章评论列表</a></li>
+                        <li><a data-href="feedback-list.html" data-title="商品评论列表" href="javascript:void(0)">商品评论列表</a></li>
                     </ul>
                 </dd>
             </dl>

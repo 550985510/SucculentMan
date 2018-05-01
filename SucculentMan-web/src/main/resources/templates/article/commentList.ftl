@@ -19,50 +19,64 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 轮播图显示列表</span>
+                    <span class="panel-title"> 文章评论列表</span>
                 </div>
                 <div class="panel-body">
+                    <div class="well">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="status_select">删除状态</label>
+                                    <select id="status_select" type="text" v-model="searchInfo.deleted"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option value="0">未删除</option>
+                                        <option value="1">已删除</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" v-on:click="search">
+                                        <span class="fa fa-search"></span> 查询
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>标题</th>
-                                <th>作者</th>
-                                <th>关键词</th>
-                                <th>所属模块</th>
-                                <th>首页显示状态</th>
+                                <th>文章标题</th>
+                                <th>用户昵称</th>
+                                <th>评论内容</th>
+                                <th>删除状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="article in articles">
-                                <td>{{article.id}}</td>
-                                <td>{{article.title}}</td>
-                                <td>{{article.author}}</td>
+                            <tr v-for="comment in comments">
+                                <td>{{comment.id}}</td>
+                                <td>{{comment.articleTitle}}</td>
+                                <td>{{comment.userNickName}}</td>
+                                <td>{{comment.content}}</td>
                                 <td>
-                                    <label class="label label-success" v-for="keyword in article.keywordList"
-                                           style="margin-right: 5px">{{keyword}}</label>
-                                </td>
-                                <td>{{article.moduleName}}</td>
-                                <td>
-                                    <label v-if="article.bannerStatus === 0" class="label label-warning">首页不显示</label>
-                                    <label v-if="article.bannerStatus === 1" class="label label-success">首页显示</label>
+                                    <label v-if="comment.deleted === 0" class="label label-success">未删除</label>
+                                    <label v-if="comment.deleted === 1" class="label label-warning">已删除</label>
                                 </td>
                                 <td>
-                                    <button class="btn btn-default" v-on:click="detail(article.id)">
+                                    <button class="btn btn-default" v-on:click="detail(comment.id)">
                                         <i class="fa fa-book"></i> 查看
                                     </button>
-                                    <button v-if="article.bannerStatus === 0" class="btn btn-success" v-on:click="bannerShow(article)">
-                                        首页显示
-                                    </button>
-                                    <button v-if="article.bannerStatus === 1" class="btn btn-warning" v-on:click="bannerHide(article)">
-                                        首页不显示
+                                    <button v-if="comment.deleted === 0" class="btn btn-warning" v-on:click="deleteBtn(comment)">
+                                        删除
                                     </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="20" v-if="articles.length == 0">没有数据 ！</td>
+                                <td class="text-center" colspan="20" v-if="comments.length == 0">没有数据 ！</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -93,11 +107,10 @@
         el: '#main',
         data: {
             searchInfo: {
-                status: 2,
                 page: 1,
                 pageSize: 20
             },
-            articles: []
+            comments: []
         },
         created: function () {
             this.searchInfo.page = 1;
@@ -116,9 +129,9 @@
                 this.query();
             },
             query: function () {
-                var url = contentPath + "/api/article/list";
+                var url = contentPath + "/api/article/comment/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
-                    this.articles = response.data.data.list;
+                    this.comments = response.data.data.list;
                     var temp = this;
                     $("#pageMenu").page({//加载分页
                         total: response.data.data.total,
@@ -142,24 +155,32 @@
                 });
             },
             detail: function (id) {
-                window.location.href = contentPath + "/article/detail?id=" + id;
+                window.location.href = contentPath + "article/comment/detail?id=" + id;
             },
-            bannerShow: function (article) {
-                article.bannerStatus = 1;
-                var url = contentPath + "/api/article/updateBanner";
-                this.$http.post(url, article).then(function (response) {
-
-                    }, function (error) {
-                    swal(error.body.msg);
-                });
-            },
-            bannerHide: function (article) {
-                article.bannerStatus = 0;
-                var url = contentPath + "/api/article/updateBanner";
-                this.$http.post(url, article).then(function (response) {
-
-                }, function (error) {
-                    swal(error.body.msg);
+            deleteBtn: function (comment) {
+                var that = this;
+                swal({
+                    title: "确定删除该评论吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        comment.deleted = 1;
+                        var url = contentPath + "/api/article/comment/delete";
+                        that.$http.post(url, comment).then(function (response) {
+                            swal("操作成功！", "", "success");
+                            that.query();
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
                 });
             }
         }

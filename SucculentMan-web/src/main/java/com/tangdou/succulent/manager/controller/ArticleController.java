@@ -27,4 +27,9 @@ public class ArticleController {
     public String bannerList() {
         return "/article/bannerList";
     }
+
+    @GetMapping("/comment/list")
+    public String commentList() {
+        return "/article/commentList";
+    }
 }
