@@ -19,7 +19,7 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 模块列表</span>
+                    <span class="panel-title"> 文章列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="well">

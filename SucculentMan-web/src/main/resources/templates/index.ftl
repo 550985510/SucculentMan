@@ -93,8 +93,18 @@
                     </ul>
                 </dd>
             </dl>
+            <dl id="menu-article" v-if="roleId !== 3">
+                <dt><i class="Hui-iconfont">&#xe620;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="/manager/goods/list" data-title="文章列表" href="javascript:;">商品列表</a></li>
+                        <li><a data-href="/manager/article/banner/list" data-title="轮播管理" href="javascript:;">轮播管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
             <dl id="menu-picture" v-if="roleId !== 3">
-                <dt><i class="Hui-iconfont">&#xe613;</i> 帖子管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe623;</i> 帖子管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
@@ -104,7 +114,7 @@
                 </dd>
             </dl>
             <dl id="menu-article" v-if="roleId !== 3">
-                <dt><i class="Hui-iconfont">&#xe620;</i> 文章管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe692;</i> 文章管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
