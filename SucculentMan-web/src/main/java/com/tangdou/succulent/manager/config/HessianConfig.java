@@ -4,6 +4,9 @@ package com.tangdou.succulent.manager.config;
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleCommentServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
+import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
+import com.tangdou.succulent.manager.api.post.PostCommentServiceApi;
+import com.tangdou.succulent.manager.api.post.PostServiceApi;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +37,15 @@ public class HessianConfig {
 
     @Resource
     private ArticleCommentServiceApi articleCommentServiceApi;
+
+    @Resource
+    private PostServiceApi postServiceApi;
+
+    @Resource
+    private PostCollectionServiceApi postCollectionServiceApi;
+
+    @Resource
+    private PostCommentServiceApi postCommentServiceApi;
 
     /**
      * 用户管理调用功能
@@ -97,6 +109,45 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(articleCommentServiceApi);
         exporter.setServiceInterface(ArticleCommentServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 帖子管理调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/postServiceApi")
+    public HessianServiceExporter postServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(postServiceApi);
+        exporter.setServiceInterface(PostServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 帖子收藏调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/postCollectionServiceApi")
+    public HessianServiceExporter postCollectionServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(postCollectionServiceApi);
+        exporter.setServiceInterface(PostCollectionServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 帖子回帖调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/postCommentServiceApi")
+    public HessianServiceExporter postCommentServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(postCommentServiceApi);
+        exporter.setServiceInterface(PostCommentServiceApi.class);
         return exporter;
     }
 

@@ -21,12 +21,12 @@ public class ModuleServiceImpl implements ModuleService {
 
     /**
      * 查询全部模块列表信息
-     *
+     * @param type 模块类型
      * @return 模块列表信息
      */
     @Override
-    public List<Module> findAll() {
-        return moduleMapper.selectAll();
+    public List<Module> findAll(Integer type) {
+        return moduleMapper.selectAll(type);
     }
 
     /**

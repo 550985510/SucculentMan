@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<@s.url '/css/jquery.pagination.css'/>">
 <#include '../include/baselink.ftl'>
-    <link href="<@s.url '/css/fileinput.css'/>" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/tagmanager/tagmanager.css'/>">
 </head>
 <body class="dashboard-page">
 <div id="main">
@@ -59,7 +57,7 @@
                             <tbody>
                             <tr v-for="comment in comments">
                                 <td>{{comment.id}}</td>
-                                <td>{{comment.articleTitle}}</td>
+                                <td>{{comment.postTitle}}</td>
                                 <td>{{comment.userNickName}}</td>
                                 <td>{{comment.content}}</td>
                                 <td>
@@ -129,7 +127,7 @@
                 this.query();
             },
             query: function () {
-                var url = contentPath + "/api/article/comment/list";
+                var url = contentPath + "/api/post/comment/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
                     this.comments = response.data.data.list;
                     var temp = this;
@@ -155,7 +153,7 @@
                 });
             },
             detail: function (id) {
-                window.location.href = contentPath + "article/comment/detail?id=" + id;
+                window.location.href = contentPath + "post/comment/detail?id=" + id;
             },
             deleteBtn: function (comment) {
                 var that = this;
@@ -171,7 +169,7 @@
                 }, function (isConfirm) {
                     if (isConfirm) {
                         comment.deleted = 1;
-                        var url = contentPath + "/api/article/comment/delete";
+                        var url = contentPath + "/api/post/comment/delete";
                         that.$http.post(url, comment).then(function (response) {
                             swal("操作成功！", "", "success");
                             that.query();

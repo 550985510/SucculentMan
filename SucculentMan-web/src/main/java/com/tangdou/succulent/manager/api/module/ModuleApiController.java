@@ -6,10 +6,7 @@ import com.tangdou.succulent.manager.bean.module.Module;
 import com.tangdou.succulent.manager.bean.staff.StaffUser;
 import com.tangdou.succulent.manager.config.AdminSecurityConfig;
 import com.tangdou.succulent.manager.service.module.ModuleService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -34,8 +31,11 @@ public class ModuleApiController {
      * @return 角色权限列表信息
      */
     @PostMapping("/list")
-    public ResponseResult<List<Module>> findAll() {
-        List<Module> list = moduleService.findAll();
+    public ResponseResult<List<Module>> findAll(Integer type) {
+        if (type == 3) {
+            type = null;
+        }
+        List<Module> list = moduleService.findAll(type);
         return new ResponseResult<>(list);
     }
 

@@ -10,6 +10,9 @@
     FROM tb_module
     WHERE
       deleted = 0
+    <if test="type != null">
+      AND type = #{type}
+    </if>
   </select>
 
   <select id="selectById" resultType="com.tangdou.succulent.manager.bean.module.Module">

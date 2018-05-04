@@ -26,8 +26,8 @@ public class ArticleServiceApiImpl implements ArticleServiceApi {
      * @return 文章分页信息
      */
     @Override
-    public PageInfo<Article> list(Article article) {
-        return articleService.findByList(article);
+    public ResponseResult<PageInfo<Article>> list(Article article) {
+        return new ResponseResult<>(articleService.findByList(article));
     }
 
     /**

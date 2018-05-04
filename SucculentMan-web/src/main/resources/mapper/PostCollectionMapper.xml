@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.PostCollectionMapper">
+  <sql id="Base_Column_List">
+    id, user_id, post_id, status, created_time
+  </sql>
+
+  <update id="updateStatusById">
+    UPDATE tb_post_collection
+    SET
+      status = #{status}
+    WHERE
+      id = #{id}
+  </update>
+
+  <select id="countByBothId" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM tb_post_collection
+    WHERE user_id = #{userId}
+    AND post_id = #{postId}
+    AND status = 0
+  </select>
+
+  <select id="selectByUserId" resultType="com.tangdou.succulent.manager.api.post.model.PostCollection">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_post_collection
+    WHERE user_id = #{userId}
+    AND status = 0
+  </select>
+
+  <select id="countByPostId" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM tb_post_collection
+    WHERE post_id = #{postId}
+    AND status = 0
+  </select>
+
+  <select id="selectByBothId" resultType="com.tangdou.succulent.manager.api.post.model.PostCollection">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_post_collection
+    WHERE user_id = #{userId}
+    AND post_id = #{postId}
+  </select>
+
+  <insert id="insert">
+    INSERT INTO tb_post_collection
+    (user_id, post_id, created_time)
+    VALUES
+    (#{userId}, #{postId}, now())
+  </insert>
+
+</mapper>

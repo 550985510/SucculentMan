@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<@s.url '/css/jquery.pagination.css'/>">
 <#include '../include/baselink.ftl'>
-    <link href="<@s.url '/css/fileinput.css'/>" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/tagmanager/tagmanager.css'/>">
 </head>
 <body class="dashboard-page">
 <div id="main">
@@ -19,11 +17,28 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 文章评论列表</span>
+                    <span class="panel-title"> 帖子列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="well">
                         <form class="form-inline">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="title_input">文章标题</label>
+                                    <input id="title_input" type="text" v-model="searchInfo.title"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="module_select">所属模块</label>
+                                    <select id="module_select" type="text" v-model="searchInfo.moduleId"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option :value="module.id" v-for="module in modules">{{module.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon btn-default" for="status_select">删除状态</label>
@@ -49,34 +64,34 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>文章标题</th>
-                                <th>用户昵称</th>
-                                <th>评论内容</th>
-                                <th>删除状态</th>
+                                <th>贴子主题</th>
+                                <th>作者</th>
+                                <th>所属模块</th>
+                                <th>是否删除</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="comment in comments">
-                                <td>{{comment.id}}</td>
-                                <td>{{comment.articleTitle}}</td>
-                                <td>{{comment.userNickName}}</td>
-                                <td>{{comment.content}}</td>
+                            <tr v-for="post in posts">
+                                <td>{{post.id}}</td>
+                                <td>{{post.title}}</td>
+                                <td>{{post.userNickName}}</td>
+                                <td>{{post.moduleName}}</td>
                                 <td>
-                                    <label v-if="comment.deleted === 0" class="label label-success">未删除</label>
-                                    <label v-if="comment.deleted === 1" class="label label-warning">已删除</label>
+                                    <label v-if="post.deleted === 0" class="label label-success">未删除</label>
+                                    <label v-if="post.deleted === 1" class="label label-danger">已删除</label>
                                 </td>
                                 <td>
-                                    <button class="btn btn-default" v-on:click="detail(comment.id)">
+                                    <button class="btn btn-default" v-on:click="detail(post.id)">
                                         <i class="fa fa-book"></i> 查看
                                     </button>
-                                    <button v-if="comment.deleted === 0" class="btn btn-info" v-on:click="deleteBtn(comment)">
+                                    <button class="btn btn-info" v-if="post.deleted === 0" v-on:click="deleteBtn(post)">
                                         <i class="fa fa-trash"></i> 删除
                                     </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center" colspan="20" v-if="comments.length == 0">没有数据 ！</td>
+                                <td class="text-center" colspan="20" v-if="posts.length == 0">没有数据 ！</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -97,8 +112,6 @@
             </div>
         </div>
     </section>
-
-</div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
 <!-- Charts JS -->
@@ -107,20 +120,28 @@
         el: '#main',
         data: {
             searchInfo: {
+                title: '',
+                moduleId: '',
+                deleted: '',
                 page: 1,
                 pageSize: 20
             },
-            comments: []
+            modules: [],
+            posts: []
         },
         created: function () {
             this.searchInfo.page = 1;
             $('#pageMenu').page('destroy');
             this.query();
+            this.findModule();
         },
         watch: {
             "searchInfo.page": function () {
                 this.query();
             }
+        },
+        mounted: function () {
+
         },
         methods: {
             search: function () {
@@ -129,9 +150,9 @@
                 this.query();
             },
             query: function () {
-                var url = contentPath + "/api/article/comment/list";
+                var url = contentPath + "/api/post/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
-                    this.comments = response.data.data.list;
+                    this.posts = response.data.data.list;
                     var temp = this;
                     $("#pageMenu").page({//加载分页
                         total: response.data.data.total,
@@ -154,13 +175,21 @@
                     swal(error.body.msg);
                 });
             },
-            detail: function (id) {
-                window.location.href = contentPath + "article/comment/detail?id=" + id;
+            findModule: function () {
+                var url = contentPath + "/api/module/list?type=1";
+                this.$http.post(url).then(function (response) {
+                    this.modules = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
             },
-            deleteBtn: function (comment) {
+            detail: function (id) {
+                window.location.href = contentPath + "/post/detail?id=" + id;
+            },
+            deleteBtn: function (post) {
                 var that = this;
                 swal({
-                    title: "确定删除该评论吗？",
+                    title: "确定删除该主题帖吗？",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -170,9 +199,9 @@
                     closeOnCancel: false
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        comment.deleted = 1;
-                        var url = contentPath + "/api/article/comment/delete";
-                        that.$http.post(url, comment).then(function (response) {
+                        post.deleted = 1;
+                        var url = contentPath + "/api/post/delete";
+                        that.$http.post(url, post).then(function (response) {
                             swal("操作成功！", "", "success");
                             that.query();
                         }, function (error) {

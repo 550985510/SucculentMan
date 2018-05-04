@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.PostMapper">
+  <sql id="Base_Column_List">
+    id, title, module_id, deleted, user_id, content, created_time
+  </sql>
+
+  <insert id="insert">
+    INSERT INTO tb_post
+    (title, module_id, user_id, content, created_time)
+    VALUES
+    (#{title}, #{moduleId}, #{userId}, #{content}, now())
+  </insert>
+
+  <update id="updateDeleteById">
+    UPDATE tb_post
+    SET deleted = #{deleted}
+    WHERE id = #{id}
+  </update>
+
+  <select id="selectByList" resultType="com.tangdou.succulent.manager.api.post.model.Post">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_post
+    <where>
+      <if test="moduleId != null and moduleId != ''">
+        module_id = #{moduleId}
+      </if>
+      <if test="deleted != null and deleted != ''">
+        AND deleted = #{deleted}
+      </if>
+      <if test="userId != null and userId != ''">
+        AND user_id = #{userId}
+      </if>
+      <if test="title != null and title != ''">
+        AND title like CONCAT ('%',#{title},'%')
+      </if>
+    </where>
+    ORDER BY created_time DESC
+  </select>
+
+  <select id="selectById" resultType="com.tangdou.succulent.manager.api.post.model.Post">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_post
+    <where>
+      id =#{id}
+      <if test="deleted != null">
+        AND deleted = #{deleted}
+      </if>
+    </where>
+  </select>
+
+</mapper>

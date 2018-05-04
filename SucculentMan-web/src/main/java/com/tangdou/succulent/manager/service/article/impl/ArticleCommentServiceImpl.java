@@ -42,7 +42,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         for (ArticleComment item : list) {
             item.setUserAvatar(userMapper.selectById(item.getUserId()).getAvatar());
             item.setUserNickName(userMapper.selectById(item.getUserId()).getNickName());
-            item.setArticleTitle(articleMapper.selectById(item.getArticleId(), null).getTitle());
+            item.setArticleTitle(articleMapper.selectById(item.getArticleId(),null).getTitle());
         }
         return new PageInfo<>(list);
     }

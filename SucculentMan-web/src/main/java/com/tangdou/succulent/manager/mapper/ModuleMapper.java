@@ -1,6 +1,7 @@
 package com.tangdou.succulent.manager.mapper;
 
 import com.tangdou.succulent.manager.bean.module.Module;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,9 +14,10 @@ public interface ModuleMapper {
 
     /**
      * 查询全部模块信息
+     * @param type 模块类型
      * @return 模块列表信息
      */
-    List<Module> selectAll();
+    List<Module> selectAll(@Param("type") Integer type);
 
     /**
      * 通过id修改

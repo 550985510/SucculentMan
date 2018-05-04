@@ -16,7 +16,7 @@ public interface ArticleServiceApi {
      * @param article 查询条件
      * @return 文章分页信息
      */
-    PageInfo<Article> list(Article article);
+    ResponseResult<PageInfo<Article>> list(Article article);
 
     /**
      * 文章详情

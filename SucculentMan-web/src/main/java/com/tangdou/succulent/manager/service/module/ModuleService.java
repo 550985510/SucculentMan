@@ -13,9 +13,10 @@ public interface ModuleService {
 
     /**
      * 查询全部模块列表信息
+     * @param type 模块类型
      * @return 模块列表信息
      */
-    List<Module> findAll();
+    List<Module> findAll(Integer type);
 
     /**
      * 修改模块信息
