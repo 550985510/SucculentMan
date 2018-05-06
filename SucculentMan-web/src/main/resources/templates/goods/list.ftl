@@ -32,6 +32,21 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
+                                    <label class="input-group-addon btn-default" for="type_select">商品类型</label>
+                                    <select id="type_select" type="text" v-model="searchInfo.type"
+                                            class="form-control">
+                                        <option value=null>全部</option>
+                                        <option value="1">多肉植物</option>
+                                        <option value="2">多肉花器</option>
+                                        <option value="3">多肉盆器</option>
+                                        <option value="4">多肉配土</option>
+                                        <option value="5">多肉资材</option>
+                                        <option value="6">周边服务</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
                                     <label class="input-group-addon btn-default" for="status_select">上架状态</label>
                                     <select id="status_select" type="text" v-model="searchInfo.status"
                                             class="form-control">
@@ -57,6 +72,7 @@
                                 <th>编号</th>
                                 <th>商品名称</th>
                                 <th>商品单价</th>
+                                <th>商品类型</th>
                                 <th>上架状态</th>
                                 <th>操作</th>
                             </tr>
@@ -66,6 +82,14 @@
                                 <td>{{goods.id}}</td>
                                 <td>{{goods.name}}</td>
                                 <td>{{goods.price}}</td>
+                                <td>
+                                    <span v-if="goods.type === 1">多肉植物</span>
+                                    <span v-if="goods.type === 2">多肉花器</span>
+                                    <span v-if="goods.type === 3">多肉盆器</span>
+                                    <span v-if="goods.type === 4">多肉配土</span>
+                                    <span v-if="goods.type === 5">多肉资材</span>
+                                    <span v-if="goods.type === 6">周边服务</span>
+                                </td>
                                 <td>
                                     <label v-if="goods.status === 0" class="label label-danger">已下架</label>
                                     <label v-if="goods.status === 1" class="label label-success">已上架</label>
@@ -127,6 +151,17 @@
                     <div class="form-group">
                         <label for="price" class="control-label">商品单价(元)</label>
                         <input id="price" class="form-control" v-model="addGoods.price"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="control-label">商品类型</label>
+                        <select id="type" class="form-control" v-model="addGoods.type">
+                            <option value="1">多肉植物</option>
+                            <option value="2">多肉花器</option>
+                            <option value="3">多肉盆器</option>
+                            <option value="4">多肉配土</option>
+                            <option value="5">多肉资材</option>
+                            <option value="6">周边服务</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="input-file" class="control-label">上传商品图片</label>
@@ -218,7 +253,6 @@
                 window.location.href = contentPath + "/goods/detail?id=" + id;
             },
             add: function () {
-                this.addGoods.content = this.editor.txt.html();
                 var url = contentPath + "/api/goods/add";
                 this.$http.post(url, this.addGoods).then(function (response) {
                     $("#addGoods").modal('hide');

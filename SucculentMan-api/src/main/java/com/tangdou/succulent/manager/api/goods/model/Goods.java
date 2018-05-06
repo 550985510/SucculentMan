@@ -39,6 +39,11 @@ public class Goods implements Serializable {
     private Integer status;
 
     /**
+     * 商品类型 1:多肉 2:花器 3:盆器 4:配土 5:资材 6:服务
+     */
+    private Integer type;
+
+    /**
      * 创建人
      */
     private String createdBy;

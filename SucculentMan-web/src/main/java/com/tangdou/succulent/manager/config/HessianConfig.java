@@ -4,6 +4,9 @@ package com.tangdou.succulent.manager.config;
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleCommentServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
+import com.tangdou.succulent.manager.api.goods.GoodsCollectionServiceApi;
+import com.tangdou.succulent.manager.api.goods.GoodsCommentServiceApi;
+import com.tangdou.succulent.manager.api.goods.GoodsServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCommentServiceApi;
 import com.tangdou.succulent.manager.api.post.PostServiceApi;
@@ -46,6 +49,15 @@ public class HessianConfig {
 
     @Resource
     private PostCommentServiceApi postCommentServiceApi;
+
+    @Resource
+    private GoodsServiceApi goodsServiceApi;
+
+    @Resource
+    private GoodsCollectionServiceApi goodsCollectionServiceApi;
+
+    @Resource
+    private GoodsCommentServiceApi goodsCommentServiceApi;
 
     /**
      * 用户管理调用功能
@@ -148,6 +160,45 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(postCommentServiceApi);
         exporter.setServiceInterface(PostCommentServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 商品管理调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/goodsServiceApi")
+    public HessianServiceExporter goodsServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(goodsServiceApi);
+        exporter.setServiceInterface(GoodsServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 商品收藏调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/goodsCollectionServiceApi")
+    public HessianServiceExporter goodsCollectionServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(goodsCollectionServiceApi);
+        exporter.setServiceInterface(GoodsCollectionServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 商品回帖调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/goodsCommentServiceApi")
+    public HessianServiceExporter goodsCommentServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(goodsCommentServiceApi);
+        exporter.setServiceInterface(GoodsCommentServiceApi.class);
         return exporter;
     }
 

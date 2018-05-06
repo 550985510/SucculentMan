@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tangdou.succulent.manager.mapper.GoodsMapper">
   <sql id="Base_Column_List">
-    id, name, img, price, status, created_by, modified_by, created_time, modified_time
+    id, name, img, price, status, type, created_by, modified_by, created_time, modified_time
   </sql>
 
   <insert id="insert">
     INSERT INTO tb_goods
-    (name, img, price, created_by, created_time)
+    (name, img, price, type, created_by, modified_by, created_time, modified_time)
     VALUES
-    (#{name}, #{img}, #{price}, #{createdBy}, now())
+    (#{name}, #{img}, #{price}, #{type}, #{createdBy}, #{modifiedBy}, now(), now())
   </insert>
 
   <update id="updateStatusById">
@@ -46,6 +46,9 @@
     <where>
       <if test="status != null and status != ''">
         AND status = #{status}
+      </if>
+      <if test="type != null and type != ''">
+        AND type = #{type}
       </if>
       <if test="name != null and name != ''">
         AND name like CONCAT ('%',#{name},'%')
