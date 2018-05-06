@@ -98,8 +98,8 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="/manager/goods/list" data-title="文章列表" href="javascript:;">商品列表</a></li>
-                        <li><a data-href="/manager/article/banner/list" data-title="轮播管理" href="javascript:;">轮播管理</a></li>
+                        <li><a data-href="/manager/goods/list" data-title="商品列表" href="javascript:;">商品列表</a></li>
+                        <li><a data-href="/manager/article/banner/list" data-title="订单列表" href="javascript:;">订单列表</a></li>
                     </ul>
                 </dd>
             </dl>

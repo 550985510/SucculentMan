@@ -69,4 +69,13 @@
     </where>
   </select>
 
+  <select id="selectTop" resultType="com.tangdou.succulent.manager.api.goods.model.Goods">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_goods
+    WHERE type = #{type}
+    AND status = 1
+    ORDER BY created_time DESC LIMIT 1
+  </select>
+
 </mapper>

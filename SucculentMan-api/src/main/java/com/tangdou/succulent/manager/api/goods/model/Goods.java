@@ -3,7 +3,6 @@ package com.tangdou.succulent.manager.api.goods.model;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -31,7 +30,7 @@ public class Goods implements Serializable {
     /**
      * 商品单价
      */
-    private BigDecimal price;
+    private Double price;
 
     /**
      * 商品上架状态 0:下架 1:上架

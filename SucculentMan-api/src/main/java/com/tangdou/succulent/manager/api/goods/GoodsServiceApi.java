@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.model.Article;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.goods.model.Goods;
+import com.tangdou.succulent.manager.api.goods.model.ShowGoods;
 
 /**
  * @author 木叶丸
@@ -25,4 +26,10 @@ public interface GoodsServiceApi {
      * @return 商品信息
      */
     ResponseResult<Goods> detail(Integer goodsId, Integer status);
+
+    /**
+     * 首页显示商品信息
+     * @return 首页显示信息
+     */
+    ResponseResult<ShowGoods> showGoods();
 }

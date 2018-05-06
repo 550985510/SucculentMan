@@ -4,7 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.goods.GoodsServiceApi;
 import com.tangdou.succulent.manager.api.goods.model.Goods;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.goods.model.ShowGoods;
+import com.tangdou.succulent.manager.mapper.GoodsMapper;
 import com.tangdou.succulent.manager.service.goods.GoodsService;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +21,9 @@ public class GoodsServiceApiImpl implements GoodsServiceApi {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private GoodsMapper goodsMapper;
 
     /**
      * 分页查询文章信息
@@ -41,5 +47,26 @@ public class GoodsServiceApiImpl implements GoodsServiceApi {
     public ResponseResult<Goods> detail(Integer goodsId, Integer status) {
         Goods goods = goodsService.detail(goodsId, status);
         return new ResponseResult<>(goods);
+    }
+
+    /**
+     * 首页显示商品信息
+     *
+     * @return 首页显示信息
+     */
+    @Override
+    public ResponseResult<ShowGoods> showGoods() {
+        ShowGoods showGoods = new ShowGoods();
+        showGoods.setImgOne(goodsMapper.selectTop(1).getImg());
+        showGoods.setImgTwo(goodsMapper.selectTop(3).getImg());
+        showGoods.setImgThree(goodsMapper.selectTop(4).getImg());
+        showGoods.setImgFour(goodsMapper.selectTop(5).getImg());
+        showGoods.setImgFive(goodsMapper.selectTop(6).getImg());
+        showGoods.setSumOne(RandomUtils.nextInt(6000, 10000) + 10000);
+        showGoods.setSumTwo(RandomUtils.nextInt(6000, 10000) + 10000);
+        showGoods.setSumThree(RandomUtils.nextInt(6000, 10000) + 10000);
+        showGoods.setSumFour(RandomUtils.nextInt(6000, 10000) + 10000);
+        showGoods.setSumFive(RandomUtils.nextInt(6000, 10000) + 10000);
+        return new ResponseResult<>(showGoods);
     }
 }

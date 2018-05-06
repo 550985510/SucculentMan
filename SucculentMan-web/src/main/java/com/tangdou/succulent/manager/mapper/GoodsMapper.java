@@ -43,4 +43,11 @@ public interface GoodsMapper {
      * @return 商品信息
      */
     Goods selectById(@Param("id") Integer id, @Param("status") Integer status);
+
+    /**
+     * 根据类型查询最新产品
+     * @param type 类型
+     * @return 最新产品信息
+     */
+    Goods selectTop(Integer type);
 }
