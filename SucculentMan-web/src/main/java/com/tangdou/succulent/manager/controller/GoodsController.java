@@ -17,4 +17,9 @@ public class GoodsController {
     public String list() {
         return "/goods/list";
     }
+
+    @GetMapping("/comment/list")
+    public String commentList() {
+        return "/goods/commentList";
+    }
 }

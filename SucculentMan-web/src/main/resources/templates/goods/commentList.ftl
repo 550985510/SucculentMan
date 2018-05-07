@@ -19,7 +19,7 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 文章评论列表</span>
+                    <span class="panel-title"> 商品评论列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="well">
@@ -49,7 +49,7 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>文章标题</th>
+                                <th>商品标题</th>
                                 <th>用户昵称</th>
                                 <th>评论内容</th>
                                 <th>删除状态</th>
@@ -59,7 +59,7 @@
                             <tbody>
                             <tr v-for="comment in comments">
                                 <td>{{comment.id}}</td>
-                                <td>{{comment.articleTitle}}</td>
+                                <td>{{comment.goodsTitle}}</td>
                                 <td>{{comment.userNickName}}</td>
                                 <td>{{comment.content}}</td>
                                 <td>
@@ -127,7 +127,7 @@
                 this.query();
             },
             query: function () {
-                var url = contentPath + "/api/article/comment/list";
+                var url = contentPath + "/api/goods/comment/list";
                 this.$http.post(url, this.searchInfo).then(function (response) {
                     this.comments = response.data.data.list;
                     var temp = this;
@@ -153,7 +153,7 @@
                 });
             },
             detail: function (id) {
-                window.location.href = contentPath + "article/comment/detail?id=" + id;
+                window.location.href = contentPath + "goods/comment/detail?id=" + id;
             },
             deleteBtn: function (comment) {
                 var that = this;
@@ -169,7 +169,7 @@
                 }, function (isConfirm) {
                     if (isConfirm) {
                         comment.deleted = 1;
-                        var url = contentPath + "/api/article/comment/delete";
+                        var url = contentPath + "/api/goods/comment/delete";
                         that.$http.post(url, comment).then(function (response) {
                             swal("操作成功！", "", "success");
                             that.query();

@@ -129,7 +129,7 @@
                 <dd>
                     <ul>
                         <li><a data-href="/manager/article/comment/list" data-title="文章评论列表" href="javascript:;">文章评论列表</a></li>
-                        <li><a data-href="feedback-list.html" data-title="商品评论列表" href="javascript:void(0)">商品评论列表</a></li>
+                        <li><a data-href="/manager/goods/comment/list" data-title="商品评论列表" href="javascript:void(0)">商品评论列表</a></li>
                     </ul>
                 </dd>
             </dl>
