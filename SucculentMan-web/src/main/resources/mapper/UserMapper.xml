@@ -139,6 +139,9 @@
       <if test="mobile != null and mobile != ''">
         mobile = #{mobile}
       </if>
+      <if test="nickName != null and nickName != ''">
+        nick_name = #{nickName}
+      </if>
       <if test="name != null and name != ''">
         name = #{name}
       </if>
