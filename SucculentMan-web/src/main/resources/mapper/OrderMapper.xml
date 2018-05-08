@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangdou.succulent.manager.mapper.OrderMapper">
+  <sql id="Base_Column_List">
+    id, user_id, user_name, location, goods_id, goods_name, goods_num, amount, status, created_time
+  </sql>
+
+  <insert id="insert">
+    INSERT INTO tb_order
+    (user_id, user_name, location, goods_id, goods_name, goods_num, amount, created_time)
+    VALUES
+    (#{userId}, #{userName}, #{location}, #{goodsId}, #{goodsName}, #{goodsNum}, #{amount}, now())
+  </insert>
+
+  <update id="updateStatusById">
+    UPDATE tb_order
+    SET status = #{status}
+    WHERE id = #{id}
+  </update>
+
+  <select id="selectByList" resultType="com.tangdou.succulent.manager.api.order.model.Order">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_order
+    <where>
+      <if test="userId != null and userId != ''">
+        AND user_id = #{userId}
+      </if>
+      <if test="status != null and status != ''">
+        AND status = #{status}
+      </if>
+      <if test="userName != null and userName != ''">
+        AND user_name like CONCAT ('%',#{userName},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectById" resultType="com.tangdou.succulent.manager.api.order.model.Order">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_order
+    WHERE id = #{id}
+  </select>
+
+</mapper>

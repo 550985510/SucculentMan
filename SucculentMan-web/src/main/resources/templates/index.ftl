@@ -99,7 +99,7 @@
                 <dd>
                     <ul>
                         <li><a data-href="/manager/goods/list" data-title="商品列表" href="javascript:;">商品列表</a></li>
-                        <li><a data-href="/manager/article/banner/list" data-title="订单列表" href="javascript:;">订单列表</a></li>
+                        <li><a data-href="/manager/order/list" data-title="订单列表" href="javascript:;">订单列表</a></li>
                     </ul>
                 </dd>
             </dl>

@@ -7,6 +7,7 @@ import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsCollectionServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsCommentServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsServiceApi;
+import com.tangdou.succulent.manager.api.order.OrderServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCommentServiceApi;
 import com.tangdou.succulent.manager.api.post.PostServiceApi;
@@ -58,6 +59,9 @@ public class HessianConfig {
 
     @Resource
     private GoodsCommentServiceApi goodsCommentServiceApi;
+
+    @Resource
+    private OrderServiceApi orderServiceApi;
 
     /**
      * 用户管理调用功能
@@ -199,6 +203,19 @@ public class HessianConfig {
         HessianServiceExporter exporter = new HessianServiceExporter();
         exporter.setService(goodsCommentServiceApi);
         exporter.setServiceInterface(GoodsCommentServiceApi.class);
+        return exporter;
+    }
+
+    /**
+     * 商品回帖调用功能
+     *
+     * @return exporter
+     */
+    @Bean(name = "/hessian/orderServiceApi")
+    public HessianServiceExporter orderServiceApi() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(orderServiceApi);
+        exporter.setServiceInterface(OrderServiceApi.class);
         return exporter;
     }
 
