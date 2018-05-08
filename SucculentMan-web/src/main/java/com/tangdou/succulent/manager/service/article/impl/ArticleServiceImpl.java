@@ -128,6 +128,8 @@ public class ArticleServiceImpl implements ArticleService {
         article.setAuthorAvatar(staffUserMapper.selectById(article.getStaffId()).getAvatar());
         article.setAuthor(staffUserMapper.selectById(article.getStaffId()).getNickName());
         article.setModuleName(moduleMapper.selectById(article.getModuleId()).getName());
+        article.setCommentNum(articleCommentMapper.countByArticleId(article.getId()));
+        article.setCollectedNum(articleCollectionMapper.countByArticleId(article.getId()));
         return article;
     }
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 文章收藏关系
@@ -37,4 +38,20 @@ public class ArticleCollection implements Serializable {
      * 创建时间
      */
     private Date createdTime;
+
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
+
+    /**
+     * 文章信息
+     */
+    private Article article;
+
 }

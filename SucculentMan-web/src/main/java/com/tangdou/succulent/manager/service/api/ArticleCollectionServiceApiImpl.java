@@ -1,13 +1,18 @@
 package com.tangdou.succulent.manager.service.api;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
+import com.tangdou.succulent.manager.api.article.model.Article;
 import com.tangdou.succulent.manager.api.article.model.ArticleCollection;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.common.RestResultEnum;
 import com.tangdou.succulent.manager.mapper.ArticleCollectionMapper;
+import com.tangdou.succulent.manager.service.article.ArticleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 文章收藏相关接口
@@ -19,6 +24,9 @@ public class ArticleCollectionServiceApiImpl implements ArticleCollectionService
 
     @Resource
     private ArticleCollectionMapper articleCollectionMapper;
+
+    @Resource
+    private ArticleService articleService;
 
     /**
      * 用户收藏
@@ -88,5 +96,21 @@ public class ArticleCollectionServiceApiImpl implements ArticleCollectionService
     @Override
     public ResponseResult<Integer> findCollectedNum(Integer articleId) {
         return new ResponseResult<>(articleCollectionMapper.countByArticleId(articleId));
+    }
+
+    /**
+     * 查询用户收藏列表
+     *
+     * @param articleCollection 查询条件
+     * @return 收藏列表信息
+     */
+    @Override
+    public ResponseResult<PageInfo<ArticleCollection>> findList(ArticleCollection articleCollection) {
+        PageHelper.startPage(articleCollection.getPage(), articleCollection.getPageSize());
+        List<ArticleCollection> list = articleCollectionMapper.selectByUserId(articleCollection.getUserId());
+        for (ArticleCollection item : list) {
+            item.setArticle(articleService.detail(item.getArticleId(),2));
+        }
+        return new ResponseResult<>(new PageInfo<>(list));
     }
 }

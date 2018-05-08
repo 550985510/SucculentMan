@@ -37,4 +37,19 @@ public class PostCollection implements Serializable {
      * 创建时间
      */
     private Date createdTime;
+
+    /**
+     * 当前页
+     */
+    private Integer page;
+
+    /**
+     * 每页数量
+     */
+    private Integer pageSize;
+
+    /**
+     * 帖子信息
+     */
+    private Post post;
 }

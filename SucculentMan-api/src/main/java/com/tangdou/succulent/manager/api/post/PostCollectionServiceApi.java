@@ -1,6 +1,9 @@
 package com.tangdou.succulent.manager.api.post;
 
+import com.github.pagehelper.PageInfo;
+import com.tangdou.succulent.manager.api.article.model.ArticleCollection;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.post.model.PostCollection;
 
 /**
  * 帖子收藏相关接口
@@ -39,4 +42,11 @@ public interface PostCollectionServiceApi {
      * @return 用户粉丝数量
      */
     ResponseResult<Integer> findCollectedNum(Integer postId);
+
+    /**
+     * 查询用户收藏列表
+     * @param postCollection 查询条件
+     * @return 收藏列表信息
+     */
+    ResponseResult<PageInfo<PostCollection>> findList(PostCollection postCollection);
 }

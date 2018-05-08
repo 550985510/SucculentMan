@@ -1,5 +1,7 @@
 package com.tangdou.succulent.manager.api.article;
 
+import com.github.pagehelper.PageInfo;
+import com.tangdou.succulent.manager.api.article.model.ArticleCollection;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 
 /**
@@ -39,4 +41,11 @@ public interface ArticleCollectionServiceApi {
      * @return 用户粉丝数量
      */
     ResponseResult<Integer> findCollectedNum(Integer articleId);
+
+    /**
+     * 查询用户收藏列表
+     * @param articleCollection 查询条件
+     * @return 收藏列表信息
+     */
+    ResponseResult<PageInfo<ArticleCollection>> findList(ArticleCollection articleCollection);
 }
