@@ -178,7 +178,11 @@
         <div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
             <div class="Hui-tabNav-wp">
                 <ul id="min_title_list" class="acrossTab cl">
-                    <li class="active">
+                    <li class="active" v-if="roleId === 3">
+                        <span title="个人中心" data-href="/manager/staff/personal">个人中心</span>
+                        <em></em>
+                    </li>
+                    <li class="active" v-else="">
                         <span title="我的桌面" data-href="/manager/desktop">我的桌面</span>
                         <em></em>
                     </li>
@@ -190,7 +194,11 @@
                     class="Hui-iconfont">&#xe6d7;</i></a></div>
         </div>
         <div id="iframe_box" class="Hui-article">
-            <div class="show_iframe">
+            <div class="show_iframe" v-if="roleId === 3">
+                <div style="display:none" class="loading"></div>
+                <iframe scrolling="yes" frameborder="0" src="/manager/staff/personal"></iframe>
+            </div>
+            <div class="show_iframe" v-else="">
                 <div style="display:none" class="loading"></div>
                 <iframe scrolling="yes" frameborder="0" src="/manager/desktop"></iframe>
             </div>
