@@ -1,6 +1,9 @@
 package com.tangdou.succulent.manager.mapper;
 
 import com.tangdou.succulent.manager.api.user.model.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,4 +64,13 @@ public interface UserMapper {
      * @return 用户列表信息
      */
     List<User> selectRandom();
+
+    /**
+     * 按照注册时间段查询
+     *
+     * @param dateRangeStart
+     * @param dateRangeEnd
+     * @return
+     */
+    public Integer countByDateRange(@Param("dateRangeStart") Date dateRangeStart, @Param("dateRangeEnd") Date dateRangeEnd);
 }

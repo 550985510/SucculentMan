@@ -8,6 +8,7 @@ import com.tangdou.succulent.manager.service.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,5 +33,17 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(user.getPage(), user.getPageSize());
         List<User> list = userMapper.selectList(user);
         return new PageInfo<>(list);
+    }
+
+    /**
+     * 统计注册用户时间
+     *
+     * @param dateRangeStart
+     * @param dateRangeEnd
+     * @return
+     */
+    @Override
+    public Integer countByDateRange(Date dateRangeStart, Date dateRangeEnd) {
+        return userMapper.countByDateRange(dateRangeStart,dateRangeEnd);
     }
 }

@@ -186,4 +186,15 @@
     ORDER BY rand() limit 5
   </select>
 
+  <select id="countByDateRange" resultType="java.lang.Integer">
+    SELECT
+    count(id)
+    FROM tb_user
+    <where>
+      <if test="dateRangeStart != null and dateRangeEnd != null">
+        AND created_time BETWEEN #{dateRangeStart} AND #{dateRangeEnd}
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -179,8 +179,9 @@
             <div class="Hui-tabNav-wp">
                 <ul id="min_title_list" class="acrossTab cl">
                     <li class="active">
-                        <span title="我的桌面" data-href="welcome.jsp">我的桌面</span>
-                        <em></em></li>
+                        <span title="我的桌面" data-href="/manager/desktop">我的桌面</span>
+                        <em></em>
+                    </li>
                 </ul>
             </div>
             <div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S"
@@ -191,7 +192,7 @@
         <div id="iframe_box" class="Hui-article">
             <div class="show_iframe">
                 <div style="display:none" class="loading"></div>
-                <iframe scrolling="yes" frameborder="0" src=""></iframe>
+                <iframe scrolling="yes" frameborder="0" src="/manager/desktop"></iframe>
             </div>
         </div>
     </section>

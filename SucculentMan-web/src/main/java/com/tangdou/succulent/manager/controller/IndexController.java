@@ -34,6 +34,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/desktop")
+    public String desktop(){
+        return "desktop";
+    }
+
     @GetMapping("/error_404")
     public String notFoundError(){
         return "404";

@@ -3,6 +3,8 @@ package com.tangdou.succulent.manager.service.user;
 import com.github.pagehelper.PageInfo;
 import com.tangdou.succulent.manager.api.user.model.User;
 
+import java.util.Date;
+
 /**
  * 用户相关
  * @author 木叶丸
@@ -16,4 +18,13 @@ public interface UserService {
      * @return 用户列表信息
      */
     PageInfo<User> findList(User user);
+
+    /**
+     * 统计注册用户时间
+     *
+     * @param dateRangeStart
+     * @param dateRangeEnd
+     * @return
+     */
+    Integer countByDateRange(Date dateRangeStart, Date dateRangeEnd);
 }
