@@ -17,7 +17,7 @@
                     <span class="panel-icon">
                         <i class="fa fa-bar-chart-o"></i>
                     </span>
-                    <span class="panel-title"> 文章评论列表</span>
+                    <span class="panel-title"> 帖子回帖列表</span>
                 </div>
                 <div class="panel-body">
                     <div class="well">

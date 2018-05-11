@@ -24,7 +24,7 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <label class="input-group-addon btn-default" for="title_input">文章标题</label>
+                                    <label class="input-group-addon btn-default" for="title_input">贴子主题</label>
                                     <input id="title_input" type="text" v-model="searchInfo.title"
                                            class="form-control">
                                 </div>

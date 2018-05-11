@@ -205,7 +205,7 @@
                 });
             },
             findModule: function () {
-                var url = contentPath + "/api/module/list";
+                var url = contentPath + "/api/module/list?type=3";
                 this.$http.post(url).then(function (response) {
                     this.modules = response.data.data;
                 }, function (error) {
